@@ -34,19 +34,21 @@ VALUES
 
 DROP TABLE IF EXISTS AnimalStatus;
 CREATE TABLE AnimalStatus (
+    statusId           integer AUTO_INCREMENT not null,
     animalId           integer,
     theDate            VARCHAR(30),
     theDescription     VARCHAR(30),
     location           VARCHAR(30),
     theStatus          VARCHAR(30),
-	
+
+    primary key (statusId),
     foreign key (animalId) references Animals(animalId)
 );
 
-INSERT INTO AnimalStatus (animalId, theDate, theDescription, location, theStatus)
+INSERT INTO AnimalStatus (statusId, animalId, theDate, theDescription, location, theStatus)
 VALUES
-('1','2021-12-12', null, 'In Campus', 'Available'),
-('2','2021-11-01', 'Her foot is injured', 'Hospital', 'Injured');
+('1', '1','2021-12-12', null, 'In Campus', 'Available'),
+('2', '2','2021-11-01', 'Her foot is injured', 'Hospital', 'Injured');
 
 DROP TABLE IF EXISTS AnimalStatusImages;
 CREATE TABLE AnimalStatusImages (
