@@ -44,5 +44,15 @@ public class AnimalStatusController {
         }
     }
 
-
+    @PutMapping("/modify/{id}")
+    public ResponseEntity<?> updateAnimalStatus(@RequestBody AnimalStatus animalStatus, @PathVariable Integer id){
+        try{
+            AnimalStatus existingAnimalStatus = animalStatusService.getAnimalStatus(id);
+            animalStatus.setAnimalId(id);
+            animalStatusService.saveAnimalStatus(animalStatus);
+            return new ResponseEntity<>(HttpStatus.OK);
+        }catch (NoSuchElementException e){
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
 }
