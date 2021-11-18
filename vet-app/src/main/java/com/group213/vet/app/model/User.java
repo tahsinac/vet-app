@@ -8,19 +8,20 @@ import javax.persistence.*;
 public class User {
 
     private int id;
-    private String the_name;
+    private String username;
+    private String theType;
     private String email;
-    private String activation_date;
+    private String activationDate;
 
     public User(){
-
     }
 
-    public User(int id, String the_name, String email, String activation_date){
+    public User(int id, String username, String theType, String email, String activationDate){
         this.id = id; //Can set to use Random UUID
-        this.the_name = the_name;
+        this.username = username;
+        this.theType = theType;
         this.email = email;
-        this.activation_date = activation_date;
+        this.activationDate = activationDate;
     }
 
     @Id
@@ -42,19 +43,27 @@ public class User {
         this.email = email;
     }
 
-    public String getThe_name() {
-        return the_name;
+    public String getUsername() {
+        return username;
     }
 
-    public void setThe_name(String the_name) {
-        this.the_name = the_name;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public String getActivation_date() {
-        return activation_date;
+    public String getActivationDate() {
+        return activationDate;
     }
 
-    public void setActivation_date(String activation_date) {
-        this.activation_date = activation_date;
+    public void setActivationDate(String activationDate) {
+        this.activationDate = activationDate;
+    }
+
+    public String getTheType() {
+        return theType;
+    }
+
+    public void setTheType(String theType) {
+        this.theType = theType;
     }
 }

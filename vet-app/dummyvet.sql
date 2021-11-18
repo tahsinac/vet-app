@@ -2,197 +2,214 @@ DROP DATABASE IF EXISTS DUMMYVET;
 CREATE DATABASE DUMMYVET; 
 USE DUMMYVET;
 
-DROP TABLE IF EXISTS Animal;
-CREATE TABLE Animal (
-	id					integer not null,
-	weight				integer,
-    tattoo				integer,
-	city_tattoo			VARCHAR(30),
-    bod					VARCHAR(30),
-	breed				VARCHAR(30),
-    sex					VARCHAR(30),
-    rfid				integer,
-    microchip			integer,
-    she_status			VARCHAR(30),
-    draught				VARCHAR(30),
-    meat				VARCHAR(30),
-    region				VARCHAR(30),
-    subspecies			VARCHAR(30),
-    distinguishing		VARCHAR(30),
-    features			VARCHAR(30),
-    color				VARCHAR(30),
+DROP TABLE IF EXISTS Animals;
+CREATE TABLE Animals (
+    animalId           integer AUTO_INCREMENT not null,
+    species             VARCHAR(30),
+    weight              integer,
+    tattooNum           integer,
+    cityTattoo          VARCHAR(30),
+    birthDate           VARCHAR(30),
+    breed               VARCHAR(30),
+    sex                 VARCHAR(30),
+    rfid                long,
+    microchip           long,
+    theStatus              VARCHAR(30),
+    diet                VARCHAR(30),
+    region              VARCHAR(30),
+    subspecies          VARCHAR(30),
+    distinguishingFeatures   VARCHAR(30),
+    color               VARCHAR(30),
     
     
-	primary key (id)
+    primary key (animalId)
 );
 
-INSERT INTO Animal (id, weight, tattoo, city_tattoo, bod, breed, sex, rfid, microchip, she_status, draught, meat, region, subspecies, distinguishing, features, color)
+INSERT INTO Animals (animalId, species, weight, tattooNum, cityTattoo, birthDate, breed, sex, rfid, microchip, theStatus, diet, region, subspecies, distinguishingFeatures, color)
 VALUES
-('1','3','234234','HOC London', '2018-08-15', 'Beagle', 'MN', '19', '5','Available', null, null, null, null, null, null, 'Black and white'),
-('2','68','564543','ABC Paris', '2018-08-31', 'Vanners', 'FM', '17', '2', 'Injured',null, null, null, null, 'High-stepping trot, flashy', 'appearance', null);
+('1', 'Dog', 3, 234234, 'HOC London', '12/07/2019', 'Beagle', 'MN', 176387613813, 20, 'Available', null, null, null, 'barks', 'Brown'),
+('2', 'Dog', 3, 234234, 'HOC Paris', '11/01/2018', 'Pitbull', 'MN', 30, 40, 'Available', null, null, null, "barks a lot", "White"),
+('3', 'Cow', 123, 981733, 'CBH India', '2018-02-29', 'Abigar', 'MN', 50, 60, 'Sick', 'Dairy', 'Spain', 'Taurus', null, null);
+-- (1, 'test', 1, 1, 'test', 'test', 'test','test',10, 10, 'test', null, null, null, 'test', 'test');
 
-
-DROP TABLE IF EXISTS AnimalStatusHistory;
-CREATE TABLE AnimalStatusHistory (
-	id					integer,
-	date_and_time		VARCHAR(30),
-    location			VARCHAR(30),
-	the_description		VARCHAR(30),
-	the_status			VARCHAR(30),
-	animal				integer,
-    
-	primary key (id)
+DROP TABLE IF EXISTS AnimalStatus;
+CREATE TABLE AnimalStatus (
+    animalId           integer,
+    theDate            VARCHAR(30),
+    theDescription     VARCHAR(30),
+    location           VARCHAR(30),
+    theStatus          VARCHAR(30),
+	
+    foreign key (animalId) references Animals(animalId)
 );
 
-INSERT INTO AnimalStatusHistory (id, date_and_time, the_description, location, the_status, animal)
+INSERT INTO AnimalStatus (animalId, theDate, theDescription, location, theStatus)
 VALUES
-('1','2021-12-12', null, 'In Campus', 'Available', '1'),
-('2','2021-11-01', 'Her foot is injured', 'Hospital', 'Injured', '2');
+('1','2021-12-12', null, 'In Campus', 'Available'),
+('2','2021-11-01', 'Her foot is injured', 'Hospital', 'Injured');
 
-
-DROP TABLE IF EXISTS History;
-CREATE TABLE History (
-	id					integer,
-	the_date			VARCHAR(30),
-	the_type			VARCHAR(30),
-	the_value			VARCHAR(30),
-    the_user			integer,
-	animal				integer,
+DROP TABLE IF EXISTS AnimalStatusImages;
+CREATE TABLE AnimalStatusImages (
+    imageId            integer AUTO_INCREMENT not null,
+    animalId           integer,
+    statusHistory      integer,
     
-	primary key (id)
+    primary key (imageId),
+    foreign key (animalId) references Animals(animalId)
 );
 
-INSERT INTO History (id, the_date, the_type, the_value, the_user, animal)
+INSERT INTO AnimalStatusImages(imageId, animalId, statusHistory)
+VALUES
+(1, 2, 1),
+(2, 2, 2);
+
+CREATE TABLE Users (
+    id                  integer AUTO_INCREMENT not null,
+    username            VARCHAR(30),
+    theType             VARCHAR(30),
+    email               VARCHAR(30),
+    activationDate      VARCHAR(30),
+
+    
+    primary key (id)
+);
+
+INSERT INTO Users (id, username, theType, email, activationDate)
+VALUES
+('1','user1','admin', 'admin@ucalgary.ca', '2021-03-04'),
+('2','user2', 'animal technician', 'a.technician@ucalgary.ca', '2021-03-04'),
+('3','user3','teach tech', 'tt@ucalgary.ca', '2021-03-04'),
+('4','user4', 'animal technician', 'b.technician@ucalgary.ca', '2021-03-04');
+
+DROP TABLE IF EXISTS ExampleHistory;
+CREATE TABLE ExampleHistory (
+    recordId            integer,
+    theDate            VARCHAR(30),
+    measurement        VARCHAR(30),
+    theValue           VARCHAR(30),
+    theUser            integer,
+    animal              integer,
+    
+    primary key (recordId),
+    foreign key (animal) references Animals(animalId),
+    foreign key (theUser) references Users(id)
+);
+
+INSERT INTO ExampleHistory (recordId, theDate, measurement, theValue, theUser, animal)
 VALUES
 ('1','2019-04-01', 'weight', null, '2', '1'),
 ('2','2019-04-26', 'blood concentration', null, '3', '1');
 
 DROP TABLE IF EXISTS Images;
-CREATE TABLE Images (
-	id					integer,
-	the_user			integer,
-	create_date			VARCHAR(30),
-	address				VARCHAR(30),
-	animal				integer,
-    the_type			VARCHAR(30),
+CREATE TABLE Images(
+    imageId            integer,
+    userId            integer,
+    creationDate         VARCHAR(30),
+    theFile                VARCHAR(30),
+    animalId            integer,
+    theType            VARCHAR(30),
     
-	primary key (id)
+    primary key (imageId),
+    foreign key (userId) references Users(id),
+    foreign key (animalId) references Animals(animalId)
 );
 
-INSERT INTO Images (id, the_user, create_date, address, animal, the_type)
+INSERT INTO Images (imageId, userId, creationDate, theFile, animalId, theType)
 VALUES
 ('1','1', '2021-03-08', 'image1.png', '1', 'profile'),
 ('2','4', '2021-03-09', 'image2.png', '2', 'injury');
 
 
-DROP TABLE IF EXISTS AnimalStatusImages;
-CREATE TABLE AnimalStatusImages (
-	id					integer,
-	status_history		integer,
-	image				integer,
 
+DROP TABLE IF EXISTS TheComment;
+CREATE TABLE TheComment (
+    commentId           integer not null,
+    userId              integer,
+    animalId            integer,
+    theDescription      varchar(30),
     
-	primary key (id)
+    primary key (commentId),
+    foreign key (animalId) references Animals(animalId),
+    foreign key (userId) references Users(id)
 );
 
-INSERT INTO AnimalStatusImages (id, status_history, image)
+INSERT INTO TheComment(commentId, userId, animalId, theDescription)
 VALUES
-('1','1', '1'),
-('2','2', '1');
-
-
-DROP TABLE IF EXISTS Users;
-CREATE TABLE Users (
-	id					integer AUTO_INCREMENT not null,
-	the_name			VARCHAR(30),
-	email				VARCHAR(30),
-    activation_date		VARCHAR(30),
-
-    
-	primary key (id)
-);
-
-INSERT INTO Users (id, the_name, email, activation_date)
-VALUES
-('1','user 1', 'admin@ucalgary.ca', '2021-03-04'),
-('2','user2', 'a.technician@ucalgary.ca', '2021-03-04');
-
-DROP TABLE IF EXISTS MedicalRecordsType;
-CREATE TABLE MedicalRecordsType (
-    id                    integer not null,
-    the_type            varchar(30),
-    primary key (id)
-);
-
-INSERT INTO MedicalRecordsType(id, the_type)
-VALUES
-(1, "XRAY"),
-(2, "DICOm");
-
-DROP TABLE IF EXISTS Prescription;
-CREATE TABLE Prescription (
-    id                    integer not null,
-    the_user            integer,
-    animal                integer,
-    create_date            varchar(30),
-    the_description        varchar(30),
-    
-    primary key (id),
-    foreign key (animal) references Animal(id),
-    foreign key (the_user) references Users(id)
-);
-
-INSERT INTO Prescription(id, the_user, animal, create_date, the_description)
-VALUES
-(1, 1, 1, "2021/11/02", "take meds"),
-(2, 2, 2, "2021/11/02", "take meds forever");
-
-DROP TABLE IF EXISTS PrescriptionItem;
-CREATE TABLE PrescriptionItem (
-    id                    integer not null,
-    the_type            varchar(30),
-    method                varchar(30),
-    the_name            varchar(30),
-    prescription        integer,
-    
-    primary key (id),
-    foreign key (prescription) references Prescription(id)
-);
-
-INSERT INTO PrescriptionItem(id, the_type, method, the_name, prescription)
-VALUES
-(1, "Hourly", 1, "body temparature care", 1),
-(2, "Mourly", 2, "something care", 2);
-
+(1, 1, 1, "He's ill."),
+(2, 1, 2, "She's hurt.");
 
 
 DROP TABLE IF EXISTS TreatmentMethod;
 CREATE TABLE TreatmentMethod (
-    id                    integer not null,
-    the_type            varchar(30),
+    treatmentId        integer not null,
+    theType            varchar(30),
+    primary key (treatmentId)
+);
+
+INSERT INTO TreatmentMethod(treatmentId, theType)
+VALUES
+(1, "Physical exam"),
+(2, "Blood work"),
+(3,	'Bordetella vaccine'),
+(4,	'Dental cleaning'),
+(5,	'Deworming'),
+(6,	'Rabies Vaccination'),
+(7,	'Chemo Treatment');
+
+
+DROP TABLE IF EXISTS PrescriptionRecords;
+CREATE TABLE PrescriptionRecords(
+    scriptRecord       integer AUTO_INCREMENT not null,
+    userId             integer not null,
+    animalId           integer not null,
+    theDate            varchar(30),
+    instructions       varchar(30),
+    drugId             varchar(30),
+    dosage             varchar(30),
+    deliveryMethod     varchar(30),
+    drugName           varchar(30),
+    treatmentMethodId  integer not null,
+    
+    primary key (scriptRecord),
+    foreign key (userId) references Users(id),
+    foreign key (animalId) references Animals(animalId),
+    foreign key (treatmentMethodId) references TreatmentMethod(treatmentId)
+);
+
+INSERT INTO PrescriptionRecords(scriptRecord, userId, animalId, theDate, instructions, drugId, dosage, deliveryMethod, drugName, treatmentMethodId)
+VALUES
+(1, 3, 1, "08/12/2020", null, null, null, null, null, 1),
+(2, 3, 2, "01/10/2021", null, null, null, null, null, 2),
+(3, 3, 2, "01/10/2021", null, null, null, null, null, 3);
+ 
+
+
+DROP TABLE IF EXISTS MedicalRecordsType;
+CREATE TABLE MedicalRecordsType (
+    id               integer not null,
+    type             varchar(30),
+   
     primary key (id)
 );
 
-INSERT INTO TreatmentMethod(id, the_type)
+INSERT INTO MedicalRecordsType(id, type)
 VALUES
-(1, "Physical exam"),
-(2, "Blood work");
-
-DROP TABLE IF EXISTS TheComment;
-CREATE TABLE TheComment (
-    id                    integer not null,
-    the_user            integer,
-    animal                integer,
-    the_description        varchar(30),
-    
-    primary key (id),
-    foreign key (animal) references Animal(id),
-    foreign key (the_user) references Users(id)
-);
-
-INSERT INTO TheComment(id, the_user, animal, the_description)
-VALUES
-(1, 1, 1, "He's ill."),
-(2, 1, 2, "She's hurt.");
+(1,   'XRAY'),
+(2,   'DICOm'),
+(3,   'SOAP'),
+(4,   'FORM'),
+(5,   'IMAGE'),
+(6,   'NOTE'),
+(7,   'LAB'),
+(8,   'LINK'),
+(9,   'RECHECKS'),
+(10,  'DX'),
+(11,  'SURGERY'),
+(12,  'XRAY'),
+(13,  'TRANSFERS'),
+(14,  'STUDENT SOAP'),
+(15,  'PROB'),
+(16,  'INVOICE'),
+(17,  'PRODUCT NOTE');
 
 
