@@ -32,11 +32,12 @@ public class Animal {
     private String subspecies;
     private String distinguishingFeatures;
     private String color;
+    private Integer requestedBy;
 
 
     public Animal(int animalId, String species, int weight, int tattooNum, String cityTattoo, String birthDate,
                   String breed, String sex, int rfid, int microchip, String theStatus, String diet,
-                  String region, String subspecies, String distinguishingFeatures, String color) {
+                  String region, String subspecies, String distinguishingFeatures, String color, Integer requestedBy) {
         this.animalId = animalId;
         this.species = species;
         this.weight = weight;
@@ -53,6 +54,7 @@ public class Animal {
         this.subspecies = subspecies;
         this.distinguishingFeatures = distinguishingFeatures;
         this.color = color;
+        this.requestedBy = requestedBy;
     }
 
     @OneToMany(targetEntity = TheComment.class, cascade=CascadeType.ALL)
