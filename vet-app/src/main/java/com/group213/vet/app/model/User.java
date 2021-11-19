@@ -68,8 +68,16 @@ public class User {
         this.theType = theType;
     }
 
+    @OneToMany(targetEntity = PrescriptionRecords.class, cascade = CascadeType.ALL)
+    @JoinColumn(name = "userId", referencedColumnName = "id")
+    private List<PrescriptionRecords> prescriptionRecords;
+
     @OneToMany (targetEntity = TheComment.class, cascade=CascadeType.ALL)
     @JoinColumn(name = "userId", referencedColumnName = "id")
     private List<TheComment> theComment;
+
+    @OneToMany(targetEntity = AnimalPhoto.class, cascade=CascadeType.ALL)
+    @JoinColumn(name = "userId", referencedColumnName = "userId")
+    private List<AnimalPhoto> animalPhoto;
 
 }
