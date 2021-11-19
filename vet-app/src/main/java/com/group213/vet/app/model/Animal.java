@@ -32,13 +32,11 @@ public class Animal {
     private String subspecies;
     private String distinguishingFeatures;
     private String color;
-    private Integer requestedBy;
-    private String alerts;
 
 
     public Animal(int animalId, String species, int weight, int tattooNum, String cityTattoo, String birthDate,
                   String breed, String sex, int rfid, int microchip, String theStatus, String diet,
-                  String region, String subspecies, String distinguishingFeatures, String color, Integer requestedBy, String alerts) {
+                  String region, String subspecies, String distinguishingFeatures, String color) {
         this.animalId = animalId;
         this.species = species;
         this.weight = weight;
@@ -55,8 +53,27 @@ public class Animal {
         this.subspecies = subspecies;
         this.distinguishingFeatures = distinguishingFeatures;
         this.color = color;
-        this.requestedBy = requestedBy;
     }
+
+    public int getAnimalId() {
+        return animalId;
+    }
+
+    @OneToMany(targetEntity = PrescriptionRecords.class, cascade = CascadeType.ALL)
+    @JoinColumn(name = "animalId", referencedColumnName = "animalId")
+    private List<PrescriptionRecords> prescriptionRecords;
+
+    @OneToMany(targetEntity = AnimalStatus.class, cascade = CascadeType.ALL)
+    @JoinColumn(name = "animalId", referencedColumnName = "animalId")
+    private List<AnimalStatus> animalStatus;
+
+    @OneToOne(targetEntity = AnimalStatus.class, cascade=CascadeType.ALL)
+    @JoinColumn(name = "animalId", referencedColumnName = "animalId")
+    private AnimalStatus animalStatus;
+
+    @OneToMany(targetEntity = AnimalPhoto.class, cascade=CascadeType.ALL)
+    @JoinColumn(name = "animalId", referencedColumnName = "animalId")
+    private List<AnimalPhoto> animalPhoto;
 
     @OneToMany(targetEntity = TheComment.class, cascade=CascadeType.ALL)
     @JoinColumn(name = "animalId", referencedColumnName = "animalId")
