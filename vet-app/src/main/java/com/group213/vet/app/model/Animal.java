@@ -33,7 +33,6 @@ public class Animal {
     private String distinguishingFeatures;
     private String color;
 
-
     public Animal(int animalId, String species, int weight, int tattooNum, String cityTattoo, String birthDate,
                   String breed, String sex, int rfid, int microchip, String theStatus, String diet,
                   String region, String subspecies, String distinguishingFeatures, String color) {
