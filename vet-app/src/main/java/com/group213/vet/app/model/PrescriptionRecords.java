@@ -1,9 +1,7 @@
 package com.group213.vet.app.model;
 
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import org.hibernate.annotations.Synchronize;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -42,7 +40,8 @@ public class PrescriptionRecords implements Serializable {
         this.treatmentMethodId = treatmentMethodId;
     }
 
-    @OneToMany(targetEntity = TreatmentMethod.class, cascade = CascadeType.ALL)
+
+    @OneToMany(targetEntity = TreatmentMethod.class)
     @JoinColumn(name = "treatmentId", referencedColumnName = "treatmentMethodId")
-    private List<TreatmentMethod> treatmentMethodList;
+    private  List<TreatmentMethod> treatmentMethodList;
 }
