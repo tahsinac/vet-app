@@ -32,7 +32,7 @@ public class UserController {
             }
         }
 
-        @PostMapping("/new")
+        @PostMapping("")
         public ResponseEntity<?> addUser(@RequestBody User user){
             try {
                 userService.saveUser(user);
@@ -42,7 +42,7 @@ public class UserController {
             }
         }
 
-        @PutMapping("/modify/{id}")
+        @PutMapping("/{id}")
         public ResponseEntity<?> updateUser(@RequestBody User user, @PathVariable Integer id){
             try{
                 User existingUser = userService.getUser(id);
@@ -55,7 +55,7 @@ public class UserController {
         }
 
 
-        @DeleteMapping("/remove/{id}")
+        @DeleteMapping("/{id}")
         public void deleteUser(@PathVariable Integer id){
             userService.deleteUser(id);
         }
