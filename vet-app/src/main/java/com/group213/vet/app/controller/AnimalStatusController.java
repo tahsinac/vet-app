@@ -34,7 +34,7 @@ public class AnimalStatusController {
         }
     }
 
-    @PostMapping("/new")
+    @PostMapping("")
     public ResponseEntity<?> addAnimalStatus(@RequestBody AnimalStatus animalStatus){
         try {
             animalStatusService.saveAnimalStatus(animalStatus);
@@ -44,7 +44,7 @@ public class AnimalStatusController {
         }
     }
 
-    @PutMapping("/modify/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<?> updateAnimalStatus(@RequestBody AnimalStatus animalStatus, @PathVariable Integer id){
         try{
             AnimalStatus existingAnimalStatus = animalStatusService.getAnimalStatus(id);
