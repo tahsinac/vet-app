@@ -1,7 +1,9 @@
 package com.group213.vet.app.controller;
 
 import com.group213.vet.app.model.Animal;
+import com.group213.vet.app.model.AnimalStatus;
 import com.group213.vet.app.service.AnimalService;
+import com.group213.vet.app.service.AnimalStatusService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,31 +13,31 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 @RestController
-@RequestMapping(path = "/animals")
-public class AnimalController {
+@RequestMapping(path = "/animals/status")
+public class AnimalStatusController {
 
     @Autowired
-    AnimalService animalService;
+    AnimalStatusService animalStatusService;
 
     @GetMapping("")
-    public List<Animal> getAnimal(){
-        return animalService.listAllAnimal();
+    public List<AnimalStatus> getAnimalStatus(){
+        return animalStatusService.listAllAnimalStatus();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Animal> getAnimalById(@PathVariable Integer id){
+    public ResponseEntity<AnimalStatus> getAnimalStatusById(@PathVariable Integer id){
         try {
-            Animal animal = animalService.getAnimal(id);
-            return new ResponseEntity<Animal>(animal, HttpStatus.OK);
+            AnimalStatus animalStatus = animalStatusService.getAnimalStatus(id);
+            return new ResponseEntity<AnimalStatus>(animalStatus, HttpStatus.OK);
         }catch (NoSuchElementException e){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
     @PostMapping("/new")
-    public ResponseEntity<?> addAnimal(@RequestBody Animal animal){
+    public ResponseEntity<?> addAnimalStatus(@RequestBody AnimalStatus animalStatus){
         try {
-            animalService.saveAnimal(animal);
+            animalStatusService.saveAnimalStatus(animalStatus);
             return new ResponseEntity<>(HttpStatus.CREATED);
         }catch(Exception e){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -43,20 +45,14 @@ public class AnimalController {
     }
 
     @PutMapping("/modify/{id}")
-    public ResponseEntity<?> updateAnimal(@RequestBody Animal animal, @PathVariable Integer id){
+    public ResponseEntity<?> updateAnimalStatus(@RequestBody AnimalStatus animalStatus, @PathVariable Integer id){
         try{
-            Animal existingAnimal = animalService.getAnimal(id);
-            animal.setAnimalId(id);
-            animalService.saveAnimal(animal);
+            AnimalStatus existingAnimalStatus = animalStatusService.getAnimalStatus(id);
+            animalStatus.setAnimalId(id);
+            animalStatusService.saveAnimalStatus(animalStatus);
             return new ResponseEntity<>(HttpStatus.OK);
         }catch (NoSuchElementException e){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-    }
-
-
-    @DeleteMapping("/remove/{id}")
-    public void deleteAnimal(@PathVariable Integer id){
-        animalService.deleteAnimal(id);
     }
 }
