@@ -55,12 +55,16 @@ VALUES
 
 DROP TABLE IF EXISTS AnimalStatus;
 CREATE TABLE AnimalStatus (
+<<<<<<< HEAD
     statusId           integer AUTO_INCREMENT not null,
+=======
+>>>>>>> kelten_1
     animalId           integer,
     theDate            VARCHAR(30),
     theDescription     VARCHAR(30),
     location           VARCHAR(30),
     theStatus          VARCHAR(30),
+<<<<<<< HEAD
 
     primary key (statusId),
     foreign key (animalId) references Animals(animalId)
@@ -70,6 +74,16 @@ INSERT INTO AnimalStatus (statusId, animalId, theDate, theDescription, location,
 VALUES
 ('1', '1','2021-12-12', null, 'In Campus', 'Available'),
 ('2', '2','2021-11-01', 'Her foot is injured', 'Hospital', 'Injured');
+=======
+	
+    foreign key (animalId) references Animals(animalId)
+);
+
+INSERT INTO AnimalStatus (animalId, theDate, theDescription, location, theStatus)
+VALUES
+('1','2021-12-12', null, 'In Campus', 'Available'),
+('2','2021-11-01', 'Her foot is injured', 'Hospital', 'Injured');
+>>>>>>> kelten_1
 
 DROP TABLE IF EXISTS AnimalStatusImages;
 CREATE TABLE AnimalStatusImages (
@@ -107,7 +121,11 @@ VALUES
 
 DROP TABLE IF EXISTS Images;
 CREATE TABLE Images(
+<<<<<<< HEAD
     imageId            integer AUTO_INCREMENT not null,
+=======
+    imageId            integer,
+>>>>>>> kelten_1
     userId            integer,
     creationDate         VARCHAR(30),
     theFile                VARCHAR(30),
@@ -173,6 +191,7 @@ CREATE TABLE PrescriptionRecords(
     dosage             varchar(30),
     deliveryMethod     varchar(30),
     drugName           varchar(30),
+<<<<<<< HEAD
 --     treatmentMethodId  integer not null,
     
     primary key (scriptRecord),
@@ -187,6 +206,21 @@ VALUES
 (2, 3, 2, "01/10/2021", null, null, null, null, null),-- , 2),
 (3, 3, 2, "01/10/2021", null, null, null, null, null),
 (4, 3, 1, "01/10/2021", null, null, null, null, null);-- , 3);
+=======
+    treatmentMethodId  integer not null,
+    
+    primary key (scriptRecord),
+    foreign key (userId) references Users(id),
+    foreign key (animalId) references Animals(animalId),
+    foreign key (treatmentMethodId) references TreatmentMethod(treatmentId)
+);
+
+INSERT INTO PrescriptionRecords(scriptRecord, userId, animalId, theDate, instructions, drugId, dosage, deliveryMethod, drugName, treatmentMethodId)
+VALUES
+(1, 3, 1, "08/12/2020", null, null, null, null, null, 1),
+(2, 3, 2, "01/10/2021", null, null, null, null, null, 2),
+(3, 3, 2, "01/10/2021", null, null, null, null, null, 3);
+>>>>>>> kelten_1
  
 
 

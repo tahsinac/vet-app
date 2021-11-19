@@ -33,6 +33,7 @@ public class Animal {
     private String distinguishingFeatures;
     private String color;
 
+
     public Animal(int animalId, String species, int weight, int tattooNum, String cityTattoo, String birthDate,
                   String breed, String sex, int rfid, int microchip, String theStatus, String diet,
                   String region, String subspecies, String distinguishingFeatures, String color) {
@@ -61,6 +62,10 @@ public class Animal {
     @OneToMany(targetEntity = PrescriptionRecords.class, cascade = CascadeType.ALL)
     @JoinColumn(name = "animalId", referencedColumnName = "animalId")
     private List<PrescriptionRecords> prescriptionRecords;
+
+    @OneToMany(targetEntity = AnimalStatus.class, cascade = CascadeType.ALL)
+    @JoinColumn(name = "animalId", referencedColumnName = "animalId")
+    private List<AnimalStatus> animalStatus;
 
     @OneToOne(targetEntity = AnimalStatus.class, cascade=CascadeType.ALL)
     @JoinColumn(name = "animalId", referencedColumnName = "animalId")
