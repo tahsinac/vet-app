@@ -33,11 +33,12 @@ public class Animal {
     private String distinguishingFeatures;
     private String color;
     private Integer requestedBy;
+    private String alerts;
 
 
     public Animal(int animalId, String species, int weight, int tattooNum, String cityTattoo, String birthDate,
                   String breed, String sex, int rfid, int microchip, String theStatus, String diet,
-                  String region, String subspecies, String distinguishingFeatures, String color, Integer requestedBy) {
+                  String region, String subspecies, String distinguishingFeatures, String color, Integer requestedBy, String alerts) {
         this.animalId = animalId;
         this.species = species;
         this.weight = weight;
