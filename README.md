@@ -48,7 +48,7 @@ Link to Jira Board [here](https://uofeng607-213.atlassian.net/jira/software/proj
     * API endpoint (PUT): http://localhost:8080/animals/treatments/{id}
 11. User story: VETAPP18 Diagnose & Prescribe Treatment
     * API endpoint (POST): http://localhost:8080/animals/prescriptions
-    * API endpoint (PUT): http://localhost:8080/animals/prescriptions{scriptRecord}
-12. User story VETAPP-16 Request Treatment <b>(ASK BRANDON!!!!!!)<b>
-    * API endpoint(GET): http://localhost:8080/animals/prescriptions
-    * API endpoint(GET): http://localhost:8080/animals/prescriptions{scriptRecord}
+    * API endpoint (PUT): http://localhost:8080/animals/prescriptions/{scriptRecord}
+12. User story VETAPP-16 Request Treatment 
+    * API endpoint(POST): http://localhost:8080/animals/prescriptions 
+      (Note: When the user enters null values on a new prescriptions, it will be checked as a request for treatment) 
