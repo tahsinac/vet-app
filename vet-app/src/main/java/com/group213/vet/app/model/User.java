@@ -77,7 +77,7 @@ public class User {
     private List<TheComment> theComment;
 
     @OneToMany(targetEntity = AnimalPhoto.class, cascade=CascadeType.ALL)
-    @JoinColumn(name = "userId", referencedColumnName = "userId")
+    @JoinColumn(name = "userId", referencedColumnName = "Id")
     private List<AnimalPhoto> animalPhoto;
 
 }
