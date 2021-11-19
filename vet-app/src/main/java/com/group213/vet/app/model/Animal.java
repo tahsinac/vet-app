@@ -63,10 +63,6 @@ public class Animal {
     @JoinColumn(name = "animalId", referencedColumnName = "animalId")
     private List<PrescriptionRecords> prescriptionRecords;
 
-    @OneToMany(targetEntity = AnimalStatus.class, cascade = CascadeType.ALL)
-    @JoinColumn(name = "animalId", referencedColumnName = "animalId")
-    private List<AnimalStatus> animalStatus;
-
     @OneToOne(targetEntity = AnimalStatus.class, cascade=CascadeType.ALL)
     @JoinColumn(name = "animalId", referencedColumnName = "animalId")
     private AnimalStatus animalStatus;
