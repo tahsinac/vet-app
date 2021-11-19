@@ -56,11 +56,13 @@ public class Animal {
     }
 
 
-//    @OneToOne(mappedBy = "animal", cascade={CascadeType.ALL})
-//    @JoinColumn()
+
     @OneToOne(targetEntity = AnimalStatus.class, cascade=CascadeType.ALL)
     @JoinColumn(name = "animalId", referencedColumnName = "animalId")
     private AnimalStatus animalStatus;
-//    private List<AnimalStatus> animalStatus;
+
+    @OneToMany(targetEntity = AnimalPhoto.class, cascade=CascadeType.ALL)
+    @JoinColumn(name = "animalId", referencedColumnName = "animalId")
+    private List<AnimalPhoto> animalPhoto;
 
 }

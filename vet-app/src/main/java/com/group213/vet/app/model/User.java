@@ -2,6 +2,7 @@ package com.group213.vet.app.model;
 
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity // Annotate the class is an entity in the database
 @Table(name="Users") //Annotate the name of the table in the database
@@ -66,4 +67,9 @@ public class User {
     public void setTheType(String theType) {
         this.theType = theType;
     }
+
+    @OneToMany(targetEntity = AnimalPhoto.class, cascade=CascadeType.ALL)
+    @JoinColumn(name = "userId", referencedColumnName = "userId")
+    private List<AnimalPhoto> animalPhoto;
 }
+
