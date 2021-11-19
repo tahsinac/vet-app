@@ -2,6 +2,24 @@ DROP DATABASE IF EXISTS DUMMYVET;
 CREATE DATABASE DUMMYVET; 
 USE DUMMYVET;
 
+CREATE TABLE Users (
+    id                  integer AUTO_INCREMENT not null,
+    username            VARCHAR(30),
+    theType             VARCHAR(30),
+    email               VARCHAR(30),
+    activationDate      VARCHAR(30),
+
+    
+    primary key (id)
+);
+
+INSERT INTO Users (id, username, theType, email, activationDate)
+VALUES
+('1','user1','admin', 'admin@ucalgary.ca', '2021-03-04'),
+('2','user2', 'animal technician', 'a.technician@ucalgary.ca', '2021-03-04'),
+('3','user3','teach tech', 'tt@ucalgary.ca', '2021-03-04'),
+('4','user4', 'animal technician', 'b.technician@ucalgary.ca', '2021-03-04');
+
 DROP TABLE IF EXISTS Animals;
 CREATE TABLE Animals (
     animalId           integer AUTO_INCREMENT not null,
@@ -20,16 +38,19 @@ CREATE TABLE Animals (
     subspecies          VARCHAR(30),
     distinguishingFeatures   VARCHAR(30),
     color               VARCHAR(30),
+    requestedBy			integer,
+	alerts			  VARCHAR(30),
     
     
-    primary key (animalId)
+    primary key (animalId),
+    foreign key (requestedBy) references Users(id)
 );
 
-INSERT INTO Animals (animalId, species, weight, tattooNum, cityTattoo, birthDate, breed, sex, rfid, microchip, theStatus, diet, region, subspecies, distinguishingFeatures, color)
+INSERT INTO Animals (animalId, species, weight, tattooNum, cityTattoo, birthDate, breed, sex, rfid, microchip, theStatus, diet, region, subspecies, distinguishingFeatures, color, requestedBy, alerts)
 VALUES
-('1', 'Dog', 3, 234234, 'HOC London', '12/07/2019', 'Beagle', 'MN', 176387613813, 20, 'Available', null, null, null, 'barks', 'Brown'),
-('2', 'Dog', 3, 234234, 'HOC Paris', '11/01/2018', 'Pitbull', 'MN', 30, 40, 'Available', null, null, null, "barks a lot", "White"),
-('3', 'Cow', 123, 981733, 'CBH India', '2018-02-29', 'Abigar', 'MN', 50, 60, 'Sick', 'Dairy', 'Spain', 'Taurus', null, null);
+('1', 'Dog', 3, 234234, 'HOC London', '12/07/2019', 'Beagle', 'MN', 176387613813, 20, 'Available', null, null, null, 'barks', 'Brown', null, null),
+('2', 'Dog', 3, 234234, 'HOC Paris', '11/01/2018', 'Pitbull', 'MN', 30, 40, 'Available', null, null, null, "barks a lot", "White", 2, 'needs attention'),
+('3', 'Cow', 123, 981733, 'CBH India', '2018-02-29', 'Abigar', 'MN', 50, 60, 'Sick', 'Dairy', 'Spain', 'Taurus', null, null, '2', 'needs attention');
 -- (1, 'test', 1, 1, 'test', 'test', 'test','test',10, 10, 'test', null, null, null, 'test', 'test');
 
 DROP TABLE IF EXISTS AnimalStatus;
@@ -62,24 +83,6 @@ INSERT INTO AnimalStatusImages(imageId, animalId, statusHistory)
 VALUES
 (1, 2, 1),
 (2, 2, 2);
-
-CREATE TABLE Users (
-    id                  integer AUTO_INCREMENT not null,
-    username            VARCHAR(30),
-    theType             VARCHAR(30),
-    email               VARCHAR(30),
-    activationDate      VARCHAR(30),
-
-    
-    primary key (id)
-);
-
-INSERT INTO Users (id, username, theType, email, activationDate)
-VALUES
-('1','user1','admin', 'admin@ucalgary.ca', '2021-03-04'),
-('2','user2', 'animal technician', 'a.technician@ucalgary.ca', '2021-03-04'),
-('3','user3','teach tech', 'tt@ucalgary.ca', '2021-03-04'),
-('4','user4', 'animal technician', 'b.technician@ucalgary.ca', '2021-03-04');
 
 DROP TABLE IF EXISTS ExampleHistory;
 CREATE TABLE ExampleHistory (
