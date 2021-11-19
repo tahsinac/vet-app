@@ -123,7 +123,7 @@ VALUES
 
 DROP TABLE IF EXISTS TheComment;
 CREATE TABLE TheComment (
-    commentId           integer not null,
+    commentId           integer AUTO_INCREMENT not null,
     userId              integer,
     animalId            integer,
     theDescription      varchar(30),
