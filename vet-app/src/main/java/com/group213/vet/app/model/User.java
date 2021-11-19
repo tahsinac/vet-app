@@ -2,11 +2,14 @@ package com.group213.vet.app.model;
 
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity // Annotate the class is an entity in the database
 @Table(name="Users") //Annotate the name of the table in the database
 public class User {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY) //Generate strategies for the values of primary keys
     private int id;
     private String username;
     private String theType;
@@ -24,8 +27,6 @@ public class User {
         this.activationDate = activationDate;
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) //Generate strategies for the values of primary keys
     public int getId(){
         return id;
     }
@@ -66,4 +67,9 @@ public class User {
     public void setTheType(String theType) {
         this.theType = theType;
     }
+
+    @OneToMany (targetEntity = TheComment.class, cascade=CascadeType.ALL)
+    @JoinColumn(name = "userId", referencedColumnName = "id")
+    private List<TheComment> theComment;
+
 }
