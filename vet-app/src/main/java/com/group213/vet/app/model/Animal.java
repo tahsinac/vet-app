@@ -55,7 +55,13 @@ public class Animal {
         this.color = color;
     }
 
+    public int getAnimalId() {
+        return animalId;
+    }
 
+    @OneToMany(targetEntity = PrescriptionRecords.class, cascade = CascadeType.ALL)
+    @JoinColumn(name = "animalId", referencedColumnName = "animalId")
+    private List<PrescriptionRecords> prescriptionRecords;
 
     @OneToOne(targetEntity = AnimalStatus.class, cascade=CascadeType.ALL)
     @JoinColumn(name = "animalId", referencedColumnName = "animalId")
@@ -64,5 +70,9 @@ public class Animal {
     @OneToMany(targetEntity = AnimalPhoto.class, cascade=CascadeType.ALL)
     @JoinColumn(name = "animalId", referencedColumnName = "animalId")
     private List<AnimalPhoto> animalPhoto;
+
+    @OneToMany(targetEntity = TheComment.class, cascade=CascadeType.ALL)
+    @JoinColumn(name = "animalId", referencedColumnName = "animalId")
+    private List <TheComment> theComment;
 
 }
