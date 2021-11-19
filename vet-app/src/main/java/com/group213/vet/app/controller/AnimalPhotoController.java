@@ -34,7 +34,7 @@ public class AnimalPhotoController {
         }
     }
 
-    @PostMapping("/new")
+    @PostMapping("")
     public ResponseEntity<?> addAnimalPhoto(@RequestBody AnimalPhoto animalPhoto){
         try {
             animalPhotoService.saveAnimalPhoto(animalPhoto);
@@ -44,7 +44,7 @@ public class AnimalPhotoController {
         }
     }
 
-    @PutMapping("/modify/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<?> updateAnimalPhoto(@RequestBody AnimalPhoto animalPhoto, @PathVariable Integer id){
         try{
             AnimalPhoto existingAnimalPhoto = animalPhotoService.getAnimalPhoto(id);
@@ -56,7 +56,7 @@ public class AnimalPhotoController {
         }
     }
 
-    @DeleteMapping("delete/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<?> removePhoto(@PathVariable Integer id){
         try{
             animalPhotoService.deleteAnimalPhoto(id);

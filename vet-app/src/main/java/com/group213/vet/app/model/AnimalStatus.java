@@ -24,10 +24,6 @@ public class AnimalStatus {
     private String location;
     private String theStatus;
 
-//    @OneToOne(cascade = CascadeType.ALL, optional = false)
-//    @JoinColumn()
-//    private Animal animal;
-
     public AnimalStatus(int statusId, int animalId, String theDate, String theDescription,
                         String location, String theStatus) {
         this.statusId = statusId;
