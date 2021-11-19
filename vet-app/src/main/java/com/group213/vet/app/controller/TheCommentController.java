@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 @RestController
-@RequestMapping("/comments")
+@RequestMapping("/animals/comments")
 public class TheCommentController {
 
     @Autowired
@@ -31,7 +31,7 @@ public class TheCommentController {
         }
     }
 
-    @PostMapping("/new")
+    @PostMapping("")
     public ResponseEntity<?> addTheComment(@RequestBody TheComment theComment){
         try {
             theCommentService.saveTheComment(theComment);
@@ -41,7 +41,7 @@ public class TheCommentController {
         }
     }
 
-    @PutMapping("/modify/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<?> updateTheComment(@RequestBody TheComment theComment, @PathVariable Integer id){
         try{
             TheComment existingComment = theCommentService.getTheComment(id);
@@ -53,7 +53,7 @@ public class TheCommentController {
         }
     }
 
-    @DeleteMapping("/remove/{id}")
+    @DeleteMapping("/{id}")
     public void deleteTheComment(@PathVariable Integer id){
         theCommentService.deleteTheComment(id);
     }
