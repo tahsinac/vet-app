@@ -104,7 +104,7 @@ VALUES
 
 DROP TABLE IF EXISTS Images;
 CREATE TABLE Images(
-    imageId            integer,
+    imageId            integer AUTO_INCREMENT not null,
     userId            integer,
     creationDate         VARCHAR(30),
     theFile                VARCHAR(30),
