@@ -32,7 +32,7 @@ public class AnimalController {
         }
     }
 
-    @PostMapping("/new")
+    @PostMapping("")
     public ResponseEntity<?> addAnimal(@RequestBody Animal animal){
         try {
             animalService.saveAnimal(animal);
@@ -42,7 +42,7 @@ public class AnimalController {
         }
     }
 
-    @PutMapping("/modify/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<?> updateAnimal(@RequestBody Animal animal, @PathVariable Integer id){
         try{
             Animal existingAnimal = animalService.getAnimal(id);
@@ -55,7 +55,7 @@ public class AnimalController {
     }
 
 
-    @DeleteMapping("/remove/{id}")
+    @DeleteMapping("/{id}")
     public void deleteAnimal(@PathVariable Integer id){
         animalService.deleteAnimal(id);
     }
