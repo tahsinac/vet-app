@@ -15,6 +15,8 @@ public class User {
     private String theType;
     private String email;
     private String activationDate;
+    private String password;
+    private boolean active;
 
     public User(){
     }
@@ -52,6 +54,20 @@ public class User {
         this.username = username;
     }
 
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    public String getPassword() {return password;}
+
     public String getActivationDate() {
         return activationDate;
     }
@@ -79,5 +95,9 @@ public class User {
     @OneToMany(targetEntity = AnimalPhoto.class, cascade=CascadeType.ALL)
     @JoinColumn(name = "userId", referencedColumnName = "id")
     private List<AnimalPhoto> animalPhoto;
+
+    @OneToMany(targetEntity = AnimalRequests.class, cascade=CascadeType.ALL)
+    @JoinColumn(name = "userId", referencedColumnName = "id")
+    private List<AnimalRequests> animalRequests;
 
 }

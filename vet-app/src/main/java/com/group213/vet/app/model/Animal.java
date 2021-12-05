@@ -32,14 +32,16 @@ public class Animal {
     private String subspecies;
     private String distinguishingFeatures;
     private String color;
-    private Integer requestedBy;
+    private String requestedBy;
     private String alerts;
+    public String approvalStatus;
+    public String requestStatus;
 
 
     public Animal(int animalId, String species, int weight, int tattooNum, String cityTattoo, String birthDate,
                   String breed, String sex, int rfid, int microchip, String theStatus, String diet,
-                  String region, String subspecies, String distinguishingFeatures, String color, Integer requestedBy,
-                  String alerts) {
+                  String region, String subspecies, String distinguishingFeatures, String color, String requestedBy,
+                  String alerts, String approvalStatus, String requestStatus) {
         this.animalId = animalId;
         this.species = species;
         this.weight = weight;
@@ -58,6 +60,8 @@ public class Animal {
         this.color = color;
         this.requestedBy = requestedBy;
         this.alerts = alerts;
+        this.approvalStatus = approvalStatus;
+        this.requestStatus = requestStatus;
     }
 
     public int getAnimalId() {
@@ -71,6 +75,10 @@ public class Animal {
     @OneToOne(targetEntity = AnimalStatus.class, cascade=CascadeType.ALL)
     @JoinColumn(name = "animalId", referencedColumnName = "animalId")
     private AnimalStatus animalStatus;
+
+    @OneToOne(targetEntity = AnimalRequests.class, cascade=CascadeType.ALL)
+    @JoinColumn(name = "animalId", referencedColumnName = "animalId")
+    private AnimalRequests animalRequests;
 
     @OneToMany(targetEntity = AnimalPhoto.class, cascade=CascadeType.ALL)
     @JoinColumn(name = "animalId", referencedColumnName = "animalId")
