@@ -15,7 +15,7 @@ const card = (
         component="img"
         alt="animals"
         height="140"
-        image="/images/animals.jpeg"
+        image="/images/animals.jpg"
       />
       <Typography variant="h5" component="div">
         Animal Name
