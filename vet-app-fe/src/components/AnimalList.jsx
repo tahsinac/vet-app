@@ -4,6 +4,7 @@ import { Box, Button } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import Axios from "axios";
 
+//Reqests management from hackathon
 export default function AnimalList() {
   const [colDefs] = useState([
     { field: "id", headerName: "Animal ID", width: 200 },
