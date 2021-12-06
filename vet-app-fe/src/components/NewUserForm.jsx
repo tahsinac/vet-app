@@ -6,7 +6,7 @@ import Stack from "@mui/material/Stack";
 import Grid from "@mui/material/Grid";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
-import { Box, Button } from "@mui/material";
+import { Box, Button, Paper } from "@mui/material";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import DesktopDatePicker from "@mui/lab/DesktopDatePicker";
 import TextField from "@mui/material/TextField";
@@ -71,6 +71,7 @@ export default function NewUserForm() {
                 value={values.username}
                 onChange={handleChange("username")}
                 label="Username"
+                placeholder="Enter username"
               />
             </FormControl>
 
@@ -82,6 +83,7 @@ export default function NewUserForm() {
                 value={type}
                 label="Role Type"
                 onChange={handleTypeChange}
+                placeholder="Select Role"
               >
                 <MenuItem value={10}>Admin</MenuItem>
                 <MenuItem value={20}>Teaching Technician</MenuItem>
@@ -100,6 +102,7 @@ export default function NewUserForm() {
                 value={values.email}
                 onChange={handleChange("email")}
                 label="Email Address"
+                placeholder="Enter email address"
               />
             </FormControl>
 
@@ -122,6 +125,7 @@ export default function NewUserForm() {
                 value={values.status}
                 onChange={handleChange("status")}
                 label="Status"
+                placeholder="Enter status"
               />
             </FormControl>
 
