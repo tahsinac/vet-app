@@ -21,7 +21,10 @@ export default function AnimalProfile(){
             <Typography variant="h5" component="div">Animal Name</Typography>
         </Stack>
         
-        <Button variant="contained" color="secondary" sx={{ m: 1 }}>Request</Button>
+        <Box sx={{display: 'flex', justifyContent: 'flex-end', p:1, m: 1}}>
+            <Button variant="contained" color="secondary" sx={{ m: 4 }}>Request Treatment</Button>
+            <Button variant="contained" color="secondary" sx={{ m: 4 }}>Request For Instruction</Button>
+        </Box>
       </Box>
       <Combined/>
         </div>

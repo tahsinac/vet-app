@@ -7,6 +7,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import { Box, Button } from "@mui/material";
+import AddRxButton from "./AddRxButton";
 
 const columns = [
   { id: "prescription", label: "Prescription", minWidth: 170 },
@@ -57,9 +58,7 @@ export default function RxTable() {
     <div>
       <Box>
         <Box display="flex" justifyContent="flex-end">
-          <Button variant="contained" color="secondary" sx={{ m: 1 }}>
-            Add Rx
-          </Button>
+          <AddRxButton/>
         </Box>
         <Paper sx={{ width: "100%", overflow: "hidden" }}>
           <TableContainer sx={{ maxHeight: 440 }}>
