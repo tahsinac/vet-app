@@ -8,6 +8,7 @@ import Users from "./pages/Users";
 import MenuBar from "./components/MenuBar";
 import NewUser from "./pages/NewUser";
 import AnimalProfile from "./components/AnimalProfile";
+import AnimalList from "./components/AnimalList";
 
 function App() {
   return (
@@ -37,6 +38,10 @@ function App() {
 
           <Route path="/animal-profile">
             <AnimalProfile />
+          </Route>
+
+          <Route path="/animal-list">
+            <AnimalList />
           </Route>
 
           {/* <Route path="*">
