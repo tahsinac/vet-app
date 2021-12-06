@@ -3,6 +3,7 @@ import { SERVER_URL } from "../constants.js";
 import { Box, Button } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import Axios from "axios";
+import { Link } from "react-router-dom"; //added
 
 export default function UsersList() {
   const [colDefs] = useState([
@@ -44,7 +45,13 @@ export default function UsersList() {
   return (
     <div style={{ height: 700, width: "100%" }}>
       <Box sx={{ display: "flex", justifyContent: "flex-end", p: 1, m: 1 }}>
-        <Button variant="contained" color="success" sx={{ m: 1 }}>
+        <Button
+          component={Link}
+          to="/users/new"
+          variant="contained"
+          color="success"
+          sx={{ m: 1 }}
+        >
           Add New User
         </Button>
         <Button variant="contained" color="secondary" sx={{ m: 1 }}>

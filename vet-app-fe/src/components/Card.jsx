@@ -6,6 +6,7 @@ import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import CardMedia from "@mui/material/CardMedia";
+import { Link } from "react-router-dom"; //added
 
 const card = (
   <React.Fragment>
@@ -25,7 +26,9 @@ const card = (
       <Typography variant="body2">Status Info</Typography>
     </CardContent>
     <CardActions>
-      <Button size="small">View Profile</Button>
+      <Button size="small" component={Link} to="/animal-profile">
+        View Profile
+      </Button>
     </CardActions>
   </React.Fragment>
 );

@@ -6,7 +6,8 @@ import Welcome from "./pages/Welcome";
 import Users from "./pages/Users";
 // import NotFound from "./pages/NotFound";
 import MenuBar from "./components/MenuBar";
-import ProfileGrid from "./components/ProfileGrid";
+import NewUser from "./pages/NewUser";
+import AnimalProfile from "./components/AnimalProfile";
 
 function App() {
   return (
@@ -29,6 +30,15 @@ function App() {
           <Route path="/users" exact>
             <Users />
           </Route>
+
+          <Route path="/users/new">
+            <NewUser />
+          </Route>
+
+          <Route path="/animal-profile">
+            <AnimalProfile />
+          </Route>
+
           {/* <Route path="*">
             <NotFound />
           </Route> */}
