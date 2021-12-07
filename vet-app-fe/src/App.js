@@ -4,7 +4,7 @@ import Login from "./pages/Login";
 import Welcome from "./pages/Welcome";
 // import MainHeader from "./components/MainHeader";
 import Users from "./pages/Users";
-// import NotFound from "./pages/NotFound";
+import NotFound from "./pages/NotFound";
 import MenuBar from "./components/MenuBar";
 import NewUser from "./pages/NewUser";
 import AnimalProfile from "./components/AnimalProfile";
@@ -44,9 +44,9 @@ function App() {
             <AnimalList />
           </Route>
 
-          {/* <Route path="*">
+          <Route path="/404">
             <NotFound />
-          </Route> */}
+          </Route>
         </main>
       </Switch>
     </div>
