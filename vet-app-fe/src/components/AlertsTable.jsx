@@ -6,7 +6,7 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import { Box, Button } from "@mui/material";
+import { Box } from "@mui/material";
 import AddAlertButton from "./AddAlertButton";
 
 const columns = [
@@ -30,7 +30,7 @@ export default function AlertsTable() {
     <div>
       <Box>
         <Box display="flex" justifyContent="flex-end">
-            <AddAlertButton/>
+          <AddAlertButton />
         </Box>
         <Paper sx={{ width: "100%", overflow: "hidden" }}>
           <TableContainer sx={{ maxHeight: 440 }}>

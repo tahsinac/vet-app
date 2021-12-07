@@ -19,7 +19,7 @@ function createData(attribute, value) {
 const rows = [
   createData("Name", "Whiskers"),
   createData("Tattoo #", "6535"),
-  createData("Weight", "fat"),
+  createData("Weight", "10"),
   createData("Age", "65"),
 ];
 

@@ -2,7 +2,6 @@ import * as React from "react";
 import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
-import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import AnimalTab from "./AnimalTab";
 import StickyHeadTable from "./Table";

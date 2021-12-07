@@ -5,11 +5,10 @@ import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormHelperText from '@mui/material/FormHelperText';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
 
 export default function AddAlertButton() {
   const [open, setOpen] = React.useState(false);
@@ -22,7 +21,7 @@ export default function AddAlertButton() {
     setOpen(false);
   };
 
-  const [priotity, setPriority] = React.useState('');
+  const [priotity, setPriority] = React.useState("");
 
   const handleChange = (event) => {
     setPriority(event.target.value);
@@ -30,25 +29,33 @@ export default function AddAlertButton() {
 
   return (
     <div>
-      <Button variant="contained" onClick={handleClickOpen} color="secondary" sx={{ m: 1 }}>
+      <Button
+        variant="contained"
+        onClick={handleClickOpen}
+        color="secondary"
+        sx={{ m: 1 }}
+      >
         Add Alert
       </Button>
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>New Alert</DialogTitle>
         <DialogContent>
-            <FormControl sx={{ m: 1, minWidth: 120 }}>
-                <InputLabel id="demo-simple-select-helper-label">Priority</InputLabel>
-                <Select
-                    labelId="demo-simple-select-helper-label"
-                    id="demo-simple-select-helper"
-                    value={priotity}
-                    label="Priority"
-                    onChange={handleChange}>
-                <MenuItem value={"low"}>Low</MenuItem>
-                <MenuItem value={"medium"}>Medium</MenuItem>
-                <MenuItem value={"high"}>High</MenuItem>
-                </Select>
-            </FormControl>
+          <FormControl sx={{ m: 1, minWidth: 120 }}>
+            <InputLabel id="demo-simple-select-helper-label">
+              Priority
+            </InputLabel>
+            <Select
+              labelId="demo-simple-select-helper-label"
+              id="demo-simple-select-helper"
+              value={priotity}
+              label="Priority"
+              onChange={handleChange}
+            >
+              <MenuItem value={"low"}>Low</MenuItem>
+              <MenuItem value={"medium"}>Medium</MenuItem>
+              <MenuItem value={"high"}>High</MenuItem>
+            </Select>
+          </FormControl>
           <TextField
             autoFocus
             margin="dense"
