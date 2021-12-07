@@ -4,14 +4,13 @@ import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
 import InputBase from "@mui/material/InputBase";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
-import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import MoreIcon from "@mui/icons-material/MoreVert";
+import Paper from "@mui/material/Paper";
 
 import { Link } from "react-router-dom"; //added
 import { NavLink } from "react-router-dom"; //added
@@ -47,7 +46,6 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   color: "inherit",
   "& .MuiInputBase-input": {
     padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
     transition: theme.transitions.create("width"),
     width: "100%",
@@ -83,7 +81,6 @@ export default function PrimarySearchAppBar() {
 
   const menuId = "primary-search-account-menu";
 
-  //modified menu items and typography
   const renderMenu = (
     <Menu
       anchorEl={anchorEl}
@@ -148,25 +145,10 @@ export default function PrimarySearchAppBar() {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
-          {/* <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="open drawer"
-            sx={{ mr: 2 }}
-          >
-            <MenuIcon />
-          </IconButton> */}
           <NavLink to="/welcome" activeClassName={classes.active}>
-            <Typography
-              variant="h6"
-              noWrap
-              // component={NavLink} MODIFIED
-              // to="/welcome"
-              sx={{ display: { xs: "none", sm: "block" } }}
-            >
-              UofC Vet App
-            </Typography>
+            <Paper variant="outlined">
+              <img height="67" width="230" src="./images/vetlogo.png" />
+            </Paper>
           </NavLink>
 
           <Search>
