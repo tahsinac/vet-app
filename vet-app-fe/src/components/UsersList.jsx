@@ -52,8 +52,14 @@ export default function UsersList() {
           sx={{ m: 1 }}
         >
           Add New User
-        </Button>
-        <Button variant="contained" color="secondary" sx={{ m: 1 }}>
+        </Button>{" "}
+        <Button
+          component={Link}
+          to="/users/modify"
+          variant="contained"
+          color="secondary"
+          sx={{ m: 1 }}
+        >
           Modify User
         </Button>
         <Button variant="contained" color="error" sx={{ m: 1 }}>

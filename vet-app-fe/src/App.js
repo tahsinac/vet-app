@@ -7,6 +7,8 @@ import Users from "./pages/Users";
 import NotFound from "./pages/NotFound";
 import MenuBar from "./components/MenuBar";
 import NewUser from "./pages/NewUser";
+import ModifyUser from "./pages/ModifyUser";
+
 import AnimalForm from "./pages/AnimalForm";
 import AnimalProfile from "./components/AnimalProfile";
 import AnimalList from "./components/AnimalList";
@@ -31,6 +33,9 @@ function App() {
           </Route>
           <Route path="/users/new">
             <NewUser />
+          </Route>{" "}
+          <Route path="/users/modify">
+            <ModifyUser />
           </Route>{" "}
           <Route path="/animal/create">
             <AnimalForm />
