@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { SERVER_URL } from "../constants.js";
 import { Box, Button } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
-import Axios from "axios";
 import { Link } from "react-router-dom"; //added
 
 export default function UsersList() {
