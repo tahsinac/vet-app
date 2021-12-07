@@ -52,3 +52,55 @@ Link to Jira Board [here](https://uofeng607-213.atlassian.net/jira/software/proj
 12. User story VETAPP-16 Request Treatment 
     * API endpoint(POST): http://localhost:8080/animals/prescriptions 
       (Note: When the user enters null values on a new prescriptions, it will be checked as a request for treatment) 
+
+
+## Frontend 
+Please ensure you have the following installed:
+
+`npm install axios` <br>
+`npm install @mui/material`<br>
+`npm install @mui/x-data-grid`<br>
+`npm install @mui/material`<br>
+`npm install @mui/icons-material`<br>
+`npm install @emotion/react`<br>
+`npm install @emotion/styled`<br>
+`npm i date-fns`<br>
+`npm i @mui/lab`<br>
+`npm install react-router-dom@5`<br>
+
+
+Once all the dependencies have install, start the react application:
+`npm start`
+
+Implemented Features on the Front End
+
+- Home Page
+- Login Page
+- Animal Profile Grid
+- Users Management Page
+- Animal Request Page
+- Animal Profile Details Page
+- Animal Images
+- Animal Comments
+- Animal RX
+- Animal Diagnosis
+- Animal Alerts
+- Not Found Page
+---
+
+## Backend 
+Back end is built using Spring Boot, for sprint 4, the following were implemented, Database connectivity and Spring Security on the API end points.
+
+### Instructions
+- http://localhost:8080/ directs to backend home paeg
+- http://localhost:8080/animals directs to login page
+
+Example login credentials:
+* username: Admin_1 , password: pa
+
+## Demo
+### Front End Demo
+![Front End Demo](demo1.gif)
+
+### Back
+
