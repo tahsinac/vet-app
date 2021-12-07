@@ -100,6 +100,9 @@ export default function PrimarySearchAppBar() {
       <MenuItem component={Link} to="/users" onClick={handleMenuClose}>
         Users
       </MenuItem>
+      <MenuItem component={Link} to="/animal/create" onClick={handleMenuClose}>
+        New Animal
+      </MenuItem>
       <MenuItem component={Link} to="/animal-list" onClick={handleMenuClose}>
         Requests
       </MenuItem>
