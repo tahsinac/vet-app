@@ -7,6 +7,7 @@ import com.group213.vet.app.service.AnimalStatusService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,11 +21,13 @@ public class AnimalStatusController {
     AnimalStatusService animalStatusService;
 
     @GetMapping("")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('ANIMAL_HEALTH_TECHNICIAN') or hasRole('ANIMAL_CARE_ATTENDANT')")
     public List<AnimalStatus> getAnimalStatus(){
         return animalStatusService.listAllAnimalStatus();
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('ANIMAL_HEALTH_TECHNICIAN') or hasRole('ANIMAL_CARE_ATTENDANT')")
     public ResponseEntity<AnimalStatus> getAnimalStatusById(@PathVariable Integer id){
         try {
             AnimalStatus animalStatus = animalStatusService.getAnimalStatus(id);
@@ -35,6 +38,7 @@ public class AnimalStatusController {
     }
 
     @PostMapping("")
+    @PreAuthorize("hasRole('ANIMAL_HEALTH_TECHNICIAN') or hasRole('ANIMAL_CARE_ATTENDANT')")
     public ResponseEntity<?> addAnimalStatus(@RequestBody AnimalStatus animalStatus){
         try {
             animalStatusService.saveAnimalStatus(animalStatus);
@@ -45,6 +49,7 @@ public class AnimalStatusController {
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasRole('ANIMAL_HEALTH_TECHNICIAN') or hasRole('ANIMAL_CARE_ATTENDANT')")
     public ResponseEntity<?> updateAnimalStatus(@RequestBody AnimalStatus animalStatus, @PathVariable Integer id){
         try{
             AnimalStatus existingAnimalStatus = animalStatusService.getAnimalStatus(id);

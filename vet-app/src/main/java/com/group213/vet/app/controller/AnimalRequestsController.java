@@ -49,6 +49,7 @@ public class AnimalRequestsController {
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('ANIMAL_HEALTH_TECHNICIAN') or hasRole('ANIMAL_CARE_ATTENDANT')")
     public ResponseEntity<?> updateAnimalRequests(@RequestBody AnimalRequests animalRequests, @PathVariable Integer id){
         try{
             AnimalRequests existingAnimalRequests = animalRequestsService.getAnimalRequests(id);
