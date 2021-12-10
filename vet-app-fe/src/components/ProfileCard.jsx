@@ -17,7 +17,7 @@ export default function ProfileCard(props) {
             <CardMedia
               component="img"
               alt="animals"
-              height="140"
+              height="190"
               image={props.img}
             />
             <Typography variant="h5" component="div">
