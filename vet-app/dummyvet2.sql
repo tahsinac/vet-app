@@ -5,21 +5,36 @@ USE DUMMYVET2;
 CREATE TABLE Users (
     id                  integer AUTO_INCREMENT not null,
     username            VARCHAR(30),
-    active        boolean,
-    theType             VARCHAR(30),
+    active        		boolean,
     email               VARCHAR(30),
     activationDate      VARCHAR(30),
-    password            VARCHAR(30) not null,
+    password            VARCHAR(200) not null,
 
 
     primary key (id)
 );
 
-INSERT INTO Users (id, username, active, theType, email, activationDate, password)
+INSERT INTO Users (id, username, active, email, password, activationDate)
 VALUES
-('1','Admin_1',True,'ROLE_ADMIN', 'admin_1@ucalgary.ca', '2021-03-04', "pt@123"),
-('2','Instructor_1',True, 'instructor', 'instructor_1@ucalgary.ca', '2021-03-04', "pa"),
-('3','Technician',True ,'technician', 'technician@ucalgary.ca', '2021-03-04', "pe");
+(1, 'test-user', true, "test@test.test", "password", '2021-03-04'),
+(2, 'test-user2', true, "test2@test.test", "password", '2021-03-05'),
+(3, 'test-user3', true, "test3@test.test", "password", '2021-03-06');
+
+CREATE TABLE Roles (
+	id 		integer AUTO_INCREMENT,
+    name	VARCHAR(200),
+    
+    primary key(id)
+);
+
+INSERT INTO Roles (id, name)
+VALUES
+(1, 'ROLE_USER'),
+(2, 'ROLE_ADMIN'),
+(3, 'ROLE_TEACHING_TECHNICIAN'),
+(4, 'ROLE_ANIMAL_HEALTH_TECHNICIAN'),
+(5, 'ROLE_STUDENT'),
+(6, 'ROLE_ANIMAL_CARE_ATTENDANT');   
 
 DROP TABLE IF EXISTS Animals;
 CREATE TABLE Animals (
@@ -33,26 +48,24 @@ CREATE TABLE Animals (
     sex                 VARCHAR(30),
     rfid                long,
     microchip           long,
-    theStatus              VARCHAR(30),
+    theStatus           VARCHAR(30),
     diet                VARCHAR(30),
     region              VARCHAR(30),
     subspecies          VARCHAR(30),
     distinguishingFeatures   VARCHAR(30),
     color               VARCHAR(30),
     requestedBy			VARCHAR(30) Default 'None',
-	alerts			  VARCHAR(30),
-    approvalStatus     VARCHAR(30) Default 'None',
-    requestStatus           VARCHAR(30) Default 'None',
-    
-    
-    
+	alerts			  	VARCHAR(30),
+    approvalStatus     	VARCHAR(30) Default 'None',
+    requestStatus       VARCHAR(30) Default 'None',
+        
     primary key (animalId)
     -- foreign key (requestedBy) references Users(id)
 );
 
 INSERT INTO Animals (animalId, species, weight, tattooNum, cityTattoo, birthDate, breed, sex, rfid, microchip, theStatus, diet, region, subspecies, distinguishingFeatures, color, requestedBy, alerts)
 VALUES
-('1', 'Dog', 3, 234234, 'HOC London', '12/07/2019', 'Beagle', 'MN', 176387613813, 20, 'Available', null, null, null, 'barks', 'Brown', 'None', null),
+('1', 'Dog', 3, 234234, 'HOC London', '12/07/2019', 'Beagle', 'MN', 17, 20, 'Available', null, null, null, 'barks', 'Brown', 'None', null),
 ('2', 'Dog', 3, 234234, 'HOC Paris', '11/01/2018', 'Pitbull', 'MN', 30, 40, 'Available', null, null, null, "barks a lot", "White",  'None', null),
 ('3', 'Dog', 3, 981733, 'CBH India', '2018-02-29', 'Abigar', 'MN', 50, 60, 'Sick', 'Available', 'Spain', 'Taurus', null, null,  'None', null),
 ('4', 'Dog', 3, 981733, 'CBH India', '2018-02-29', 'Abigar', 'MN', 50, 60, 'Sick', 'Available', 'Spain', 'Taurus', null, null,  'None', null),
@@ -60,7 +73,7 @@ VALUES
 ('6', 'Dog', 3, 981733, 'CBH India', '2018-02-29', 'Abigar', 'MN', 50, 60, 'Sick', 'Available', 'Spain', 'Taurus', null, null,  'None', null),
 ('7', 'Dog', 3, 981733, 'CBH India', '2018-02-29', 'Abigar', 'MN', 50, 60, 'Sick', 'Available', 'Spain', 'Taurus', null, null,  'None', null),
 ('8', 'Dog', 3, 981733, 'CBH India', '2018-02-29', 'Abigar', 'MN', 50, 60, 'Sick', 'Available', 'Spain', 'Taurus', null, null,  'None', null),
-('9', 'Cat', 3, 234234, 'HOC London', '12/07/2019', 'Beagle', 'MN', 176387613813, 20, 'Available', null, null, null, 'barks', 'Brown', 'None', null),
+('9', 'Cat', 3, 234234, 'HOC London', '12/07/2019', 'Beagle', 'MN', 16, 20, 'Available', null, null, null, 'barks', 'Brown', 'None', null),
 ('10', 'Cat', 3, 234234, 'HOC Paris', '11/01/2018', 'Pitbull', 'MN', 30, 40, 'Available', null, null, null, "barks a lot", "White",  'None', null),
 ('11', 'Cat', 3, 981733, 'CBH India', '2018-02-29', 'Abigar', 'MN', 50, 60, 'Sick', 'Available', 'Spain', 'Taurus', null, null,  'None', null),
 ('12', 'Cat', 3, 981733, 'CBH India', '2018-02-29', 'Abigar', 'MN', 50, 60, 'Sick', 'Available', 'Spain', 'Taurus', null, null,  'None', null),
@@ -77,39 +90,25 @@ VALUES
 ('23', 'Horse', 3, 981733, 'CBH India', '2018-02-29', 'Abigar', 'MN', 50, 60, 'Sick', 'Available', 'Spain', 'Taurus', null, null,  'None', null),
 ('24', 'Horse', 3, 981733, 'CBH India', '2018-02-29', 'Abigar', 'MN', 50, 60, 'Sick', 'Available', 'Spain', 'Taurus', null, null,  'None', null);
 
-DROP TABLE IF EXISTS AnimalRequests;
-CREATE TABLE AnimalRequests (
-	requestId          integer AUTO_INCREMENT not null,
-    userId           integer,
-	animalId           integer,
-    approvalStatus     VARCHAR(30) Default 'None',
-    requestStatus           VARCHAR(30) Default 'None',
-    
-    primary key (requestId),
-    foreign key (userId) references Users(id),
-    foreign key (animalId) references Animals(animalId)
-);
+-- DROP TABLE IF EXISTS AnimalRequests;
+-- CREATE TABLE AnimalRequests (
+-- 	requestId          integer AUTO_INCREMENT not null,
+--     userId           integer,
+-- 	animalId           integer,
+--     approvalStatus     VARCHAR(30) Default 'None',
+--     requestStatus           VARCHAR(30) Default 'None',
+--     
+--     primary key (requestId),
+--     foreign key (userId) references Users(id),
+--     foreign key (animalId) references Animals(animalId)
+-- );
 
-DROP TABLE IF EXISTS AnimalRequests;
-CREATE TABLE AnimalRequests (
-	requestId          integer AUTO_INCREMENT not null,
-    userId           integer,
-	animalId           integer,
-    approvalStatus     VARCHAR(30) Default 'None',
-    requestStatus           VARCHAR(30) Default 'None',
-    
-    primary key (requestId),
-    foreign key (userId) references Users(id),
-    foreign key (animalId) references Animals(animalId)
-);
-
-
-INSERT INTO AnimalRequests (requestId, userId, animalId)
-VALUES
-('1', '1','1'),
-('2', '2','2'),
-('3', '2','3'),
-('4', '2','4');
+-- INSERT INTO AnimalRequests (requestId, userId, animalId)
+-- VALUES
+-- ('1', '1','1'),
+-- ('2', '2','2'),
+-- ('3', '2','3'),
+-- ('4', '2','4');
 
 DROP TABLE IF EXISTS AnimalStatus;
 CREATE TABLE AnimalStatus (
