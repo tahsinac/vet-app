@@ -36,12 +36,13 @@ public class Animal {
     private String alerts;
     public String approvalStatus;
     public String requestStatus;
+    public String animalName;
 
 
     public Animal(int animalId, String species, int weight, int tattooNum, String cityTattoo, String birthDate,
                   String breed, String sex, int rfid, int microchip, String theStatus, String diet,
                   String region, String subspecies, String distinguishingFeatures, String color, String requestedBy,
-                  String alerts, String approvalStatus, String requestStatus) {
+                  String alerts, String approvalStatus, String requestStatus, String animalName) {
         this.animalId = animalId;
         this.species = species;
         this.weight = weight;
@@ -62,6 +63,7 @@ public class Animal {
         this.alerts = alerts;
         this.approvalStatus = approvalStatus;
         this.requestStatus = requestStatus;
+        this.animalName = animalName;
     }
 
     public int getAnimalId() {
