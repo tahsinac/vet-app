@@ -17,9 +17,9 @@ CREATE TABLE Users (
 
 INSERT INTO Users (id, username, active, email, password, activationDate)
 VALUES
-(1, 'test-user', true, "test@test.test", "password", '2021-03-04'),
-(2, 'test-user2', true, "test2@test.test", "password", '2021-03-05'),
-(3, 'test-user3', true, "test3@test.test", "password", '2021-03-06');
+(1, 'test-user', true, "test@test.test", "$2a$10$paOCw4c78f//fcwDYpyTTOOJ7.OoCTV1BI0iXmLuCCTCyfe6zqvL6", '2021-03-04'),
+(2, 'test-user2', true, "test2@test.test", "$2a$10$paOCw4c78f//fcwDYpyTTOOJ7.OoCTV1BI0iXmLuCCTCyfe6zqvL6", '2021-03-05'),
+(3, 'test-user3', true, "test3@test.test", "$2a$10$paOCw4c78f//fcwDYpyTTOOJ7.OoCTV1BI0iXmLuCCTCyfe6zqvL6", '2021-03-06');
 
 DROP TABLE IF EXISTS Roles;
 CREATE TABLE Roles (
@@ -57,61 +57,29 @@ CREATE TABLE Animals (
     subspecies          VARCHAR(30),
     distinguishingFeatures   VARCHAR(30),
     color               VARCHAR(30),
-    requestedBy			VARCHAR(30) Default 'None',
-	alerts			  	VARCHAR(30),
+    requestedBy					VARCHAR(30) Default 'None',
+		alerts			  			VARCHAR(30),
     approvalStatus     	VARCHAR(30) Default 'None',
     requestStatus       VARCHAR(30) Default 'None',
+    animalName 					VARCHAR(30),
         
     primary key (animalId)
-    -- foreign key (requestedBy) references Users(id)
 );
 
-INSERT INTO Animals (animalId, species, weight, tattooNum, cityTattoo, birthDate, breed, sex, rfid, microchip, theStatus, diet, region, subspecies, distinguishingFeatures, color, requestedBy, alerts)
+INSERT INTO Animals (animalId, species, weight, tattooNum, cityTattoo, birthDate, breed, sex, rfid, microchip, theStatus, diet, region, subspecies, distinguishingFeatures, color, requestedBy, alerts, animalName)
 VALUES
-('1', 'Dog', 3, 234234, 'HOC London', '12/07/2019', 'Beagle', 'MN', 17, 20, 'Available', null, null, null, 'barks', 'Brown', 'None', null),
-('2', 'Dog', 3, 234234, 'HOC Paris', '11/01/2018', 'Pitbull', 'MN', 30, 40, 'Available', null, null, null, "barks a lot", "White",  'None', null),
-('3', 'Dog', 3, 981733, 'CBH India', '2018-02-29', 'Abigar', 'MN', 50, 60, 'Sick', 'Available', 'Spain', 'Taurus', null, null,  'None', null),
-('4', 'Dog', 3, 981733, 'CBH India', '2018-02-29', 'Abigar', 'MN', 50, 60, 'Sick', 'Available', 'Spain', 'Taurus', null, null,  'None', null),
-('5', 'Dog', 3, 981733, 'CBH India', '2018-02-29', 'Abigar', 'MN', 50, 60, 'Sick', 'Available', 'Spain', 'Taurus', null, null,  'None', null),
-('6', 'Dog', 3, 981733, 'CBH India', '2018-02-29', 'Abigar', 'MN', 50, 60, 'Sick', 'Available', 'Spain', 'Taurus', null, null,  'None', null),
-('7', 'Dog', 3, 981733, 'CBH India', '2018-02-29', 'Abigar', 'MN', 50, 60, 'Sick', 'Available', 'Spain', 'Taurus', null, null,  'None', null),
-('8', 'Dog', 3, 981733, 'CBH India', '2018-02-29', 'Abigar', 'MN', 50, 60, 'Sick', 'Available', 'Spain', 'Taurus', null, null,  'None', null),
-('9', 'Cat', 3, 234234, 'HOC London', '12/07/2019', 'Beagle', 'MN', 16, 20, 'Available', null, null, null, 'barks', 'Brown', 'None', null),
-('10', 'Cat', 3, 234234, 'HOC Paris', '11/01/2018', 'Pitbull', 'MN', 30, 40, 'Available', null, null, null, "barks a lot", "White",  'None', null),
-('11', 'Cat', 3, 981733, 'CBH India', '2018-02-29', 'Abigar', 'MN', 50, 60, 'Sick', 'Available', 'Spain', 'Taurus', null, null,  'None', null),
-('12', 'Cat', 3, 981733, 'CBH India', '2018-02-29', 'Abigar', 'MN', 50, 60, 'Sick', 'Available', 'Spain', 'Taurus', null, null,  'None', null),
-('13', 'Cat', 3, 981733, 'CBH India', '2018-02-29', 'Abigar', 'MN', 50, 60, 'Sick', 'Available', 'Spain', 'Taurus', null, null,  'None', null),
-('14', 'Cat', 3, 981733, 'CBH India', '2018-02-29', 'Abigar', 'MN', 50, 60, 'Sick', 'Available', 'Spain', 'Taurus', null, null,  'None', null),
-('15', 'Cat', 3, 981733, 'CBH India', '2018-02-29', 'Abigar', 'MN', 50, 60, 'Sick', 'Available', 'Spain', 'Taurus', null, null,  'None', null),
-('16', 'Cat', 3, 981733, 'CBH India', '2018-02-29', 'Abigar', 'MN', 50, 60, 'Sick', 'Available', 'Spain', 'Taurus', null, null,  'None', null),
-('17', 'Horse', 3, 234234, 'HOC Paris', '11/01/2018', 'Pitbull', 'MN', 30, 40, 'Available', null, null, null, "barks a lot", "White",  'None', null),
-('18', 'Horse', 3, 981733, 'CBH India', '2018-02-29', 'Abigar', 'MN', 50, 60, 'Sick', 'Available', 'Spain', 'Taurus', null, null,  'None', null),
-('19', 'Horse', 3, 981733, 'CBH India', '2018-02-29', 'Abigar', 'MN', 50, 60, 'Sick', 'Available', 'Spain', 'Taurus', null, null,  'None', null),
-('20', 'Horse', 3, 981733, 'CBH India', '2018-02-29', 'Abigar', 'MN', 50, 60, 'Sick', 'Available', 'Spain', 'Taurus', null, null,  'None', null),
-('21', 'Horse', 3, 981733, 'CBH India', '2018-02-29', 'Abigar', 'MN', 50, 60, 'Sick', 'Available', 'Spain', 'Taurus', null, null,  'None', null),
-('22', 'Horse', 3, 981733, 'CBH India', '2018-02-29', 'Abigar', 'MN', 50, 60, 'Sick', 'Available', 'Spain', 'Taurus', null, null,  'None', null),
-('23', 'Horse', 3, 981733, 'CBH India', '2018-02-29', 'Abigar', 'MN', 50, 60, 'Sick', 'Available', 'Spain', 'Taurus', null, null,  'None', null),
-('24', 'Horse', 3, 981733, 'CBH India', '2018-02-29', 'Abigar', 'MN', 50, 60, 'Sick', 'Available', 'Spain', 'Taurus', null, null,  'None', null);
-
--- DROP TABLE IF EXISTS AnimalRequests;
--- CREATE TABLE AnimalRequests (
--- 	requestId          integer AUTO_INCREMENT not null,
---     userId           integer,
--- 	animalId           integer,
---     approvalStatus     VARCHAR(30) Default 'None',
---     requestStatus           VARCHAR(30) Default 'None',
---     
---     primary key (requestId),
---     foreign key (userId) references Users(id),
---     foreign key (animalId) references Animals(animalId)
--- );
-
--- INSERT INTO AnimalRequests (requestId, userId, animalId)
--- VALUES
--- ('1', '1','1'),
--- ('2', '2','2'),
--- ('3', '2','3'),
--- ('4', '2','4');
+('1', 'Dog', 13, 234234, 'HOC London', '018-02-29', 'Beagle', 'F', 17, 20, 'Available', null, null, null, 'Loves Treats', 'Brown', 'None', null, "Fido"),
+('2', 'Dog', 32, 552278, 'HOC Paris', '2018-02-29', 'Pitbull', 'M', 30, 40, 'Available', null, null, null, "Barks a lot", "White",  'None', null, "Barney"),
+('3', 'Dog', 13, 456113, 'CBH India', '2018-02-29', 'Great Dane', 'M', 50, 60, 'Sick', 'Available', 'Spain', 'Taurus', null, null,  'None', null, "Pluto"),
+('4', 'Cat', 4, 568552, 'CBH India', '2018-02-29', 'Persian', 'F', 50, 60, 'Available', 'Available', 'Spain', 'Taurus', null, null,  'None', null, "Mr Tinkles"),
+('5', 'Cat', 6, 867322, 'CBH India', '2018-02-29', 'Siamese', 'M', 50, 60, 'Sick', 'Available', 'Spain', 'Taurus', null, null,  'None', null, "Mr Whiskers"),
+('6', 'Cat', 7, 124699, 'CBH India', '2018-02-29', 'Munchkin', 'F', 50, 60, 'Sick', 'Available', 'Spain', 'Taurus', null, null,  'None', null, "Mr Meow"),
+('7', 'Horse', 103, 910112, 'HOC Paris', '2018-11-18', 'Arabian', 'M', 30, 40, 'Available', null, null, null, "barks a lot", "White",  'None', null, "Sea Biscuit"),
+('8', 'Horse', 105, 345666, 'CBH India', '2018-02-29', 'Thoroghbred', 'M', 50, 60, 'Sick', 'Available', 'Spain', 'Taurus', null, null,  'None', null, "Red Racer"),
+('9', 'Horse', 119, 128889, 'CBH India', '2018-02-29', 'Mustang', 'M', 50, 60, 'Sick', 'Available', 'Spain', 'Taurus', null, null,  'None', null, "Horsey"),
+('10', 'Cow', 113, 777221, 'HOC Paris', '2018-02-29', 'Hereford', 'M', 30, 40, 'Available', null, null, null, "barks a lot", "White",  'None', null, "Carlos"),
+('11', 'Cow', 134, 900003, 'CBH India', '2018-02-29', 'Galloway', 'F', 50, 60, 'Sick', 'Available', 'Spain', 'Taurus', null, null,  'None', null, "Sammy"),
+('12', 'Cow', 135, 981733, 'CBH India', '2018-02-29', 'Simmental', 'M', 50, 60, 'Sick', 'Available', 'Spain', 'Taurus', null, null,  'None', null, "Brian");
 
 DROP TABLE IF EXISTS AnimalStatus;
 CREATE TABLE AnimalStatus (
@@ -182,8 +150,18 @@ CREATE TABLE Images(
 
 INSERT INTO Images (imageId, userId, creationDate, theFile, animalId, theType)
 VALUES
-('1','1', '2021-03-08', 'image1.png', '1', 'profile'),
-('2','2', '2021-03-09', 'image2.png', '2', 'injury');
+('1','1', '2021-03-08', 'dog1.jpg', '1', 'profile'),
+('2','2', '2021-03-09', 'dog2.jpg', '2', 'profife'),
+('3','1', '2021-03-08', 'dog3.png', '3', 'profile'),
+('4','2', '2021-03-09', 'cat1.jpg', '4', 'profife'),
+('5','1', '2021-03-08', 'cat2.jpg', '5', 'profile'),
+('6','2', '2021-03-09', 'cat3.jpg', '6', 'profife'),
+('7','1', '2021-03-08', 'horse1.jpjg', '7', 'profile'),
+('8','2', '2021-03-09', 'horse2.jpg', '8', 'profile'),
+('9','2', '2021-03-09', 'horse3.jpg', '9', 'profile'),
+('10','1', '2021-03-08', 'cow1.jpg', '10', 'profile'),
+('11','2', '2021-03-09', 'cow2.jpg', '11', 'profile'),
+('12','2', '2021-03-09', 'cow3.jpg', '12', 'profile');
 
 
 
