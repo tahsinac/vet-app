@@ -2,6 +2,7 @@ DROP DATABASE IF EXISTS DUMMYVET2;
 CREATE DATABASE DUMMYVET2; 
 USE DUMMYVET2;
 
+DROP TABLE IF EXISTS Users;
 CREATE TABLE Users (
     id                  integer AUTO_INCREMENT not null,
     username            VARCHAR(30),
@@ -20,12 +21,14 @@ VALUES
 (2, 'test-user2', true, "test2@test.test", "password", '2021-03-05'),
 (3, 'test-user3', true, "test3@test.test", "password", '2021-03-06');
 
+DROP TABLE IF EXISTS Roles;
 CREATE TABLE Roles (
 	id 		integer AUTO_INCREMENT,
     name	VARCHAR(200),
     
     primary key(id)
 );
+
 
 INSERT INTO Roles (id, name)
 VALUES
