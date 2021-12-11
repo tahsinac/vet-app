@@ -42,7 +42,7 @@ export default function AnimalProfile(){
             <Button variant="contained" color="secondary" sx={{ m: 4 }}>Request For Instruction</Button>
         </Box>
       </Box>
-      <Combined id = {animal.animalId}/>
+      <Combined animal = {animal}/>
         </div>
     );
 }
