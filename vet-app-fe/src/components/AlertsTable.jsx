@@ -1,4 +1,5 @@
-import * as React from "react";
+import React, { useEffect, useState } from "react";
+import { SERVER_URL } from "../constants.js";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -19,15 +20,56 @@ function createData(priority, message, location) {
   return { priority, message, location };
 }
 
-const rows = [
-  createData("Medium", "Please get address from client", "VET Building"),
-  createData("Low", "Found with broken tail", "Engineering building"),
-  createData("High", "Found with broken leg", "Cafeteria"),
-];
+function containsObject(obj, list) {
+  var i;
+  for (i = 0; i < list.length; i++) {
+      if ((list[i].priority === obj.priority) && (list[i].message === obj.message) && (list[i].location === obj.location)){
+          return true;
+      }
+  }
+
+  return false;
+}
+
+var rows = [];
 
 export default function AlertsTable() {
+
+  const [alerts, setAlerts] = useState([]);
+
+  useEffect(() => {
+    fetch(SERVER_URL + "animals/1")
+      .then((response) => response.json())
+      .then((data) => {
+        const alertData = data.alerts.map((p) => {
+          return {
+            priority: p.priority,
+            message: p.message,
+            location: p.location,
+          };
+        });
+        setAlerts(alertData);
+        console.log(alertData)
+
+        
+      })
+      .then(function(data) {
+
+      })
+      .catch((err) => console.error(err));
+}, []);
+
+
+
+
   return (
     <div>
+      {(alerts.forEach((element) => {
+        if(!containsObject(createData(element.priority, element.message, element.location), rows)) {
+          rows.push(createData(element.priority, element.message, element.location))
+        }
+          
+        }))};
       <Box>
         <Box display="flex" justifyContent="flex-end">
           <AddAlertButton />

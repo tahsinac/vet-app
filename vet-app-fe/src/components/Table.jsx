@@ -20,13 +20,12 @@ function createData(attribute, value) {
 
 var rows = [];
 
-export default function StickyHeadTable() {
-
+export default function StickyHeadTable(props) {
   const [animals, setAnimals] = useState([]);
-
+  const id = props.id
 
   useEffect(() => {
-    fetch(SERVER_URL + "animals/1")
+    fetch(SERVER_URL + "animals/" + props.id)
       .then((response) => response.json())
       .then((data) => {
         // animals: responseData
@@ -57,7 +56,7 @@ export default function StickyHeadTable() {
         
       })
       .catch((err) => console.error(err));
-}, []);
+}, [id]);
 
   return (  
     <div>

@@ -13,19 +13,19 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
-export default function Combined() {
+export default function Combined(props) {
   return (
     <div>
       <Box sx={{ flexGrow: 1 }}>
         <Grid container spacing={2}>
           <Grid item xs={4}>
             <Item>
-              <StickyHeadTable />
+              <StickyHeadTable id = {props.id} />
             </Item>
           </Grid>
           <Grid item xs={8}>
             <Item>
-              <AnimalTab />
+              <AnimalTab id = {props.id}/>
             </Item>
           </Grid>
         </Grid>

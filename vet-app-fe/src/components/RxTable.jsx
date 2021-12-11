@@ -20,6 +20,17 @@ function createData(drugName, instructions) {
   return { drugName, instructions };
 }
 
+function containsObject(obj, list) {
+  var i;
+  for (i = 0; i < list.length; i++) {
+      if ((list[i].drugName === obj.drugName) && (list[i].instructions === obj.instructions)){
+          return true;
+      }
+  }
+
+  return false;
+}
+
 var rows = [];
 
 
@@ -31,7 +42,6 @@ export default function RxTable() {
     fetch(SERVER_URL + "animals/1")
       .then((response) => response.json())
       .then((data) => {
-        // animals: responseData
         const prescriptionData = data.prescriptionRecords.map((p) => {
           return {
             instructions: p.instructions,
@@ -49,23 +59,14 @@ export default function RxTable() {
       .catch((err) => console.error(err));
 }, []);
 
-
-
-// {prescriptions.map(p => {
-//   rows = [
-//           createData(p.drugName, p.instructions),
-//           createData(p.drugName, p.instructions),
-//    ];
-                 
-//  })}
-
-
   return (
     <div>
       
-      {this.setState(prescriptions.forEach((element) => {
-      rows.push(createData(element.drugName, element.instructions))
-
+      {(prescriptions.forEach((element) => {
+        if(!containsObject(createData(element.drugName, element.instructions), rows)) {
+          rows.push(createData(element.drugName, element.instructions))
+        }
+          
         }))};
 
       <Box>
