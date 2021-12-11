@@ -3,12 +3,13 @@ import { SERVER_URL } from "../constants.js";
 import { Box, Button } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import { Link } from "react-router-dom"; //added
+import authToken from "../authentication/DataService";
 
 export default function UsersList() {
   const [colDefs] = useState([
     { field: "id", headerName: "User ID", width: 200 },
     { field: "username", headerName: "Username", width: 350 },
-    { field: "theType", headerName: "Type", width: 350 },
+    // { field: "theType", headerName: "Type", width: 350 },
     { field: "email", headerName: "Email", width: 350 },
     { field: "activationDate", headerName: "Activation Date", width: 350 },
     { field: "active", headerName: "Status", width: 350 },
@@ -22,14 +23,14 @@ export default function UsersList() {
 
   useEffect(() => {
     (async () => {
-      fetch(SERVER_URL + "users/")
+      fetch(SERVER_URL + "users/", { headers: authToken() })
         .then((response) => response.json())
         .then((rowData) => {
           const userData = rowData.map((u) => {
             return {
               id: u.id,
               username: u.username,
-              theType: u.theType,
+              // theType: u.theType,
               email: u.email,
               activationDate: u.activationDate,
               active: u.active,

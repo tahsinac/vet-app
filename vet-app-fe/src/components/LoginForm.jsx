@@ -1,6 +1,8 @@
 import React, { useRef, useState } from "react";
 import axios from "axios";
 import { SERVER_URL } from "../constants.js";
+import { Route, Switch, Redirect } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 import {
   Grid,
@@ -11,13 +13,13 @@ import {
   Typography,
   Link,
 } from "@mui/material";
-import AuthenticationService from "../authentication/AuthenticationService";
+import auth from "../authentication/AuthenticationService";
 
 import LockIcon from "@mui/icons-material/Lock";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 
-export default function LoginForm() {
+export default function LoginForm(props) {
   const paperStyle = {
     padding: 20,
     height: "40vh",
@@ -39,22 +41,25 @@ export default function LoginForm() {
     setPassword(e.target.value);
   };
 
-  const loginOnSubmit = (event) => {
-    event.preventDefault(); //To prevent losing state
-    console.log(username);
-    console.log(password);
+  function loginOnSubmit(event) {
+    event.preventDefault();
 
-    executeAuthenticationService(username, password).then((response) =>
-      console.log(response)
-    );
-  };
-
-  function executeAuthenticationService(username, password) {
-    return axios.post(`${SERVER_URL}auth/signin`, {
-      username,
-      password,
-    });
+    props.onLogin({ username, password });
+    // console.log(username, password);
   }
+
+  // const loginOnSubmit = (event) => {
+  //   event.preventDefault(); //To prevent losing state
+
+  //   props.onLogin({ username: username, password: password });
+  //   console.log(username, password);
+
+  //   auth.signin(username, password).then(() => {
+  //     // const { history } = this.props;
+  //     // props.history.push("/welcome");
+  //     // window.location.reload();
+  //   // });
+  // };
 
   return (
     <Grid>
