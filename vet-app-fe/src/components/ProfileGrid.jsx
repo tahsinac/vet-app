@@ -3,7 +3,6 @@ import { SERVER_URL } from "../constants.js";
 import ProfileCard from "./ProfileCard";
 import Grid from "@mui/material/Grid";
 import Container from "@mui/material/Container";
-import Button from "@mui/material/Button";
 import { useHistory } from "react-router-dom";
 
 export default function ProfileGrid() {
@@ -35,7 +34,7 @@ export default function ProfileGrid() {
 
   const addViewProfileHandler = (profileID) => {
     console.log(profileID);
-      history.push("/animal-profile");
+      history.push({pathname: "/animal-profile", state: profileID});
   };
 
   return (
