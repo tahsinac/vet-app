@@ -3,34 +3,13 @@ import { SERVER_URL } from "../constants.js";
 import ProfileCard from "./ProfileCard";
 import Grid from "@mui/material/Grid";
 import Container from "@mui/material/Container";
+import Button from "@mui/material/Button";
+import { useHistory } from "react-router-dom";
 
 export default function ProfileGrid() {
 
   const [animals, setAnimals] = useState([]);
-
-  // useEffect(() => {
-  //   (async () => {
-  //     fetch(SERVER_URL + "animals")
-  //       .then((response) => response.json())
-  //       .then((data) => {
-  //         // animals: responseData
-  //         const animalData = data.map((a) => {
-  //           return {
-  //             animalId: a.animalId,
-  //             animalName: a.animalName,
-  //             tattooNum: a.tattooNum,
-  //             breed: a.breed,
-  //             image: a.animalPhoto[0].theFile,
-  //           };
-  //         });
-  //         console.log(animalData)
-  //         setAnimals(animalData);
-  //         // console.log(animals)
-  //       })
-  //       .catch((err) => console.error(err));
-  //   })();
-  // }, []);
-
+  
   useEffect(() => {
       fetch(SERVER_URL + "animals")
         .then((response) => response.json())
@@ -45,15 +24,20 @@ export default function ProfileGrid() {
               image: "/images/" + a.animalPhoto[0].theFile,
             };
           });
-          // console.log(animalData)
           setAnimals(animalData);
         })
         .catch((err) => console.error(err));
   }, []);
 
 
-  
-  
+  //
+  const history = useHistory();
+
+  const addViewProfileHandler = (profileID) => {
+    console.log(profileID);
+      history.push("/animal-profile");
+  };
+
   return (
     <div>
       <Container sx={{ p: 2 }}>
@@ -61,7 +45,8 @@ export default function ProfileGrid() {
         {animals.map(a => {
           return (
             <Grid item xs={12} sm={6} md={4}>
-              <ProfileCard 
+              <ProfileCard sendAnimal={addViewProfileHandler}
+                id = {a.animalId} 
                 img = {a.image}
                 name = {a.animalName}
                 tattooNum = {a.tattooNum}

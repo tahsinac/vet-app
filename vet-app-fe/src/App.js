@@ -10,6 +10,7 @@ import NewUser from "./pages/NewUser";
 import ModifyUser from "./pages/ModifyUser";
 
 import AnimalForm from "./pages/AnimalForm";
+import ProfileGridPage from "./pages/ProfileGridPage";
 import AnimalProfile from "./components/AnimalProfile";
 import AnimalList from "./components/AnimalList";
 
