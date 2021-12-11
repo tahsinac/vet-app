@@ -152,11 +152,11 @@ INSERT INTO Images (imageId, userId, creationDate, theFile, animalId, theType)
 VALUES
 ('1','1', '2021-03-08', 'dog1.jpg', '1', 'profile'),
 ('2','2', '2021-03-09', 'dog2.jpg', '2', 'profife'),
-('3','1', '2021-03-08', 'dog3.png', '3', 'profile'),
+('3','1', '2021-03-08', 'dog3.jpg', '3', 'profile'),
 ('4','2', '2021-03-09', 'cat1.jpg', '4', 'profife'),
 ('5','1', '2021-03-08', 'cat2.jpg', '5', 'profile'),
 ('6','2', '2021-03-09', 'cat3.jpg', '6', 'profife'),
-('7','1', '2021-03-08', 'horse1.jpjg', '7', 'profile'),
+('7','1', '2021-03-08', 'horse1.jpg', '7', 'profile'),
 ('8','2', '2021-03-09', 'horse2.jpg', '8', 'profile'),
 ('9','2', '2021-03-09', 'horse3.jpg', '9', 'profile'),
 ('10','1', '2021-03-08', 'cow1.jpg', '10', 'profile'),

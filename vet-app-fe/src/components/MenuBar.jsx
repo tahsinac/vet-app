@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useEffect, useState } from "react";
 import { styled, alpha } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -11,10 +12,12 @@ import SearchIcon from "@mui/icons-material/Search";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import Paper from "@mui/material/Paper";
+import auth from "../authentication/AuthenticationService";
 
 import { Link } from "react-router-dom"; //added
 import { NavLink } from "react-router-dom"; //added
 import classes from "./MainHeader.module.css"; //added
+import { useHistory } from "react-router-dom"; //added
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -61,6 +64,17 @@ export default function PrimarySearchAppBar() {
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+  const [currentUser, setCurrentUser] = useState(undefined);
+  const [showUsers, setShowUsers] = useState(false);
+
+  useEffect(() => {
+    const user = auth.getCurrentUser();
+
+    if (user) {
+      setCurrentUser(user);
+      setShowUsers(user.roles.includes("ROLE_ADMIN"));
+    }
+  }, []);
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -78,6 +92,16 @@ export default function PrimarySearchAppBar() {
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
+
+  // const { history } = useHistory();
+  // const logout = () => auth.logout;
+
+  // const handleLogout = () => {
+  //   logout();
+  //   window.addEventListener("popstate", () => {
+  //     history.go(1);
+  //   });
+  // };
 
   const menuId = "primary-search-account-menu";
 
@@ -97,9 +121,12 @@ export default function PrimarySearchAppBar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem component={Link} to="/users" onClick={handleMenuClose}>
-        Users
-      </MenuItem>
+      {" "}
+      {showUsers && (
+        <MenuItem component={Link} to="/users" onClick={handleMenuClose}>
+          Users
+        </MenuItem>
+      )}
       <MenuItem component={Link} to="/animal/create" onClick={handleMenuClose}>
         New Animal
       </MenuItem>
@@ -109,7 +136,9 @@ export default function PrimarySearchAppBar() {
       <MenuItem component={Link} to="/login" onClick={handleMenuClose}>
         Log In
       </MenuItem>
-      <MenuItem onClick={handleMenuClose}>Logout</MenuItem>
+      <MenuItem component={Link} to="/login" onClick={auth.logout}>
+        Logout
+      </MenuItem>
     </Menu>
   );
 
