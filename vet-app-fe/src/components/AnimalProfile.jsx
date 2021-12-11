@@ -6,19 +6,16 @@ import Avatar from '@mui/material/Avatar';
 import Combined from "./Combined";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-// import * as Images from "../images2";
 
 export default function AnimalProfile(){
 
   const [animal, setAnimal] = useState([]);
   const location = useLocation()
-  // {`/images/${animal.animalPhoto}`}
 
   useEffect(() => {
     fetch(SERVER_URL + "animals/" + location.state.id)
       .then((response) => response.json())
       .then((data) => {
-        console.log("/images/" + data.animalPhoto[0].theFile) 
         localStorage.setItem(`animalPhoto`, JSON.stringify(data.animalPhoto[0].theFile));
         setAnimal(data)})
       .catch((err) => console.error(err));
@@ -45,7 +42,7 @@ export default function AnimalProfile(){
             <Button variant="contained" color="secondary" sx={{ m: 4 }}>Request For Instruction</Button>
         </Box>
       </Box>
-      <Combined/>
+      <Combined id = {animal.animalId}/>
         </div>
     );
 }
