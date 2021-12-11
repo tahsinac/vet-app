@@ -58,7 +58,6 @@ CREATE TABLE Animals (
     distinguishingFeatures   VARCHAR(30),
     color               VARCHAR(30),
     requestedBy					VARCHAR(30) Default 'None',
-		alerts			  			VARCHAR(30),
     approvalStatus     	VARCHAR(30) Default 'None',
     requestStatus       VARCHAR(30) Default 'None',
     animalName 					VARCHAR(30),
@@ -66,20 +65,20 @@ CREATE TABLE Animals (
     primary key (animalId)
 );
 
-INSERT INTO Animals (animalId, species, weight, tattooNum, cityTattoo, birthDate, breed, sex, rfid, microchip, theStatus, diet, region, subspecies, distinguishingFeatures, color, requestedBy, alerts, animalName)
+INSERT INTO Animals (animalId, species, weight, tattooNum, cityTattoo, birthDate, breed, sex, rfid, microchip, theStatus, diet, region, subspecies, distinguishingFeatures, color, requestedBy, animalName)
 VALUES
-('1', 'Dog', 13, 234234, 'HOC London', '018-02-29', 'Beagle', 'F', 17, 20, 'Available', null, null, null, 'Loves Treats', 'Brown', 'None', null, "Fido"),
-('2', 'Dog', 32, 552278, 'HOC Paris', '2018-02-29', 'Pitbull', 'M', 30, 40, 'Available', null, null, null, "Barks a lot", "White",  'None', null, "Barney"),
-('3', 'Dog', 13, 456113, 'CBH India', '2018-02-29', 'Great Dane', 'M', 50, 60, 'Sick', 'Available', 'Spain', 'Taurus', null, null,  'None', null, "Pluto"),
-('4', 'Cat', 4, 568552, 'CBH India', '2018-02-29', 'Persian', 'F', 50, 60, 'Available', 'Available', 'Spain', 'Taurus', null, null,  'None', null, "Mr Tinkles"),
-('5', 'Cat', 6, 867322, 'CBH India', '2018-02-29', 'Siamese', 'M', 50, 60, 'Sick', 'Available', 'Spain', 'Taurus', null, null,  'None', null, "Mr Whiskers"),
-('6', 'Cat', 7, 124699, 'CBH India', '2018-02-29', 'Munchkin', 'F', 50, 60, 'Sick', 'Available', 'Spain', 'Taurus', null, null,  'None', null, "Mr Meow"),
-('7', 'Horse', 103, 910112, 'HOC Paris', '2018-11-18', 'Arabian', 'M', 30, 40, 'Available', null, null, null, "barks a lot", "White",  'None', null, "Sea Biscuit"),
-('8', 'Horse', 105, 345666, 'CBH India', '2018-02-29', 'Thoroghbred', 'M', 50, 60, 'Sick', 'Available', 'Spain', 'Taurus', null, null,  'None', null, "Red Racer"),
-('9', 'Horse', 119, 128889, 'CBH India', '2018-02-29', 'Mustang', 'M', 50, 60, 'Sick', 'Available', 'Spain', 'Taurus', null, null,  'None', null, "Horsey"),
-('10', 'Cow', 113, 777221, 'HOC Paris', '2018-02-29', 'Hereford', 'M', 30, 40, 'Available', null, null, null, "barks a lot", "White",  'None', null, "Carlos"),
-('11', 'Cow', 134, 900003, 'CBH India', '2018-02-29', 'Galloway', 'F', 50, 60, 'Sick', 'Available', 'Spain', 'Taurus', null, null,  'None', null, "Sammy"),
-('12', 'Cow', 135, 981733, 'CBH India', '2018-02-29', 'Simmental', 'M', 50, 60, 'Sick', 'Available', 'Spain', 'Taurus', null, null,  'None', null, "Brian");
+('1', 'Dog', 13, 234234, 'HOC London', '018-02-29', 'Beagle', 'F', 17, 20, 'Available', null, null, null, 'Loves Treats', 'Brown', 'None',  "Fido"),
+('2', 'Dog', 32, 552278, 'HOC Paris', '2018-02-29', 'Pitbull', 'M', 30, 40, 'Available', null, null, null, "Barks a lot", "White",  'None',  "Barney"),
+('3', 'Dog', 13, 456113, 'CBH India', '2018-02-29', 'Great Dane', 'M', 50, 60, 'Sick', 'Available', 'Spain', 'Taurus', null, null,  'None', "Pluto"),
+('4', 'Cat', 4, 568552, 'CBH India', '2018-02-29', 'Persian', 'F', 50, 60, 'Available', 'Available', 'Spain', 'Taurus', null, null,  'None', "Mr Tinkles"),
+('5', 'Cat', 6, 867322, 'CBH India', '2018-02-29', 'Siamese', 'M', 50, 60, 'Sick', 'Available', 'Spain', 'Taurus', null, null,  'None', "Mr Whiskers"),
+('6', 'Cat', 7, 124699, 'CBH India', '2018-02-29', 'Munchkin', 'F', 50, 60, 'Sick', 'Available', 'Spain', 'Taurus', null, null,  'None',  "Mr Meow"),
+('7', 'Horse', 103, 910112, 'HOC Paris', '2018-11-18', 'Arabian', 'M', 30, 40, 'Available', null, null, null, "barks a lot", "White",  'None', "Sea Biscuit"),
+('8', 'Horse', 105, 345666, 'CBH India', '2018-02-29', 'Thoroghbred', 'M', 50, 60, 'Sick', 'Available', 'Spain', 'Taurus', null, null,  'None', "Red Racer"),
+('9', 'Horse', 119, 128889, 'CBH India', '2018-02-29', 'Mustang', 'M', 50, 60, 'Sick', 'Available', 'Spain', 'Taurus', null, null,  'None', "Horsey"),
+('10', 'Cow', 113, 777221, 'HOC Paris', '2018-02-29', 'Hereford', 'M', 30, 40, 'Available', null, null, null, "barks a lot", "White",  'None', "Carlos"),
+('11', 'Cow', 134, 900003, 'CBH India', '2018-02-29', 'Galloway', 'F', 50, 60, 'Sick', 'Available', 'Spain', 'Taurus', null, null,  'None', "Sammy"),
+('12', 'Cow', 135, 981733, 'CBH India', '2018-02-29', 'Simmental', 'M', 50, 60, 'Sick', 'Available', 'Spain', 'Taurus', null, null,  'None',  "Brian");
 
 DROP TABLE IF EXISTS AnimalStatus;
 CREATE TABLE AnimalStatus (
@@ -222,9 +221,31 @@ CREATE TABLE PrescriptionRecords(
 
 INSERT INTO PrescriptionRecords(scriptRecord, userId, animalId, theDate, instructions, drugId, dosage, deliveryMethod, drugName, treatmentMethodId)
 VALUES
-(1, 3, 1, "08/12/2020", null, null, null, null, null, 1),
-(2, 3, 2, "01/10/2021", null, null, null, null, null, 2),
-(3, 3, 2, "01/10/2021", null, null, null, null, null, 3);
+(1, 3, 1, "08/12/2020", "for noisy pups", 0, "18 mg", "Oral", "Bark-Less", 1),
+(2, 3, 1, "08/12/2020", "for sick dogs", 0, "30 mg", "Oral", "Cough-Less", 1),
+(3, 3, 2, "01/10/2021",null, null, null, null, null, 3),
+(4, 3, 2, "01/10/2021", null, null, null, null, null, 3);
+
+
+DROP TABLE IF EXISTS Alerts;
+CREATE TABLE Alerts(
+    alertId     	integer AUTO_INCREMENT not null,
+    userId             integer not null,
+    animalId           integer not null,
+    priority           varchar(30),
+    message       	   varchar(60),
+    location           varchar(30),
+    
+    primary key (alertId),
+    foreign key (userId) references Users(id),
+    foreign key (animalId) references Animals(animalId)
+);
+
+INSERT INTO Alerts(alertId, userId, animalId, priority, message, location)
+VALUES
+(1, 3, 1, "High", "Please get this dog some help", "On Campus"),
+(2, 3, 1, "Low", "Check into this dog's ear","at home"),
+(3, 3, 2, "Medium", "Look into psychologist for animal", "barn");
  
 
 
