@@ -6,17 +6,20 @@ import Avatar from '@mui/material/Avatar';
 import Combined from "./Combined";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
+// import * as Images from "../images2";
 
 export default function AnimalProfile(){
 
   const [animal, setAnimal] = useState([]);
   const location = useLocation()
+  // {`/images/${animal.animalPhoto}`}
 
   useEffect(() => {
     fetch(SERVER_URL + "animals/" + location.state.id)
       .then((response) => response.json())
       .then((data) => {
         console.log("/images/" + data.animalPhoto[0].theFile) 
+        localStorage.setItem(`animalPhoto`, JSON.stringify(data.animalPhoto[0].theFile));
         setAnimal(data)})
       .catch((err) => console.error(err));
 }, []);
@@ -33,7 +36,7 @@ export default function AnimalProfile(){
         }}
       >
         <Stack direction="row" justifyContent="center" alignItems="center"spacing={2}>
-            <Avatar alt="animal image" src={`/images/${animal.animalPhoto}`}  sx={{ width: 90, height: 90 }} />
+            <Avatar alt="animal image" src={`/images/${JSON.parse(localStorage.getItem("animalPhoto"))}`}  sx={{ width: 90, height: 90 }} />
             <Typography variant="h5" component="div">{animal.animalName}</Typography>
         </Stack>
         
