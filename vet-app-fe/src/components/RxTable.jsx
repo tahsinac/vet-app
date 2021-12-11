@@ -1,4 +1,5 @@
-import * as React from "react";
+import React, { useEffect, useState } from "react";
+import { SERVER_URL } from "../constants.js";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -10,52 +11,63 @@ import { Box } from "@mui/material";
 import AddRxButton from "./AddRxButton";
 
 const columns = [
-  { id: "prescription", label: "Prescription", minWidth: 170 },
-  { id: "description", label: "Description", minWidth: 100 },
-  { id: "date", label: "Date", minWidth: 170 },
-  { id: "prescribedBy", label: "Prescribed By", minWidth: 100 },
+  { id: "drugName", label: "Prescription", minWidth: 100 },
+  { id: "instructions", label: "Instructions", minWidth: 100 },
+
 ];
 
-function createData(prescription, description, date, prescribedBy) {
-  return { prescription, description, date, prescribedBy };
+function createData(drugName, instructions) {
+  return { drugName, instructions };
 }
 
-const rows = [
-  createData(
-    "Medicine 1",
-    "this medicine is for dogs",
-    "05/07/2020",
-    "Dr. John Doe"
-  ),
-  createData(
-    "Medicine 2",
-    "this medicine is for cats",
-    "05/10/2020",
-    "Dr. John Doe"
-  ),
-  createData(
-    "Medicine 3",
-    "this medicine is for chickens",
-    "05/15/2020",
-    "Dr. John Doe"
-  ),
-  createData(
-    "Medicine 4",
-    "this medicine is for horses",
-    "05/20/2020",
-    "Dr. John Doe"
-  ),
-  createData(
-    "Medicine 5",
-    "this medicine is for cows",
-    "05/25/2020",
-    "Dr. John Doe"
-  ),
-];
+var rows = [];
+
 
 export default function RxTable() {
+
+  const [prescriptions, setPrescriptions] = useState([]);
+
+  useEffect(() => {
+    fetch(SERVER_URL + "animals/1")
+      .then((response) => response.json())
+      .then((data) => {
+        // animals: responseData
+        const prescriptionData = data.prescriptionRecords.map((p) => {
+          return {
+            instructions: p.instructions,
+            drugName: p.drugName,
+          };
+        });
+        setPrescriptions(prescriptionData);
+        console.log(prescriptionData)
+
+        
+      })
+      .then(function(data) {
+
+      })
+      .catch((err) => console.error(err));
+}, []);
+
+
+
+// {prescriptions.map(p => {
+//   rows = [
+//           createData(p.drugName, p.instructions),
+//           createData(p.drugName, p.instructions),
+//    ];
+                 
+//  })}
+
+
   return (
     <div>
+      
+      {this.setState(prescriptions.forEach((element) => {
+      rows.push(createData(element.drugName, element.instructions))
+
+        }))};
+
       <Box>
         <Box display="flex" justifyContent="flex-end">
           <AddRxButton />
