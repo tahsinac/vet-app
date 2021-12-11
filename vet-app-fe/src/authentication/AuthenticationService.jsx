@@ -19,6 +19,7 @@ const signin = (username, password) => {
     .then((response) => {
       if (response.data.accessToken) {
         localStorage.setItem("user", JSON.stringify(response.data));
+        localStorage.setItem("isAuthenticated", "true");
       }
       console.log(response.data);
       return response.data;
@@ -26,7 +27,10 @@ const signin = (username, password) => {
 };
 
 const logout = () => {
-  localStorage.removeItem("user");
+  //   localStorage.removeItem("user");
+  //   localStorage.removeItem("isAuthenticated");
+  localStorage.clear();
+  window.location.reload();
 };
 
 const getCurrentUser = () => {

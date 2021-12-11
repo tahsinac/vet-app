@@ -64,15 +64,29 @@ export default function PrimarySearchAppBar() {
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+
+  //Authentication to display users bar
   const [currentUser, setCurrentUser] = useState(undefined);
   const [showUsers, setShowUsers] = useState(false);
+  const [showNewAnimal, setShowNewAnimal] = useState(false);
+  const [showRequests, setShowRequests] = useState(false);
+  const [showLogin, setShowLogin] = useState(false);
+  const [showLogout, setShowLogout] = useState(false);
 
   useEffect(() => {
     const user = auth.getCurrentUser();
 
+    let showUsersRoles = ["ROLE_ADMIN", "ROLE_TEACHING_TECHNICIAN"];
+
     if (user) {
       setCurrentUser(user);
-      setShowUsers(user.roles.includes("ROLE_ADMIN"));
+      if (
+        user.roles.includes("ROLE_ADMIN") === true ||
+        user.roles.includes("ROLE_TEACHING_TECHNICIAN") === true
+      ) {
+        setShowUsers(true);
+      }
+      // setShowUsers(user.roles.includes("ROLE_ADMIN"));
     }
   }, []);
 
