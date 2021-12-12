@@ -8,7 +8,7 @@ export default function AnimalForm() {
   const history = useHistory();
 
   const addNewAnimalHandler = (animalData) => {
-    console.log(animalData);
+    // console.log(animalData);
     axios
       .post(
         `${SERVER_URL}animals`,
@@ -16,18 +16,21 @@ export default function AnimalForm() {
           species: animalData.species,
           weight: parseInt(animalData.weight),
           tattooNum: parseInt(animalData.tattoo),
+          breed: animalData.breed,
           sex: animalData.sex,
           animalName: animalData.animalName,
         },
         { headers: authToken() }
       )
-      .then((response) => {
-        console.log(response);
-      })
-      .then(() => {
-        history.push("/welcome");
-        // window.location.reload();
+      // .then((response) => response.json())
+      .then((response) => response.data.animalId)
+      .then((data) => {
+        history.push({ pathname: "/animal-profile", state: data });
       });
+    // .then(() => {
+    //   history.push("/animal-profile");
+    //   // window.location.reload();
+    // });
   };
 
   return (

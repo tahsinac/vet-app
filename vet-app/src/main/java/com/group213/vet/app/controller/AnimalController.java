@@ -43,7 +43,7 @@ public class AnimalController {
     public ResponseEntity<?> addAnimal(@RequestBody Animal animal){
         try {
             animalService.saveAnimal(animal);
-            return new ResponseEntity<>(HttpStatus.CREATED);
+            return new ResponseEntity<Animal>(animal, HttpStatus.CREATED);
         }catch(Exception e){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }

@@ -29,12 +29,8 @@ export default function NewUserForm(props) {
   const [species, setSpecies] = useState("");
   const [weight, setWeight] = useState("");
   const [tattoo, setTattoo] = useState("");
+  const [breed, setBreed] = useState("");
   const [sex, setSex] = useState("");
-
-  const handleChange = (prop) => (event) => {
-    setValues({ ...values, [prop]: event.target.value });
-    console.log(values);
-  };
 
   const handleAnimalNameInput = (event) => {
     setAnimalName(event.target.value);
@@ -52,13 +48,24 @@ export default function NewUserForm(props) {
     setTattoo(event.target.value);
   };
 
+  const handleBreedInput = (event) => {
+    setBreed(event.target.value);
+  };
+
   const handleSexInput = (event) => {
     setSex(event.target.value);
   };
 
   function newAnimalSubmit(event) {
     event.preventDefault();
-    props.onNewAnimalSubmit({ species, weight, tattoo, sex, animalName });
+    props.onNewAnimalSubmit({
+      species,
+      weight,
+      tattoo,
+      breed,
+      sex,
+      animalName,
+    });
     // console.log(username, email, password, dateValue, type);
   }
 
@@ -133,6 +140,16 @@ export default function NewUserForm(props) {
                 onChange={handleTattooInput}
                 label="Tattoo"
                 placeholder="Enter Tattoo"
+              />
+            </FormControl>
+
+            <FormControl sx={{ m: 1, width: "40ch" }} variant="outlined">
+              <InputLabel htmlFor="outlined-adornment-breed">Breed</InputLabel>
+              <OutlinedInput
+                id="outlined-adornment-breed"
+                onChange={handleBreedInput}
+                label="Breed"
+                placeholder="Enter Breed"
               />
             </FormControl>
 
