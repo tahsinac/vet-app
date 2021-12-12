@@ -1,4 +1,5 @@
-import * as React from "react";
+import React, { useEffect, useState } from "react";
+import { SERVER_URL } from "../constants.js";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -6,6 +7,7 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
+import { SettingsSystemDaydreamTwoTone } from "@mui/icons-material";
 
 const columns = [
   { id: "attribute", label: "Attribute", minWidth: 170 },
@@ -16,15 +18,70 @@ function createData(attribute, value) {
   return { attribute, value };
 }
 
-const rows = [
-  createData("Name", "Whiskers"),
-  createData("Tattoo #", "6535"),
-  createData("Weight", "10"),
-  createData("Age", "65"),
-];
+var rows = [];
 
-export default function StickyHeadTable() {
-  return (
+export default function StickyHeadTable(props) {
+  const [animals, setAnimals] = useState([]);
+  const id = props.id
+
+  useEffect(() => {
+    fetch(SERVER_URL + "animals/" + props.id)
+      .then((response) => response.json())
+      .then((data) => {
+        // animals: responseData
+        const animalData = [data].map((a) => {
+          return {
+            animalName: a.animalName,
+            species: a.species,
+            subspecies: a.subspecies,
+            breed: a.breed,
+            sex: a.sex,
+            distinguishingFeatures: a.distinguishingFeatures,
+            tattooNum: a.tattooNum,
+            cityTattoo: a.cityTattoo,
+            rfid: a.rfid,
+            microchip: a.microchip,
+            birthDate: a.birthDate,
+            color: a.color,
+            weight: a.weight,
+            diet: a.diet,
+            region: a.region,
+            
+            
+          };
+        });
+        console.log(animalData)
+       setAnimals(animalData);
+
+        
+      })
+      .catch((err) => console.error(err));
+}, [id]);
+
+  return (  
+    <div>
+    {animals.map(a => {
+     
+    rows = [
+            createData("Animal Name", a.animalName),
+            createData("Species", a.species),
+            createData("Subspecies", a.subspecies),
+            createData("Breed", a.breed),
+            createData("Sex", a.sex),
+            createData("Distinguishing Features", a.distinguishingFeatures),
+            createData("Tattoo #", a.tattooNum),
+            createData("City Tattoo", a.cityTattoo),
+            createData("RFID", a.rfid),
+            createData("Microchip", a.microchip),
+            createData("Birth Date", a.birthDate),
+            createData("Color", a.color),
+            createData("Weight", a.weight),
+            createData("Diet", a.diet),
+            createData("Region", a.region),
+     ];
+                   
+   })}
+    
     <Paper sx={{ width: "100%", overflow: "hidden" }}>
       <TableContainer sx={{ maxHeight: 440 }}>
         <Table stickyHeader aria-label="sticky table">
@@ -32,9 +89,9 @@ export default function StickyHeadTable() {
             <TableRow>
               {columns.map((column) => (
                 <TableCell
-                  key={column.id}
-                  align={column.align}
-                  style={{ minWidth: column.minWidth }}
+                key={column.id}
+                align={column.align}
+                style={{ minWidth: column.minWidth }}
                 >
                   {column.label}
                 </TableCell>
@@ -42,13 +99,14 @@ export default function StickyHeadTable() {
             </TableRow>
           </TableHead>
           <TableBody>
+            
             {rows.map((row) => {
               return (
                 <TableRow
-                  hover
-                  role="checkbox"
-                  tabIndex={-1}
-                  key={row.Attribute}
+                hover
+                role="checkbox"
+                tabIndex={-1}
+                key={row.Attribute}
                 >
                   {columns.map((column) => {
                     const value = row[column.id];
@@ -67,5 +125,6 @@ export default function StickyHeadTable() {
         </Table>
       </TableContainer>
     </Paper>
+    </div>
   );
 }
