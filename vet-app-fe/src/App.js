@@ -13,40 +13,43 @@ import AnimalForm from "./pages/AnimalForm";
 import ProfileGridPage from "./pages/ProfileGridPage";
 import AnimalProfile from "./components/AnimalProfile";
 import AnimalList from "./components/AnimalList";
+import ProtectedRoute from "./authentication/ProtectedRoute";
+import { BrowserRouter } from "react-router-dom/cjs/react-router-dom.min";
 
 function App() {
   return (
     <div>
       <MenuBar />
+      <Route path="/login">
+        <Login />
+      </Route>
       <Switch>
         <main>
           <Route path="/" exact>
-            <Redirect to="/welcome" />
+            <Redirect to="/login" />
           </Route>
-          <Route path="/login">
-            <Login />
-          </Route>
-          <Route path="/welcome">
-            <Welcome />
-          </Route>
-          <Route path="/users" exact>
-            <Users />
-          </Route>
-          <Route path="/users/new">
-            <NewUser />
-          </Route>{" "}
-          <Route path="/users/modify">
-            <ModifyUser />
-          </Route>{" "}
-          <Route path="/animal/create">
-            <AnimalForm />
-          </Route>
-          <Route path="/animal-profile">
-            <AnimalProfile />
-          </Route>
-          <Route path="/animal-list">
-            <AnimalList />
-          </Route>
+
+          <ProtectedRoute path="/welcome" component={Welcome} />
+          {/* <Welcome />
+          </ProtectedRoute> */}
+          <ProtectedRoute path="/users" exact component={Users} />
+          {/* <Users /> */}
+          {/* </ProtectedRoute> */}
+          <ProtectedRoute path="/users/new" component={NewUser} />
+          {/* <NewUser />
+          </Route>{" "} */}
+          <ProtectedRoute path="/users/modify" component={ModifyUser} />
+          {/* <ModifyUser />
+          </ProtectedRoute>{" "} */}
+          <ProtectedRoute path="/animal/create" component={AnimalForm} />
+          {/* <AnimalForm />
+          </ProtectedRoute> */}
+          <ProtectedRoute path="/animal-profile" component={AnimalProfile} />
+          {/* <AnimalProfile />
+          </ProtectedRoute> */}
+          <ProtectedRoute path="/animal-list" component={AnimalList} />
+          {/* <AnimalList />
+          </ProtectedRoute> */}
           <Route path="/404">
             <NotFound />
           </Route>

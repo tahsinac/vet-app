@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useEffect, useState } from "react";
 import { styled, alpha } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -11,10 +12,12 @@ import SearchIcon from "@mui/icons-material/Search";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import Paper from "@mui/material/Paper";
+import auth from "../authentication/AuthenticationService";
 
 import { Link } from "react-router-dom"; //added
 import { NavLink } from "react-router-dom"; //added
 import classes from "./MainHeader.module.css"; //added
+import { useHistory } from "react-router-dom"; //added
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -62,6 +65,48 @@ export default function PrimarySearchAppBar() {
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
+  //Authentication to display users bar
+  const [currentUser, setCurrentUser] = useState(undefined);
+  const [showUsers, setShowUsers] = useState(false);
+  const [showNewAnimal, setShowNewAnimal] = useState(false);
+  const [showRequests, setShowRequests] = useState(false);
+  const [showLogin, setShowLogin] = useState(true);
+  const [showLogout, setShowLogout] = useState(false);
+
+  useEffect(() => {
+    const user = auth.getCurrentUser();
+
+    if (user) {
+      setCurrentUser(user);
+      if (
+        user.roles.includes("ROLE_ADMIN") === true ||
+        user.roles.includes("ROLE_TEACHING_TECHNICIAN") === true
+      ) {
+        setShowUsers(true);
+      }
+
+      if (user.roles.includes("ROLE_ADMIN") === true) {
+        setShowNewAnimal(true);
+      }
+
+      if (
+        user.roles.includes("ROLE_ADMIN") === true ||
+        user.roles.includes("ROLE_ANIMAL_HEALTH_TECHNICIAN") === true ||
+        user.roles.includes("ROLE_TEACHING_TECHNICIAN")
+      ) {
+        setShowRequests(true);
+      }
+
+      if (user.roles.includes("") === false) {
+        setShowLogin(false);
+      }
+
+      if (user.roles.includes("") === false) {
+        setShowLogout(true);
+      }
+    }
+  }, []);
+
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -78,6 +123,16 @@ export default function PrimarySearchAppBar() {
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
+
+  // const { history } = useHistory();
+  // const logout = () => auth.logout;
+
+  // const handleLogout = () => {
+  //   logout();
+  //   window.addEventListener("popstate", () => {
+  //     history.go(1);
+  //   });
+  // };
 
   const menuId = "primary-search-account-menu";
 
@@ -97,19 +152,35 @@ export default function PrimarySearchAppBar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem component={Link} to="/users" onClick={handleMenuClose}>
-        Users
-      </MenuItem>
-      <MenuItem component={Link} to="/animal/create" onClick={handleMenuClose}>
-        New Animal
-      </MenuItem>
-      <MenuItem component={Link} to="/animal-list" onClick={handleMenuClose}>
-        Requests
-      </MenuItem>
-      <MenuItem component={Link} to="/login" onClick={handleMenuClose}>
-        Log In
-      </MenuItem>
-      <MenuItem onClick={handleMenuClose}>Logout</MenuItem>
+      {showUsers && (
+        <MenuItem component={Link} to="/users" onClick={handleMenuClose}>
+          Users
+        </MenuItem>
+      )}
+      {showNewAnimal && (
+        <MenuItem
+          component={Link}
+          to="/animal/create"
+          onClick={handleMenuClose}
+        >
+          New Animal
+        </MenuItem>
+      )}
+      {showRequests && (
+        <MenuItem component={Link} to="/animal-list" onClick={handleMenuClose}>
+          Requests
+        </MenuItem>
+      )}
+      {showLogin && (
+        <MenuItem component={Link} to="/login" onClick={handleMenuClose}>
+          Log In
+        </MenuItem>
+      )}
+      {showLogout && (
+        <MenuItem component={Link} to="/login" onClick={auth.logout}>
+          Logout
+        </MenuItem>
+      )}
     </Menu>
   );
 
