@@ -70,13 +70,11 @@ export default function PrimarySearchAppBar() {
   const [showUsers, setShowUsers] = useState(false);
   const [showNewAnimal, setShowNewAnimal] = useState(false);
   const [showRequests, setShowRequests] = useState(false);
-  const [showLogin, setShowLogin] = useState(false);
+  const [showLogin, setShowLogin] = useState(true);
   const [showLogout, setShowLogout] = useState(false);
 
   useEffect(() => {
     const user = auth.getCurrentUser();
-
-    let showUsersRoles = ["ROLE_ADMIN", "ROLE_TEACHING_TECHNICIAN"];
 
     if (user) {
       setCurrentUser(user);
@@ -85,6 +83,26 @@ export default function PrimarySearchAppBar() {
         user.roles.includes("ROLE_TEACHING_TECHNICIAN") === true
       ) {
         setShowUsers(true);
+      }
+
+      if (user.roles.includes("ROLE_ADMIN") === true) {
+        setShowNewAnimal(true);
+      }
+
+      if (
+        user.roles.includes("ROLE_ADMIN") === true ||
+        user.roles.includes("ROLE_ANIMAL_HEALTH_TECHNICIAN") === true ||
+        user.roles.includes("ROLE_TEACHING_TECHNICIAN")
+      ) {
+        setShowRequests(true);
+      }
+
+      if (user.roles.includes("") === false) {
+        setShowLogin(false);
+      }
+
+      if (user.roles.includes("") === false) {
+        setShowLogout(true);
       }
       // setShowUsers(user.roles.includes("ROLE_ADMIN"));
     }
@@ -135,24 +153,35 @@ export default function PrimarySearchAppBar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      {" "}
       {showUsers && (
         <MenuItem component={Link} to="/users" onClick={handleMenuClose}>
           Users
         </MenuItem>
       )}
-      <MenuItem component={Link} to="/animal/create" onClick={handleMenuClose}>
-        New Animal
-      </MenuItem>
-      <MenuItem component={Link} to="/animal-list" onClick={handleMenuClose}>
-        Requests
-      </MenuItem>
-      <MenuItem component={Link} to="/login" onClick={handleMenuClose}>
-        Log In
-      </MenuItem>
-      <MenuItem component={Link} to="/login" onClick={auth.logout}>
-        Logout
-      </MenuItem>
+      {showNewAnimal && (
+        <MenuItem
+          component={Link}
+          to="/animal/create"
+          onClick={handleMenuClose}
+        >
+          New Animal
+        </MenuItem>
+      )}
+      {showRequests && (
+        <MenuItem component={Link} to="/animal-list" onClick={handleMenuClose}>
+          Requests
+        </MenuItem>
+      )}
+      {showLogin && (
+        <MenuItem component={Link} to="/login" onClick={handleMenuClose}>
+          Log In
+        </MenuItem>
+      )}
+      {showLogout && (
+        <MenuItem component={Link} to="/login" onClick={auth.logout}>
+          Logout
+        </MenuItem>
+      )}
     </Menu>
   );
 

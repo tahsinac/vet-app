@@ -80,6 +80,7 @@ export default function UsersList() {
             selectedIDs.has(row.id)
           );
           setData(selectedRowData);
+          console.log(selectedRowData);
         }}
       />
     </div>

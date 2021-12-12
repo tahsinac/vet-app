@@ -12,22 +12,42 @@ import TextField from "@mui/material/TextField";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
+import { Link } from "react-router-dom"; //added
 
-export default function NewUserForm() {
+export default function NewUserForm(props) {
   const [values, setValues] = React.useState({
     username: "",
+    password: "",
     email: "",
-    type: "",
+    role: "",
     activationDate: "",
     status: "",
   });
 
-  const [dateValue, setDateValue] = React.useState(new Date());
+  const [dateValue, setDateValue] = useState(new Date());
+  const [role, setRole] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
 
-  const [type, setType] = React.useState("");
+  const usernameInputChangeHandler = (e) => {
+    setUsername(e.target.value);
+  };
+
+  const passwordInputChangeHandler = (e) => {
+    setPassword(e.target.value);
+  };
+
+  const emailInputChangeHandler = (e) => {
+    setEmail(e.target.value);
+  };
 
   const handleChangeDate = (dateValue) => {
     setDateValue(dateValue);
+  };
+
+  const handleRolesChange = (event) => {
+    setRole(event.target.value);
   };
 
   const handleChange = (prop) => (event) => {
@@ -35,9 +55,12 @@ export default function NewUserForm() {
     console.log(values);
   };
 
-  const handleTypeChange = (event) => {
-    setType(event.target.value);
-  };
+  function newUserSubmit(event) {
+    event.preventDefault();
+
+    props.onNewUserSubmit({ username, email, password, dateValue, role });
+    // console.log(username, email, password, dateValue, type);
+  }
 
   return (
     <Box sx={{ display: "flex", justifyContent: "center" }}>
@@ -67,29 +90,10 @@ export default function NewUserForm() {
               </InputLabel>
               <OutlinedInput
                 id="outlined-adornment-username"
-                value={values.username}
-                onChange={handleChange("username")}
+                onChange={usernameInputChangeHandler}
                 label="Username"
                 placeholder="Enter username"
               />
-            </FormControl>
-
-            <FormControl fullWidth>
-              <InputLabel id="demo-simple-select-label">Role Type</InputLabel>
-              <Select
-                labelId="role-type-label"
-                id="role-type"
-                value={type}
-                label="Role Type"
-                onChange={handleTypeChange}
-                placeholder="Select Role"
-              >
-                <MenuItem value={10}>Admin</MenuItem>
-                <MenuItem value={20}>Teaching Technician</MenuItem>
-                <MenuItem value={30}>Animal Care Attendant</MenuItem>
-                <MenuItem value={40}>Animal Care Technician</MenuItem>
-                <MenuItem value={50}>Student</MenuItem>
-              </Select>
             </FormControl>
 
             <FormControl sx={{ m: 1, width: "40ch" }} variant="outlined">
@@ -98,24 +102,51 @@ export default function NewUserForm() {
               </InputLabel>
               <OutlinedInput
                 id="outlined-adornment-email"
-                value={values.email}
-                onChange={handleChange("email")}
+                onChange={emailInputChangeHandler}
                 label="Email Address"
                 placeholder="Enter email address"
               />
+            </FormControl>
+
+            <FormControl sx={{ m: 1, width: "40ch" }} variant="outlined">
+              <InputLabel htmlFor="outlined-adornment-username">
+                Password
+              </InputLabel>
+              <OutlinedInput
+                id="outlined-adornment-username"
+                onChange={passwordInputChangeHandler}
+                label="Password"
+                placeholder="Enter password"
+              />
+            </FormControl>
+
+            <FormControl fullWidth>
+              <InputLabel id="demo-simple-select-label">Role Type</InputLabel>
+              <Select
+                labelId="role-type-label"
+                id="role-type"
+                label="Role Type"
+                onChange={handleRolesChange}
+                placeholder="Select Role"
+              >
+                <MenuItem value={"admin"}>Admin</MenuItem>
+                <MenuItem value={"tt"}>Teaching Technician</MenuItem>
+                <MenuItem value={"aca"}>Animal Care Attendant</MenuItem>
+                <MenuItem value={"aht"}>Animal Health Technician</MenuItem>
+                <MenuItem value={"student"}>Student</MenuItem>
+              </Select>
             </FormControl>
 
             <LocalizationProvider dateAdapter={AdapterDateFns}>
               <DesktopDatePicker
                 label="Activation Date"
                 inputFormat="MM/dd/yyyy"
-                value={dateValue}
                 onChange={handleChangeDate}
                 renderInput={(params) => <TextField {...params} />}
               />
             </LocalizationProvider>
 
-            <FormControl sx={{ m: 1, width: "40ch" }} variant="outlined">
+            {/* <FormControl sx={{ m: 1, width: "40ch" }} variant="outlined">
               <InputLabel htmlFor="outlined-adornment-status">
                 Status
               </InputLabel>
@@ -126,12 +157,23 @@ export default function NewUserForm() {
                 label="Status"
                 placeholder="Enter status"
               />
-            </FormControl>
+            </FormControl> */}
 
-            <Button variant="contained" color="success" sx={{ m: 1 }}>
+            <Button
+              onClick={newUserSubmit}
+              variant="contained"
+              color="success"
+              sx={{ m: 1 }}
+            >
               Add New User
             </Button>
-            <Button variant="contained" color="error" sx={{ m: 1 }}>
+            <Button
+              component={Link}
+              to="/users"
+              variant="contained"
+              color="error"
+              sx={{ m: 1 }}
+            >
               Cancel
             </Button>
           </Stack>

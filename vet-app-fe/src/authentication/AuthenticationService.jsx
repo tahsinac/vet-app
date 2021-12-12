@@ -1,12 +1,13 @@
 import axios from "axios";
 import { SERVER_URL } from "../constants.js";
 
-const signup = (username, email, password, activationDate) => {
+const signup = (username, email, password, activationDate, role) => {
   return axios.post(`${SERVER_URL}auth/signup`, {
     username,
     email,
     password,
     activationDate,
+    role,
   });
 };
 
