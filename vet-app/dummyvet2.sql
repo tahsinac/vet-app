@@ -77,8 +77,8 @@ VALUES
 ('8', 'Horse', 105, 345666, 'CBH India', '2018-02-29', 'Thoroghbred', 'M', 50, 60, 'Sick', 'Available', 'Spain', 'Taurus', null, null,  'None', "Red Racer"),
 ('9', 'Horse', 119, 128889, 'CBH India', '2018-02-29', 'Mustang', 'M', 50, 60, 'Sick', 'Available', 'Spain', 'Taurus', null, null,  'None', "Horsey"),
 ('10', 'Cow', 113, 777221, 'HOC Paris', '2018-02-29', 'Hereford', 'M', 30, 40, 'Available', null, null, null, "barks a lot", "White",  'None', "Carlos"),
-('11', 'Cow', 134, 900003, 'CBH India', '2018-02-29', 'Galloway', 'F', 50, 60, 'Sick', 'Available', 'Spain', 'Taurus', null, null,  'None', "Sammy"),
-('12', 'Cow', 135, 981733, 'CBH India', '2018-02-29', 'Simmental', 'M', 50, 60, 'Sick', 'Available', 'Spain', 'Taurus', null, null,  'None',  "Brian");
+('11', 'Cow', 134, 900003, 'CBH India', '2018-02-29', 'Galloway', 'F', 50, 60, 'Sick', 'Available', 'Spain', 'Taurus', null, null,  'None', "Sammy");
+-- ('12', 'Cow', 135, 981733, 'CBH India', '2018-02-29', 'Simmental', 'M', 50, 60, 'Sick', 'Available', 'Spain', 'Taurus', null, null,  'None',  "Brian");
 
 DROP TABLE IF EXISTS AnimalStatus;
 CREATE TABLE AnimalStatus (
@@ -159,8 +159,8 @@ VALUES
 ('8','2', '2021-03-09', 'horse2.jpg', '8', 'profile'),
 ('9','2', '2021-03-09', 'horse3.jpg', '9', 'profile'),
 ('10','1', '2021-03-08', 'cow1.jpg', '10', 'profile'),
-('11','2', '2021-03-09', 'cow2.jpg', '11', 'profile'),
-('12','2', '2021-03-09', 'cow3.jpg', '12', 'profile');
+('11','2', '2021-03-09', 'cow2.jpg', '11', 'profile');
+-- ('12','2', '2021-03-09', 'cow3.jpg', '12', 'profile');
 
 
 
@@ -278,3 +278,7 @@ VALUES
 (15,  'PROB'),
 (16,  'INVOICE'),
 (17,  'PRODUCT NOTE');
+
+INSERT INTO Animals (animalId, species, weight, tattooNum, cityTattoo, birthDate, breed, sex, rfid, microchip, theStatus, diet, region, subspecies, distinguishingFeatures, color, requestedBy, animalName)
+VALUES
+('13', 'Dog', 13, 234234, 'HOC London', '018-02-29', 'Beagle', 'F', 17, 20, 'Available', null, null, null, 'Loves Treats', 'Brown', 'None',  "Test15");
