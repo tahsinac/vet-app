@@ -9,20 +9,22 @@ import Typography from "@mui/material/Typography";
 import CardMedia from "@mui/material/CardMedia";
 
 export default function ProfileCard(props) {
-  // passing the prop.id to set state initially
-  const [id, setId] = useState(props.id);
 
-  // setting this to onClick for the child component
-  function displayOnView(event) {
-    handleButtonClick();
-    event.preventDefault();
-    props.sendAnimal({ id }); //future declaration of sending the data via function
-  }
+// passing the prop.id to set state initially
+const [id, setId] = useState(props.id);
 
-  //updates the prop id of the animal being clicked on
-  const handleButtonClick = () => {
-    setId(props.id);
-  };
+// setting this to onClick for the child component
+function displayOnView(event) {
+  handleButtonClick()
+  event.preventDefault();
+  props.sendAnimal({id}) //future declaration of sending the data via function
+}
+
+//updates the prop id of the animal being clicked on
+const handleButtonClick = () =>{
+  setId(props.id)
+}
+
 
   return (
     <Box sx={{ minWidth: 275 }}>
@@ -44,11 +46,14 @@ export default function ProfileCard(props) {
             <Typography variant="body2">{props.breed}</Typography>
           </CardContent>
           <CardActions>
-            <Button size="small" onClick={displayOnView}>
+            <Button 
+            size="small" 
+            onClick = {displayOnView}
+            >
               View Profile
             </Button>
           </CardActions>
-        </React.Fragment>
+    </React.Fragment>
       </Card>
     </Box>
   );

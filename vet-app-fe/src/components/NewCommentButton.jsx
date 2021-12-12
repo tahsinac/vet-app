@@ -20,7 +20,7 @@ export default function NewCommentButton() {
   return (
     <div>
       <Button variant="contained" onClick={handleClickOpen} color="secondary" sx={{ m: 1 }}>
-        New
+        New Comment
       </Button>
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>New Comment</DialogTitle>

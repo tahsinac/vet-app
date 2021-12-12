@@ -104,7 +104,6 @@ export default function PrimarySearchAppBar() {
       if (user.roles.includes("") === false) {
         setShowLogout(true);
       }
-      // setShowUsers(user.roles.includes("ROLE_ADMIN"));
     }
   }, []);
 
