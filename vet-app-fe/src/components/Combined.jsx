@@ -20,7 +20,7 @@ export default function Combined(props) {
         <Grid container spacing={2}>
           <Grid item xs={4}>
             <Item>
-              <StickyHeadTable id = {props.id} />
+              <StickyHeadTable id = {props.animal.animalId} />
             </Item>
           </Grid>
           <Grid item xs={8}>
