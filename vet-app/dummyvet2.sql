@@ -168,6 +168,8 @@ DROP TABLE IF EXISTS TheComment;
 CREATE TABLE TheComment (
     commentId           integer AUTO_INCREMENT not null,
     userId              integer,
+    theDate				varchar(30),
+    username			varchar(30),
     animalId            integer,
     theDescription      varchar(30),
     
@@ -176,10 +178,10 @@ CREATE TABLE TheComment (
     foreign key (userId) references Users(id)
 );
 
-INSERT INTO TheComment(commentId, userId, animalId, theDescription)
+INSERT INTO TheComment(commentId, userId, animalId, username, theDescription)
 VALUES
-(1, 1, 1, "He's ill."),
-(2, 1, 2, "She's hurt.");
+(1, 1, 1, 'test-user', "He's ill."),
+(2, 1, 1, 'test-user2', "She's hurt.");
 
 
 DROP TABLE IF EXISTS TreatmentMethod;
