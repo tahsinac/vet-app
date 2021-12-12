@@ -69,7 +69,7 @@ export default function AlertsTable() {
           rows.push(createData(element.priority, element.message, element.location))
         }
           
-        }))};
+        }))}
       <Box>
         <Box display="flex" justifyContent="flex-end">
           <AddAlertButton />

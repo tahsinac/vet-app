@@ -67,7 +67,7 @@ export default function CommentsTable() {
           rows.push(createData(element.username, element.theDescription))
         }
           
-        }))};
+        }))}
 
       <Box>
         <Box display="flex" justifyContent="flex-end">

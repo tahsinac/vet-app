@@ -16,7 +16,7 @@ export default function AnimalProfile(){
     fetch(SERVER_URL + "animals/" + location.state.id)
       .then((response) => response.json())
       .then((data) => {
-        localStorage.setItem(`animalPhoto`, JSON.stringify(data.animalPhoto[0].theFile));
+        localStorage.setItem('animalPhoto', JSON.stringify(data.animalPhoto[0].theFile));
         setAnimal(data)})
       .catch((err) => console.error(err));
 }, []);

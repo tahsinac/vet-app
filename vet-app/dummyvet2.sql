@@ -150,7 +150,7 @@ CREATE TABLE Images(
 INSERT INTO Images (imageId, userId, creationDate, theFile, animalId, theType)
 VALUES
 ('1','1', '2021-03-08', 'dog1.jpg', '1', 'profile'),
-('2','2', '2021-03-09', 'dog2.jpg', '2', 'profife'),
+('2','2', '2021-03-09', 'dog2.jpg', '2', 'profile'),
 ('3','1', '2021-03-08', 'dog3.jpg', '3', 'profile'),
 ('4','2', '2021-03-09', 'cat1.jpg', '4', 'profife'),
 ('5','1', '2021-03-08', 'cat2.jpg', '5', 'profile'),

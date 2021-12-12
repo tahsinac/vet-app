@@ -5,27 +5,36 @@ import Grid from "@mui/material/Grid";
 import Container from "@mui/material/Container";
 import { useHistory } from "react-router-dom";
 
-export default function ProfileGrid() {
 
+export default function ProfileGrid() {
   const [animals, setAnimals] = useState([]);
   
+  function hasPhoto(obj) {
+    return obj.animalPhoto.length === 0 ? false : true;
+  }
+
   useEffect(() => {
-      fetch(SERVER_URL + "animals")
-        .then((response) => response.json())
-        .then((data) => {
-          // animals: responseData
-          const animalData = data.map((a) => {
-            return {
-              animalId: a.animalId,
-              animalName: a.animalName,
-              tattooNum: a.tattooNum,
-              breed: a.breed + " " + a.species,
-              image: "/images/" + a.animalPhoto[0].theFile,
-            };
-          });
-          setAnimals(animalData);
-        })
-        .catch((err) => console.error(err));
+    fetch(SERVER_URL + "animals")
+      .then((response) => response.json())
+      .then((data) => {
+        // animals: responseData
+        const animalData = data.map((a) => {
+
+          let imagePath = "";
+          hasPhoto(a)
+            ? (imagePath = `/images/${a.animalPhoto[0].theFile}`)
+            : (imagePath = `/images/animals.jpg`);
+          return {
+            animalId: a.animalId,
+            animalName: a.animalName,
+            tattooNum: a.tattooNum,
+            breed: a.breed + " " + a.species,
+            image: imagePath,
+          };
+        });
+        setAnimals(animalData);
+      })
+      .catch((err) => console.error(err));
   }, []);
 
 

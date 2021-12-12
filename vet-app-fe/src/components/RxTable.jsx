@@ -67,7 +67,7 @@ export default function RxTable() {
           rows.push(createData(element.drugName, element.instructions))
         }
           
-        }))};
+        }))}
 
       <Box>
         <Box display="flex" justifyContent="flex-end">

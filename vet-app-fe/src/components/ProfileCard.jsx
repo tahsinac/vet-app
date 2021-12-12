@@ -8,6 +8,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import CardMedia from "@mui/material/CardMedia";
 
+
 export default function ProfileCard(props) {
 
 // passing the prop.id to set state initially
