@@ -20,10 +20,12 @@ public class TheComment {
     private int userId;
     private int animalId;
     private String theDescription;
+    private String username;
 
 
-    public TheComment(int commentId, int userId, int animalId, String theDescription) {
+    public TheComment(int commentId, int userId, int animalId, String theDescription, String username) {
         this.commentId = commentId;
+        this.username = username;
         this.userId = userId;
         this.animalId = animalId;
         this.theDescription = theDescription;

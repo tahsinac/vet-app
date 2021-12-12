@@ -5,7 +5,7 @@ import { TabContext } from "@mui/lab";
 import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
 import PhotoGrid from "./PhotoGrid";
-import CommentList from "./CommentList";
+import Comment from "./Comment";
 import RxTable from "./RxTable";
 import AlertsTable from "./AlertsTable";
 
@@ -32,7 +32,7 @@ export default function AnimalTab() {
           <PhotoGrid />
         </TabPanel>
         <TabPanel value="2">
-          <CommentList />
+          <Comment />
         </TabPanel>
         <TabPanel value="3">
           <RxTable />

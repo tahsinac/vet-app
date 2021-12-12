@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping(path = "/animals/prescriptions")
 public class PrescriptionRecordsController {
@@ -20,13 +21,13 @@ public class PrescriptionRecordsController {
     PrescriptionRecordsService prescriptionRecordsService;
 
     @GetMapping("")
-    @PreAuthorize("hasRole('ANIMAL_HEALTH_TECHNICIAN')")
+//    @PreAuthorize("hasRole('ANIMAL_HEALTH_TECHNICIAN')")
     public List<PrescriptionRecords> getPrescriptionRecords(){
         return prescriptionRecordsService.listAllPrescriptionRecords();
     }
 
     @GetMapping("/{scriptRecord}")
-    @PreAuthorize("hasRole('ANIMAL_HEALTH_TECHNICIAN')")
+//    @PreAuthorize("hasRole('ANIMAL_HEALTH_TECHNICIAN')")
     public ResponseEntity<PrescriptionRecords> getPrescrptionRecordBySR(@PathVariable Integer scriptRecord){
         try {
             PrescriptionRecords prescriptionRecords = prescriptionRecordsService.getPrescriptionRecordBySR(scriptRecord);
@@ -37,7 +38,7 @@ public class PrescriptionRecordsController {
     }
 
     @PutMapping("/{scriptRecord}")
-    @PreAuthorize("hasRole('ANIMAL_HEALTH_TECHNICIAN')")
+//    @PreAuthorize("hasRole('ANIMAL_HEALTH_TECHNICIAN')")
     public ResponseEntity<?> updatePrescriptionRecord(@RequestBody PrescriptionRecords prescriptionRecord, @PathVariable Integer scriptRecord) {
         try {
             PrescriptionRecords prescriptionRecords = prescriptionRecordsService.getPrescriptionRecordBySR(scriptRecord);
@@ -50,7 +51,7 @@ public class PrescriptionRecordsController {
     }
 
     @PostMapping("")
-    @PreAuthorize("hasRole('ANIMAL_HEALTH_TECHNICIAN')")
+//    @PreAuthorize("hasRole('ANIMAL_HEALTH_TECHNICIAN')")
     public ResponseEntity<?> addPrescriptionRecord(@RequestBody PrescriptionRecords prescriptionRecord){
         try {
             prescriptionRecordsService.savePrescriptionRecord(prescriptionRecord);
@@ -61,7 +62,7 @@ public class PrescriptionRecordsController {
     }
 
     @DeleteMapping("/{scriptRecord}")
-    @PreAuthorize("hasRole('ANIMAL_HEALTH_TECHNICIAN')")
+//    @PreAuthorize("hasRole('ANIMAL_HEALTH_TECHNICIAN')")
     public ResponseEntity<?> removePrescriptionRecord(@PathVariable Integer scriptRecord){
         try{
             prescriptionRecordsService.deletePrescriptionRecord(scriptRecord);

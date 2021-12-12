@@ -22,12 +22,12 @@ const card = (
         Headshot
       </Typography>
     </CardContent>
-    <CardActions>
+    {/* <CardActions>
       <Box>
         <Button variant="contained" color="success" size = "small" sx={{ m: 1 }}>SET DEFAULT</Button>
         <Button variant="contained" color="error" size = "small" sx={{ m: 1 }}>DELETE</Button>
       </Box>
-    </CardActions>
+    </CardActions> */}
   </React.Fragment>
 );
 
