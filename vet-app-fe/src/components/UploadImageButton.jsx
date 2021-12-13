@@ -42,10 +42,7 @@ export default function UploadImageButton(props) {
       newImage,
       {headers: authToken()}
     )
-    .then((response) => console.log(response))
     .then(window.location.reload())
-    console.log(newImage);
-    console.log(`${SERVER_URL}animals/photos/${props.animal.animalId}`)
     setOpen(false);
   };
 
