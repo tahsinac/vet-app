@@ -65,6 +65,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/animals/**").permitAll()
                 .antMatchers("/animals/prescriptions/**").permitAll()
                 .antMatchers("/animals/photos/**").permitAll()
+                .antMatchers("/animals/alerts/**").permitAll()
                 .anyRequest().authenticated();
 
         http.csrf().disable();
