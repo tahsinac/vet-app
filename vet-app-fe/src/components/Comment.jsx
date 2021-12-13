@@ -9,6 +9,8 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import { Box } from "@mui/material";
 import NewCommentButton from "./NewCommentButton";
+import axios from "axios";
+import authToken from "../authentication/DataService";
 
 const columns = [
   { id: "username", label: "Author", minWidth: 100 },
@@ -48,7 +50,7 @@ export default function CommentsTable(props) {
 
       <Box>
         <Box display="flex" justifyContent="flex-end">
-          <NewCommentButton />
+          <NewCommentButton animal = {props.animal} />
         </Box>
         <Paper sx={{ width: "100%", overflow: "hidden" }}>
           <TableContainer sx={{ maxHeight: 440 }}>

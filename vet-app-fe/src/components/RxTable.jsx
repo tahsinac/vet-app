@@ -11,19 +11,21 @@ import { Box } from "@mui/material";
 import AddRxButton from "./AddRxButton";
 
 const columns = [
+  { id: "theDate", label: "Date", minWidth: 100 },
   { id: "drugName", label: "Prescription", minWidth: 100 },
+  { id: "deliveryMethod", label: "Delivery Method", minWidth: 100 },
   { id: "instructions", label: "Instructions", minWidth: 100 },
 
 ];
 
-function createData(drugName, instructions) {
-  return { drugName, instructions };
+function createData(theDate, drugName, deliveryMethod, instructions) {
+  return { theDate, drugName, deliveryMethod, instructions };
 }
 
 function containsObject(obj, list) {
   var i;
   for (i = 0; i < list.length; i++) {
-      if ((list[i].drugName === obj.drugName) && (list[i].instructions === obj.instructions)){
+      if ((list[i].drugName === obj.drugName) && (list[i].instructions === obj.instructions) && (list[i].theDate === obj.theDate) && (list[i].deliveryMethod === obj.deliveryMethod)){
           return true;
       }
   }
@@ -31,47 +33,23 @@ function containsObject(obj, list) {
   return false;
 }
 
-var rows = [];
+export default function RxTable(props) {
 
-
-export default function RxTable() {
-
-  const [prescriptions, setPrescriptions] = useState([]);
-
-  useEffect(() => {
-    fetch(SERVER_URL + "animals/1")
-      .then((response) => response.json())
-      .then((data) => {
-        const prescriptionData = data.prescriptionRecords.map((p) => {
-          return {
-            instructions: p.instructions,
-            drugName: p.drugName,
-          };
-        });
-        setPrescriptions(prescriptionData);
-        console.log(prescriptionData)
-
-        
-      })
-      .then(function(data) {
-
-      })
-      .catch((err) => console.error(err));
-}, []);
+  const [rows] = useState([]);
 
   return (
     <div>
       
-      {(prescriptions.forEach((element) => {
-        if(!containsObject(createData(element.drugName, element.instructions), rows)) {
-          rows.push(createData(element.drugName, element.instructions))
+      {((props.animal.prescriptionRecords || []).forEach((element) => {
+        if(!containsObject(createData(element.theDate, element.drugName, element.deliveryMethod ,element.instructions), rows)) {
+          rows.push(createData(element.theDate, element.drugName, element.deliveryMethod, element.instructions))
         }
           
         }))}
 
       <Box>
         <Box display="flex" justifyContent="flex-end">
-          <AddRxButton />
+          <AddRxButton animal = {props.animal} />
         </Box>
         <Paper sx={{ width: "100%", overflow: "hidden" }}>
           <TableContainer sx={{ maxHeight: 440 }}>
