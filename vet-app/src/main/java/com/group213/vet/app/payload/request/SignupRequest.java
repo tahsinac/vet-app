@@ -9,6 +9,8 @@ public class SignupRequest {
     @Size(min = 3, max = 20)
     private String username;
 
+    private boolean active;
+
     @NotBlank
     @Size(max = 50)
     @Email
@@ -61,5 +63,13 @@ public class SignupRequest {
 
     public String setActivationDate(String activationDate){
         return this.activationDate = activationDate;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 }
