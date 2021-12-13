@@ -32,7 +32,7 @@ export default function AnimalTab(props) {
           <PhotoGrid animal = {props.animal}/>
         </TabPanel>
         <TabPanel value="2">
-          <Comment />
+          <Comment animal = {props.animal}/>
         </TabPanel>
         <TabPanel value="3">
           <RxTable animal = {props.animal}/>

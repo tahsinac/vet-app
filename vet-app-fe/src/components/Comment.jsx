@@ -31,43 +31,20 @@ function containsObject(obj, list) {
   return false;
 }
 
-var rows = [];
+//var rows = [];
 
+export default function CommentsTable(props) {
 
-export default function CommentsTable() {
-
-  const [comments, setComments] = useState([]);
-
-  useEffect(() => {
-    fetch(SERVER_URL + "animals/1")
-      .then((response) => response.json())
-      .then((data) => {
-        const commentsData = data.theComment.map((p) => {
-          return {
-            username: p.username,
-            theDescription: p.theDescription,
-          };
-        });
-        setComments(commentsData);
-        console.log(commentsData)
-
-        
-      })
-      .then(function(data) {
-
-      })
-      .catch((err) => console.error(err));
-}, []);
+ const [rows] = useState([]);
 
   return (
     <div>
-      
-      {(comments.forEach((element) => {
+      {(props.animal.theComment || []).forEach((element) => {
         if(!containsObject(createData(element.username, element.theDescription), rows)) {
           rows.push(createData(element.username, element.theDescription))
         }
           
-        }))}
+        })}
 
       <Box>
         <Box display="flex" justifyContent="flex-end">
