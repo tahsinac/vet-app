@@ -35,7 +35,7 @@ export default function AnimalTab(props) {
           <Comment animal = {props.animal} />
         </TabPanel>
         <TabPanel value="3">
-          <RxTable />
+          <RxTable animal = {props.animal} />
         </TabPanel>
         <TabPanel value="4">
           <AlertsTable />
