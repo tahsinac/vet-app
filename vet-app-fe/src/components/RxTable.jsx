@@ -49,7 +49,7 @@ export default function RxTable(props) {
 
       <Box>
         <Box display="flex" justifyContent="flex-end">
-          <AddRxButton />
+          <AddRxButton animal = {props.animal} />
         </Box>
         <Paper sx={{ width: "100%", overflow: "hidden" }}>
           <TableContainer sx={{ maxHeight: 440 }}>

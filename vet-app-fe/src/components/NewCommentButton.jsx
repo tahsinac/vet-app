@@ -11,7 +11,6 @@ import { SERVER_URL } from "../constants.js";
 import authToken from "../authentication/DataService";
 
 
-
 export default function NewCommentButton(props) {
   const [open, setOpen] = React.useState(false);
   const [values, setValues] = React.useState({

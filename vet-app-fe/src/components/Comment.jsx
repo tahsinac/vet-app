@@ -9,6 +9,8 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import { Box } from "@mui/material";
 import NewCommentButton from "./NewCommentButton";
+import axios from "axios";
+import authToken from "../authentication/DataService";
 
 const columns = [
   { id: "username", label: "Author", minWidth: 100 },
