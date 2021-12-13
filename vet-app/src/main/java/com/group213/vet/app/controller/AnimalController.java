@@ -39,7 +39,7 @@ public class AnimalController {
     }
 
     @PostMapping("")
-    @PreAuthorize("hasRole('ADMIN')")
+//    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> addAnimal(@RequestBody Animal animal){
         try {
             animalService.saveAnimal(animal);
@@ -50,7 +50,7 @@ public class AnimalController {
     }
 
     @PutMapping("/{id}")
-    @PreAuthorize("hasRole('ADMIN') or hasRole('ANIMAL_CARE_ATTENDANT') or hasRole('TEACHING_TECHNICIAN')")
+//    @PreAuthorize("hasRole('ADMIN') or hasRole('ANIMAL_CARE_ATTENDANT') or hasRole('TEACHING_TECHNICIAN')")
     public ResponseEntity<?> updateAnimal(@RequestBody Animal animal, @PathVariable Integer id){
         try{
             Animal existingAnimal = animalService.getAnimal(id);

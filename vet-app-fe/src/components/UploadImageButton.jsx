@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState } from "react";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
@@ -9,13 +9,15 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import InputLabel from "@mui/material/InputLabel";
+import axios from "axios";
+import { SERVER_URL } from "../constants.js";
+import authToken from "../authentication/DataService";
 
 export default function UploadImageButton(props) {
-  const [open, setOpen] = React.useState(false);
-  var inputFile = "";
-  var inputType = "";
-  var inputDate = "";
-  
+  const [open, setOpen] = useState(false);
+  const [type, setType] = useState("");
+  const [file, setFile] = useState("");
+  const [date, setDate] = useState("");
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -26,23 +28,38 @@ export default function UploadImageButton(props) {
   };
 
   const handleAdd = (event) => {
-    inputType = event.target.value
-    inputDate = event.target.value
-    inputFile = event.target.value
+    event.preventDefault();
+    const user = JSON.parse(localStorage.getItem("user"));
+    const newImage = {
+      userId: parseInt(user.id),
+      creationDate: date,
+      theFile: file,
+      animalId: parseInt(props.animal.animalId),
+      theType: type
+    }
+    axios.post(
+      `${SERVER_URL}animals/photos/`,
+      newImage,
+      {headers: authToken()}
+    )
+    .then((response) => console.log(response))
+    .then(window.location.reload())
+    console.log(newImage);
+    console.log(`${SERVER_URL}animals/photos/${props.animal.animalId}`)
     setOpen(false);
   };
 
-  // const handleTypeInput = (event) =>{
-  //   inputType = event.target.value
-  // }
+  const handleTypeInput = (event) =>{
+    setType(event.target.value)
+  }
 
-  // const handleDateInput = (event) =>{
-  //   inputDate = event.target.value
-  // }
+  const handleDateInput = (event) =>{
+    setDate(event.target.value)
+  }
 
-  // const handleFileInput = (event) =>{
-  //   inputFile = event.target.value
-  // }
+  const handleFileInput = (event) =>{
+    setFile(event.target.value)
+  }
 
   return (
     <div>
@@ -59,10 +76,11 @@ export default function UploadImageButton(props) {
                 id="type"
                 label="type"
                 placeholder="Image Type"
+                onChange={handleTypeInput}
               >
-                <MenuItem value={"profile"}>Profile Photo</MenuItem>
-                <MenuItem value={"injury"}>Injury Photo</MenuItem>
-                <MenuItem value={"medical record"}>Medical Record Photo</MenuItem>
+                <MenuItem value={"Profile"}>Profile Photo</MenuItem>
+                <MenuItem value={"Injury"}>Injury Photo</MenuItem>
+                <MenuItem value={"Medical Record"}>Medical Record Photo</MenuItem>
               </Select>
             </FormControl>
           <TextField
@@ -73,6 +91,7 @@ export default function UploadImageButton(props) {
             type="text"
             fullWidth
             variant="standard"
+            onChange={handleDateInput}
           />
           <TextField
             autoFocus
@@ -82,11 +101,12 @@ export default function UploadImageButton(props) {
             type="text"
             fullWidth
             variant="standard"
+            onChange={handleFileInput}
           />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleClose}>Add</Button>
+          <Button onClick={handleAdd}>Add</Button>
         </DialogActions>
       </Dialog>
     </div>
