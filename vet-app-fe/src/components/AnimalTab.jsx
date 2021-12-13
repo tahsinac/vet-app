@@ -38,7 +38,7 @@ export default function AnimalTab(props) {
           <RxTable animal = {props.animal} />
         </TabPanel>
         <TabPanel value="4">
-          <AlertsTable />
+          <AlertsTable animal = {props.animal} />
         </TabPanel>
       </TabContext>
     </Box>

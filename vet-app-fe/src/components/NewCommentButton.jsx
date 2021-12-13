@@ -1,13 +1,49 @@
-import * as React from "react";
+import React, { useState }  from "react";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
+import { useDateRangeValidation } from "@mui/lab/internal/pickers/hooks/useValidation";
+import axios from "axios";
+import { SERVER_URL } from "../constants.js";
+import authToken from "../authentication/DataService";
 
-export default function NewCommentButton() {
+
+
+export default function NewCommentButton(props) {
   const [open, setOpen] = React.useState(false);
+  const [values, setValues] = React.useState({
+    description: "",
+  });
+
+  const [description, setTheDescription] = useState("");
+
+  const handleTheDescriptionInput = (event) => {
+    setTheDescription(event.target.value);
+  };
+
+
+  const handleAdd = (event) => {
+    event.preventDefault();
+    const user = JSON.parse(localStorage.getItem("user"));
+    const newDescription =
+      {
+        userId: parseInt(user.id),
+        animalId: parseInt(props.animal.animalId),
+        theDescription: description,
+        username: user.username
+      }
+      axios.post(
+        `${SERVER_URL}animals/comments/`,
+        newDescription,
+        {headers: authToken()}
+      )
+      .then(window.location.reload())
+    console.log(`${SERVER_URL}animals/comments/`);
+    setOpen(false);
+  };
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -17,6 +53,11 @@ export default function NewCommentButton() {
     setOpen(false);
   };
 
+
+  // const handleAdd = (event) => {
+  //   inputComment = event.target.value
+  // };
+
   return (
     <div>
       <Button variant="contained" onClick={handleClickOpen} color="secondary" sx={{ m: 1 }}>
@@ -25,21 +66,14 @@ export default function NewCommentButton() {
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>New Comment</DialogTitle>
         <DialogContent>
-          <TextField
-            autoFocus
-            margin="dense"
-            id="name"
-            label="Title"
-            type="text"
-            fullWidth
-            variant="standard"
-          />
+
           <TextField
             multiline="true"
             autoFocus
             margin="dense"
-            id="name"
-            label="Comment"
+            id="theDescription"
+            onChange={handleTheDescriptionInput}
+            label="Comment Description"
             type="text"
             fullWidth
             variant="standard"
@@ -47,7 +81,7 @@ export default function NewCommentButton() {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleClose}>Add</Button>
+          <Button onClick={handleAdd}>Add</Button>
         </DialogActions>
       </Dialog>
     </div>

@@ -29,7 +29,25 @@ export default function AddRxButton() {
             autoFocus
             margin="dense"
             id="name"
-            label="Prescription"
+            label="Date"
+            type="text"
+            fullWidth
+            variant="standard"
+          />
+          <TextField
+            autoFocus
+            margin="dense"
+            id="name"
+            label="Drug Name"
+            type="text"
+            fullWidth
+            variant="standard"
+          />
+          <TextField
+            autoFocus
+            margin="dense"
+            id="name"
+            label="Delivery Method"
             type="text"
             fullWidth
             variant="standard"
@@ -39,7 +57,7 @@ export default function AddRxButton() {
             autoFocus
             margin="dense"
             id="name"
-            label="Description"
+            label="Instructions"
             type="text"
             fullWidth
             variant="standard"
