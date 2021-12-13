@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.NoSuchElementException;
+
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/animals/comments")
@@ -61,7 +62,7 @@ public class TheCommentController {
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
+//    @PreAuthorize("hasRole('ADMIN')")
     public void deleteTheComment(@PathVariable Integer id){
         theCommentService.deleteTheComment(id);
     }
