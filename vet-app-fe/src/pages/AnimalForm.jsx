@@ -13,6 +13,7 @@ export default function AnimalForm() {
       {species: animalData.species,
       weight: animalData.weight,
       tattooNum: animalData.tattoo,
+      breed: animalData.breed,
       sex: animalData.sex,
       animalName: animalData.animalName}, 
       {headers: authToken()}
