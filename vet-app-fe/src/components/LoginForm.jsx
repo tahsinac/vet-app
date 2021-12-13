@@ -43,7 +43,8 @@ export default function LoginForm(props) {
 
   function loginOnSubmit(event) {
     event.preventDefault();
-
+    console.log(username);
+    console.log(password);
     props.onLogin({ username, password });
     // console.log(username, password);
   }

@@ -14,7 +14,12 @@ export default function Login() {
   };
 
   return (
-    <div>
+    <div
+      style={{
+        backgroundImage: "url(/images/calgary.jpg)",
+        backgroundSize: "cover",
+      }}
+    >
       <LoginForm onLogin={addLoginHandler} />
     </div>
   );

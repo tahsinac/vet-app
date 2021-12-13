@@ -4,6 +4,7 @@ import { Box, Button } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import { Link } from "react-router-dom"; //added
 import authToken from "../authentication/DataService";
+import AlertDialog from "./UserDeleteDialog";
 
 export default function UsersList() {
   const [colDefs] = useState([
@@ -16,10 +17,10 @@ export default function UsersList() {
   ]);
 
   const [rowData, setRowData] = useState([]);
-
   const [data, setData] = useState("");
-
   const [selectedUser, setSelectedUser] = useState([]);
+
+  var selectedRowData = 0;
 
   useEffect(() => {
     (async () => {
@@ -63,9 +64,10 @@ export default function UsersList() {
         >
           Modify User
         </Button>
-        <Button variant="contained" color="error" sx={{ m: 1 }}>
+        {/* <Button variant="contained" color="error" sx={{ m: 1 }}>
           Remove User
-        </Button>
+        </Button> */}
+        <AlertDialog data={data} />
       </Box>
       <DataGrid
         columns={colDefs}
@@ -76,11 +78,12 @@ export default function UsersList() {
         disableSelectionOnClick
         onSelectionModelChange={(ids) => {
           const selectedIDs = new Set(ids);
-          const selectedRowData = rowData.filter((row) =>
-            selectedIDs.has(row.id)
-          );
-          setData(selectedRowData);
-          console.log(selectedRowData);
+          selectedRowData = rowData.filter((row) => selectedIDs.has(row.id));
+          const userData = selectedRowData;
+          setData(userData);
+          setData((state) => {
+            return state;
+          });
         }}
       />
     </div>
