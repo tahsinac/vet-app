@@ -57,7 +57,7 @@ export default function UsersList() {
         </Button>{" "}
         <Button
           component={Link}
-          to="/users/modify"
+          to={{ pathname: "/users/modify", state: { data } }}
           variant="contained"
           color="secondary"
           sx={{ m: 1 }}

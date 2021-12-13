@@ -174,19 +174,6 @@ export default function NewUserForm(props) {
               />
             </LocalizationProvider>
 
-            {/* <FormControl sx={{ m: 1, width: "40ch" }} variant="outlined">
-              <InputLabel htmlFor="outlined-adornment-status">
-                Status
-              </InputLabel>
-              <OutlinedInput
-                id="outlined-adornment-status"
-                value={values.status}
-                onChange={handleChange("status")}
-                label="Status"
-                placeholder="Enter status"
-              />
-            </FormControl> */}
-
             <Button
               onClick={newUserSubmit}
               variant="contained"

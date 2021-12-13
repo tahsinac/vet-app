@@ -47,13 +47,15 @@ public class UserController {
             }
         }
 
-        @PutMapping("/{id}")
+        @PatchMapping("/{id}")
         @PreAuthorize("hasRole('ADMIN')")
         public ResponseEntity<?> updateUser(@RequestBody User user, @PathVariable Integer id){
             try{
                 User existingUser = userService.getUser(id);
-                user.setId(id);
-                userService.saveUser(user);
+                boolean status = user.isActive();
+                existingUser.setActive(status);
+//                user.setId(id);
+                userService.saveUser(existingUser);
                 return new ResponseEntity<>(HttpStatus.OK);
             }catch (NoSuchElementException e){
                 return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

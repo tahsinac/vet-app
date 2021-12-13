@@ -26,9 +26,6 @@ export default function AlertDialog(props) {
     setOpen(false);
   };
 
-  //   const user = JSON.parse(localStorage.getItem("user"));
-  //   console.log(user);
-
   const handleAgree = () => {
     setOpen(false);
     console.log(props.data[0].id);
@@ -51,7 +48,7 @@ export default function AlertDialog(props) {
         sx={{ m: 1 }}
         onClick={handleClickOpen}
       >
-        Open alert dialog
+        Delete User
       </Button>
       <Dialog
         open={open}
@@ -59,13 +56,10 @@ export default function AlertDialog(props) {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">
-          {"Use Google's location service?"}
-        </DialogTitle>
+        <DialogTitle id="alert-dialog-title">{"Delete this user?"}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            Let Google help apps determine location. This means sending
-            anonymous location data to Google, even when no apps are running.
+            Are you sure you wish to delete this user?
           </DialogContentText>
         </DialogContent>
         <DialogActions>
