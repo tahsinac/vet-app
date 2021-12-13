@@ -29,7 +29,7 @@ export default function AnimalTab(props) {
           </TabList>
         </Box>
         <TabPanel value="1">
-          <PhotoGrid />
+          <PhotoGrid animal = {props.animal} />
         </TabPanel>
         <TabPanel value="2">
           <Comment animal = {props.animal} />
