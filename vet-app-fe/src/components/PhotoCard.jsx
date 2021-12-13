@@ -5,7 +5,7 @@ import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import CardMedia from '@mui/material/CardMedia';
 
-export default function PhotoCard() {
+export default function PhotoCard(props) {
   return (
     <Box sx={{ minWidth: 100 }}>
       <Card variant="outlined">
@@ -15,10 +15,13 @@ export default function PhotoCard() {
             component="img"
             alt="animals"
             height="200"
-            image="/images/cat.jpg"
+            image= {`/images/${props.theFile}`}
           />
           <Typography sx={{ p: 1 }} color="text.secondary" align="left">
-            Headshot
+           {`${props.theType} Photo`}
+          </Typography>
+          <Typography sx={{ p: 1 }} color="text.secondary" align="left" variant="subtitle2">
+           {`Uploaded: ${props.creationDate}`}
           </Typography>
         </CardContent>
       </React.Fragment>
