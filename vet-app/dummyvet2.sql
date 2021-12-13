@@ -70,9 +70,9 @@ VALUES
 ('1', 'Dog', 13, 234234, 'HOC London', '018-02-29', 'Beagle', 'F', 17, 20, 'Available', null, null, null, 'Loves Treats', 'Brown', 'None',  "Fido"),
 ('2', 'Dog', 32, 552278, 'HOC Paris', '2018-02-29', 'Pitbull', 'M', 30, 40, 'Available', null, null, null, "Barks a lot", "White",  'None',  "Barney"),
 ('3', 'Dog', 13, 456113, 'CBH India', '2018-02-29', 'Great Dane', 'M', 50, 60, 'Sick', 'Available', 'Spain', 'Taurus', null, null,  'None', "Pluto"),
-('4', 'Cat', 4, 568552, 'CBH India', '2018-02-29', 'Persian', 'F', 50, 60, 'Available', 'Available', 'Spain', 'Taurus', null, null,  'None', "Mr Tinkles"),
+('4', 'Cat', 4, 568552, 'CBH India', '2018-02-29', 'Persian', 'F', 50, 60, 'Available', 'Available', 'Spain', 'Taurus', null, null,  'None', "Tinkles"),
 ('5', 'Cat', 6, 867322, 'CBH India', '2018-02-29', 'Siamese', 'M', 50, 60, 'Sick', 'Available', 'Spain', 'Taurus', null, null,  'None', "Mr Whiskers"),
-('6', 'Cat', 7, 124699, 'CBH India', '2018-02-29', 'Munchkin', 'F', 50, 60, 'Sick', 'Available', 'Spain', 'Taurus', null, null,  'None',  "Mr Meow"),
+('6', 'Cat', 7, 124699, 'CBH India', '2018-02-29', 'Munchkin', 'F', 50, 60, 'Sick', 'Available', 'Spain', 'Taurus', null, null,  'None',  "Ms Meow"),
 ('7', 'Horse', 103, 910112, 'HOC Paris', '2018-11-18', 'Arabian', 'M', 30, 40, 'Available', null, null, null, "barks a lot", "White",  'None', "Sea Biscuit"),
 ('8', 'Horse', 105, 345666, 'CBH India', '2018-02-29', 'Thoroghbred', 'M', 50, 60, 'Sick', 'Available', 'Spain', 'Taurus', null, null,  'None', "Red Racer"),
 ('9', 'Horse', 119, 128889, 'CBH India', '2018-02-29', 'Mustang', 'M', 50, 60, 'Sick', 'Available', 'Spain', 'Taurus', null, null,  'None', "Horsey"),
@@ -154,7 +154,7 @@ VALUES
 ('3','1', '2021-03-08', 'dog3.jpg', '3', 'profile'),
 ('4','2', '2021-03-09', 'cat1.jpg', '4', 'profife'),
 ('5','1', '2021-03-08', 'cat2.jpg', '5', 'profile'),
-('6','2', '2021-03-09', 'cat3.jpg', '6', 'profife'),
+('6','2', '2021-03-09', 'cat3.jpg', '6', 'profile'),
 ('7','1', '2021-03-08', 'horse1.jpg', '7', 'profile'),
 ('8','2', '2021-03-09', 'horse2.jpg', '8', 'profile'),
 ('9','2', '2021-03-09', 'horse3.jpg', '9', 'profile'),
@@ -246,8 +246,9 @@ CREATE TABLE Alerts(
 INSERT INTO Alerts(alertId, userId, animalId, priority, message, location)
 VALUES
 (1, 3, 1, "High", "Please get this dog some help", "On Campus"),
-(2, 3, 1, "Low", "Check into this dog's ear","at home"),
-(3, 3, 2, "Medium", "Look into psychologist for animal", "barn");
+(2, 2, 1, "Low", "Check on this dog's ear","On Campus"),
+(3, 2, 11, "Medium", "Walking with a limp", "Barn"),
+(4, 3, 9, "Low", "Hoofing too loudly", "Barn");
  
 
 
