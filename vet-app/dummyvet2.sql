@@ -181,7 +181,8 @@ CREATE TABLE TheComment (
 INSERT INTO TheComment(commentId, userId, animalId, username, theDescription)
 VALUES
 (1, 1, 1, 'test-user', "He's ill."),
-(2, 1, 1, 'test-user2', "She's hurt.");
+(2, 1, 1, 'test-user2', "She's hurt."),
+(3, 1, 4, 'test-user2', "He needs some milk.");
 
 
 DROP TABLE IF EXISTS TreatmentMethod;
