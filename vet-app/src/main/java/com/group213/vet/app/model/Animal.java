@@ -64,6 +64,7 @@ public class Animal {
         this.animalName = animalName;
     }
 
+
     public int getAnimalId() {
         return animalId;
     }

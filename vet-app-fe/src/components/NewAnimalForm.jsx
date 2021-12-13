@@ -6,13 +6,9 @@ import Stack from "@mui/material/Stack";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import { Box, Button } from "@mui/material";
-// import LocalizationProvider from "@mui/lab/LocalizationProvider";
-// import DesktopDatePicker from "@mui/lab/DesktopDatePicker";
-// import TextField from "@mui/material/TextField";
-// import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
-import { Link } from "react-router-dom"; //added
+import { Link } from "react-router-dom";
 
 export default function NewUserForm(props) {
   const [values, setValues] = React.useState({
@@ -20,10 +16,11 @@ export default function NewUserForm(props) {
     species: "",
     weight: "",
     tattoo: "",
+    breed: "",
     sex: "",
   });
 
-  // const [type, setType] = React.useState("");
+  const [type, setType] = React.useState("");
 
   const [animalName, setAnimalName] = useState("");
   const [species, setSpecies] = useState("");
@@ -32,10 +29,15 @@ export default function NewUserForm(props) {
   const [breed, setBreed] = useState("");
   const [sex, setSex] = useState("");
 
+
+  const handleChange = (prop) => (event) => {
+    setValues({ ...values, [prop]: event.target.value });
+    console.log(values);
+  };
+
   const handleAnimalNameInput = (event) => {
     setAnimalName(event.target.value);
   };
-
   const handleSpeciesInput = (event) => {
     setSpecies(event.target.value);
   };
@@ -58,14 +60,8 @@ export default function NewUserForm(props) {
 
   function newAnimalSubmit(event) {
     event.preventDefault();
-    props.onNewAnimalSubmit({
-      species,
-      weight,
-      tattoo,
-      breed,
-      sex,
-      animalName,
-    });
+
+    props.onNewAnimalSubmit({ species, weight, tattoo, breed, sex, animalName });
     // console.log(username, email, password, dateValue, type);
   }
 
@@ -104,7 +100,7 @@ export default function NewUserForm(props) {
             </FormControl>
 
             <FormControl sx={{ m: 1, width: "40ch" }}>
-              <InputLabel id="demo-simple-select-species">Species</InputLabel>
+              <InputLabel id="demo-simple-select-label">Animal Species</InputLabel>
               <Select
                 labelId="species-label"
                 id="species"
@@ -120,7 +116,7 @@ export default function NewUserForm(props) {
             </FormControl>
 
             <FormControl sx={{ m: 1, width: "40ch" }} variant="outlined">
-              <InputLabel htmlFor="outlined-adornment-weight">
+              <InputLabel htmlFor="outlined-adornment-attribute">
                 Weight
               </InputLabel>
               <OutlinedInput
@@ -136,7 +132,7 @@ export default function NewUserForm(props) {
                 Tattoo Number
               </InputLabel>
               <OutlinedInput
-                id="outlined-adornment-tattoo"
+                id="outlined-adornment-tatto"
                 onChange={handleTattooInput}
                 label="Tattoo"
                 placeholder="Enter Tattoo"
@@ -144,9 +140,11 @@ export default function NewUserForm(props) {
             </FormControl>
 
             <FormControl sx={{ m: 1, width: "40ch" }} variant="outlined">
-              <InputLabel htmlFor="outlined-adornment-breed">Breed</InputLabel>
+              <InputLabel htmlFor="outlined-adornment-tattoo">
+                Breed
+              </InputLabel>
               <OutlinedInput
-                id="outlined-adornment-breed"
+                id="outlined-adornment-tatto"
                 onChange={handleBreedInput}
                 label="Breed"
                 placeholder="Enter Breed"
@@ -167,21 +165,12 @@ export default function NewUserForm(props) {
               </Select>
             </FormControl>
 
-            <Button
-              onClick={newAnimalSubmit}
-              variant="contained"
-              color="success"
-              sx={{ m: 1 }}
-            >
+            <Button onClick = {newAnimalSubmit}
+            variant="contained" color="success" sx={{ m: 1 }}>
               Add New Animal
             </Button>
-            <Button
-              component={Link}
-              to="/welcome"
-              variant="contained"
-              color="error"
-              sx={{ m: 1 }}
-            >
+            <Button component = {Link} to = "/welcome"
+            variant="contained" color="error" sx={{ m: 1 }}>
               Cancel
             </Button>
           </Stack>

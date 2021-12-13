@@ -31,48 +31,23 @@ function containsObject(obj, list) {
   return false;
 }
 
-var rows = [];
 
-export default function AlertsTable() {
+export default function AlertsTable(props) {
 
-  const [alerts, setAlerts] = useState([]);
-
-  useEffect(() => {
-    fetch(SERVER_URL + "animals/1")
-      .then((response) => response.json())
-      .then((data) => {
-        const alertData = data.alerts.map((p) => {
-          return {
-            priority: p.priority,
-            message: p.message,
-            location: p.location,
-          };
-        });
-        setAlerts(alertData);
-        console.log(alertData)
-
-        
-      })
-      .then(function(data) {
-
-      })
-      .catch((err) => console.error(err));
-}, []);
-
-
+  const [rows, setRows] = useState([]);
 
 
   return (
+    
     <div>
-      {(alerts.forEach((element) => {
+      {((props.animal.alerts || []).forEach((element) => {
         if(!containsObject(createData(element.priority, element.message, element.location), rows)) {
           rows.push(createData(element.priority, element.message, element.location))
         }
-          
-        }))};
+        }))}
       <Box>
         <Box display="flex" justifyContent="flex-end">
-          <AddAlertButton />
+          <AddAlertButton animal = {props.animal}/>
         </Box>
         <Paper sx={{ width: "100%", overflow: "hidden" }}>
           <TableContainer sx={{ maxHeight: 440 }}>

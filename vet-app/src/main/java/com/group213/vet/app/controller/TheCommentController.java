@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/animals/comments")
 public class TheCommentController {
@@ -20,13 +21,13 @@ public class TheCommentController {
     TheCommentService theCommentService;
 
     @GetMapping("")
-    @PreAuthorize("hasRole('USER') or hasRole('TEACHING_TECHNICIAN') or hasRole('STUDENT')" +
-            " or hasRole('ADMIN') or hasRole('ANIMAL_HEALTH_TECHNICIAN') or hasRole('ANIMAL_CARE_ATTENDANT')")
+//    @PreAuthorize("hasRole('USER') or hasRole('TEACHING_TECHNICIAN') or hasRole('STUDENT')" +
+//            " or hasRole('ADMIN') or hasRole('ANIMAL_HEALTH_TECHNICIAN') or hasRole('ANIMAL_CARE_ATTENDANT')")
     public List<TheComment> getTheComment() { return theCommentService.listAllTheComments(); }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasRole('USER') or hasRole('TEACHING_TECHNICIAN') or hasRole('STUDENT')" +
-            " or hasRole('ADMIN') or hasRole('ANIMAL_HEALTH_TECHNICIAN') or hasRole('ANIMAL_CARE_ATTENDANT')")
+//    @PreAuthorize("hasRole('USER') or hasRole('TEACHING_TECHNICIAN') or hasRole('STUDENT')" +
+//            " or hasRole('ADMIN') or hasRole('ANIMAL_HEALTH_TECHNICIAN') or hasRole('ANIMAL_CARE_ATTENDANT')")
     public ResponseEntity<TheComment> getTheCommentById(@PathVariable Integer id){
         try {
             TheComment theComment = theCommentService.getTheComment(id);
@@ -37,7 +38,7 @@ public class TheCommentController {
     }
 
     @PostMapping("")
-    @PreAuthorize("hasRole('STUDENT') or hasRole('ANIMAL_HEALTH_TECHNICIAN') or hasRole('ANIMAL_CARE_ATTENDANT')")
+//    @PreAuthorize("hasRole('STUDENT') or hasRole('ANIMAL_HEALTH_TECHNICIAN') or hasRole('ANIMAL_CARE_ATTENDANT')")
     public ResponseEntity<?> addTheComment(@RequestBody TheComment theComment){
         try {
             theCommentService.saveTheComment(theComment);
@@ -48,7 +49,7 @@ public class TheCommentController {
     }
 
     @PutMapping("/{id}")
-    @PreAuthorize("hasRole('STUDENT') or hasRole('ANIMAL_HEALTH_TECHNICIAN') or hasRole('ANIMAL_CARE_ATTENDANT')")
+//    @PreAuthorize("hasRole('STUDENT') or hasRole('ANIMAL_HEALTH_TECHNICIAN') or hasRole('ANIMAL_CARE_ATTENDANT')")
     public ResponseEntity<?> updateTheComment(@RequestBody TheComment theComment, @PathVariable Integer id){
         try{
             TheComment existingComment = theCommentService.getTheComment(id);
@@ -61,7 +62,7 @@ public class TheCommentController {
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
+//    @PreAuthorize("hasRole('ADMIN')")
     public void deleteTheComment(@PathVariable Integer id){
         theCommentService.deleteTheComment(id);
     }

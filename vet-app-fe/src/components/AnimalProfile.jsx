@@ -68,12 +68,20 @@ export default function AnimalProfile() {
             src={`/images/${localStorage.getItem("animalPhoto")}`}
             sx={{ width: 90, height: 90 }}
           />
-          <Typography variant="h5" component="div">
-            {animal.animalName}
-          </Typography>
+          <Stack spacing={0.1}>
+            <Typography variant="h5" component="div">
+              {animal.animalName}
+            </Typography>
+            <Typography variant="subtitle2" component="div">
+              {`Status: ${animal.theStatus}`}
+            </Typography>
+          </Stack>
         </Stack>
 
         <Box sx={{ display: "flex", justifyContent: "flex-end", p: 1, m: 1 }}>
+          <Button variant="contained" color="secondary" sx={{ m: 4 }}>
+            Update Status
+          </Button>
           <Button variant="contained" color="secondary" sx={{ m: 4 }}>
             Request Treatment
           </Button>

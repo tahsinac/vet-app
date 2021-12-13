@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState } from "react";
 import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
@@ -25,7 +25,7 @@ export default function Combined(props) {
           </Grid>
           <Grid item xs={8}>
             <Item>
-              <AnimalTab id = {props.id}/>
+              <AnimalTab animal = {props.animal}/>
             </Item>
           </Grid>
         </Grid>

@@ -9,7 +9,7 @@ import Comment from "./Comment";
 import RxTable from "./RxTable";
 import AlertsTable from "./AlertsTable";
 
-export default function AnimalTab() {
+export default function AnimalTab(props) {
   const [value, setValue] = React.useState("1");
 
   const handleChange = (event, newValue) => {
@@ -29,16 +29,16 @@ export default function AnimalTab() {
           </TabList>
         </Box>
         <TabPanel value="1">
-          <PhotoGrid />
+          <PhotoGrid animal = {props.animal}/>
         </TabPanel>
         <TabPanel value="2">
-          <Comment />
+          <Comment animal = {props.animal}/>
         </TabPanel>
         <TabPanel value="3">
-          <RxTable />
+          <RxTable animal = {props.animal}/>
         </TabPanel>
         <TabPanel value="4">
-          <AlertsTable />
+          <AlertsTable animal = {props.animal}/>
         </TabPanel>
       </TabContext>
     </Box>
