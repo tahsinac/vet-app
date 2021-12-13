@@ -11,7 +11,7 @@ export default function PhotoGrid(props) {
   return (
     <Container sx={{ p: 2 }}>
       <Box sx={{ display: "flex", justifyContent: "flex-end", p: 1, m: 1 }}>
-        <UploadImageButton />
+        <UploadImageButton animal = {props.animal}/>
       </Box>
       <Grid container spacing={4}>
         {(props.animal.animalPhoto || []).map(p => {
