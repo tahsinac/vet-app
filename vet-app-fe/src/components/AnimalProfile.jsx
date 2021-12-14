@@ -57,13 +57,13 @@ export default function AnimalProfile() {
       if (
         user.roles.includes("ROLE_ADMIN") === true ||
         user.roles.includes("ROLE_ANIMAL_HEALTH_TECHNICIAN") === true ||
-        user.roles.includes("ROLE_ANIMAL_CARE_ATTENDANT")
+        user.roles.includes("ROLE_ANIMAL_CARE_ATTENDANT") === true
       ) {
         setShowStatus(true);
       }
       if (
         user.roles.includes("ROLE_ANIMAL_HEALTH_TECHNICIAN") === true ||
-        user.roles.includes("ROLE_ANIMAL_CARE_ATTENDANT")
+        user.roles.includes("ROLE_ANIMAL_CARE_ATTENDANT") ===true
       ) {
         setUpdateButton(true);
       }

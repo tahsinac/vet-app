@@ -1,17 +1,33 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PhotoCard from "./PhotoCard";
 import Grid from "@mui/material/Grid";
 import Container from "@mui/material/Container";
 import { Box } from "@mui/material";
 import UploadImageButton from "./UploadImageButton";
+import auth from "../authentication/AuthenticationService";
 
 export default function PhotoGrid(props) {
+
+  const [currentUser, setCurrentUser] = useState(undefined);
+  const [showUploadButton, setUploadButton] = useState(false);
+
+  useEffect(() => {
+    const user = auth.getCurrentUser();
+    if (user) {
+      setCurrentUser(user);
+      if (
+        user.roles.includes("ROLE_ANIMAL_CARE_ATTENDANT") === true
+      ) {
+        setUploadButton(true);
+      }
+    }
+  }, []);
  
   console.log(props.animal);
   return (
     <Container sx={{ p: 2 }}>
       <Box sx={{ display: "flex", justifyContent: "flex-end", p: 1, m: 1 }}>
-        <UploadImageButton animal = {props.animal}/>
+        {showUploadButton && (<UploadImageButton animal = {props.animal}/>)}
       </Box>
       <Grid container spacing={4}>
         {(props.animal.animalPhoto || []).map(p => {
