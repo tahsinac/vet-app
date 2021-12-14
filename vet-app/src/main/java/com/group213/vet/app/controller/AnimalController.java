@@ -49,13 +49,14 @@ public class AnimalController {
         }
     }
 
-    @PutMapping("/{id}")
+    @PatchMapping("/{id}")
 //    @PreAuthorize("hasRole('ADMIN') or hasRole('ANIMAL_CARE_ATTENDANT') or hasRole('TEACHING_TECHNICIAN')")
     public ResponseEntity<?> updateAnimal(@RequestBody Animal animal, @PathVariable Integer id){
         try{
             Animal existingAnimal = animalService.getAnimal(id);
-            animal.setAnimalId(id);
-            animalService.saveAnimal(animal);
+            String requestedBy = animal.getRequestedBy();
+            existingAnimal.setRequestedBy(requestedBy);
+            animalService.saveAnimal(existingAnimal);
             return new ResponseEntity<>(HttpStatus.OK);
         }catch (NoSuchElementException e){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
