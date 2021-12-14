@@ -7,11 +7,16 @@ import Combined from "./Combined";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import UpdateStatusButton from "./UpdateStatusButton"; 
+import auth from "../authentication/AuthenticationService";
 
 export default function AnimalProfile() {
   const [animal, setAnimal] = useState([]);
   const location = useLocation();
   const [status, setStatus] = useState([]);
+
+  const [currentUser, setCurrentUser] = useState(undefined);
+  const [showStatus, setShowStatus] = useState(false);
+  const [showUpdateButton, setUpdateButton] = useState(false);
 
   function hasPhoto(data) {
     return data.animalPhoto.length === 0 ? false : true;
@@ -45,6 +50,26 @@ export default function AnimalProfile() {
       .catch((err) => console.error(err));
   }, []);
 
+  useEffect(() => {
+    const user = auth.getCurrentUser();
+    if (user) {
+      setCurrentUser(user);
+      if (
+        user.roles.includes("ROLE_ADMIN") === true ||
+        user.roles.includes("ROLE_ANIMAL_HEALTH_TECHNICIAN") === true ||
+        user.roles.includes("ROLE_ANIMAL_CARE_ATTENDANT")
+      ) {
+        setShowStatus(true);
+      }
+      if (
+        user.roles.includes("ROLE_ANIMAL_HEALTH_TECHNICIAN") === true ||
+        user.roles.includes("ROLE_ANIMAL_CARE_ATTENDANT")
+      ) {
+        setUpdateButton(true);
+      }
+    }
+  }, []);
+
   return (
     <div>
       <Box
@@ -71,26 +96,29 @@ export default function AnimalProfile() {
             <Typography variant="h4" component="div">
               {animal.animalName}
             </Typography>
-            {!status ? 
-              (<Typography variant="subtitle2" component="div">
-                Status: N/A 
-              </Typography>) :
-              (<Typography variant="subtitle2" component="div">
-              {`Status: ${status.theStatus}`} 
-            </Typography>)
-            }
-            {!status ? 
-              (<Typography variant="subtitle2" component="div">
-                Location: N/A 
-              </Typography>) :
-              (<Typography variant="subtitle2" component="div">
-              {`Location: ${status.location}`} 
-            </Typography>)
-            }
+            {(showStatus &&
+              <Stack spacing={0.05}>
+              {!status ? 
+                (<Typography variant="subtitle2" component="div">
+                  Status: N/A 
+                </Typography>) :
+                (<Typography variant="subtitle2" component="div">
+                {`Status: ${status.theStatus}`} 
+              </Typography>)
+              }
+              {!status ? 
+                (<Typography variant="subtitle2" component="div">
+                  Location: N/A 
+                </Typography>) :
+                (<Typography variant="subtitle2" component="div">
+                {`Location: ${status.location}`} 
+              </Typography>)
+              }
+            </Stack>)}
           </Stack>
         </Stack>
         <Box sx={{ display: "flex", justifyContent: "flex-end", p: 1, m: 1 }}>
-          <UpdateStatusButton animal={animal}/>
+          {showUpdateButton && (<UpdateStatusButton animal={animal}/>)}
           <Button variant="contained" color="secondary" sx={{ m: 4 }}>
             Request Treatment
           </Button>
