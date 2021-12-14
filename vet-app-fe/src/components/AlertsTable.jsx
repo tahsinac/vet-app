@@ -9,6 +9,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import { Box } from "@mui/material";
 import AddAlertButton from "./AddAlertButton";
+import auth from "../authentication/AuthenticationService";
 
 const columns = [
   { id: "priority", label: "Priority", minWidth: 170 },
@@ -36,6 +37,20 @@ export default function AlertsTable(props) {
 
   const [rows, setRows] = useState([]);
 
+  const [currentUser, setCurrentUser] = useState(undefined);
+  const [showAddAlertButton, setShowAddAlertButton] = useState(false);
+
+  useEffect(() => {
+    const user = auth.getCurrentUser();
+    if (user) {
+      setCurrentUser(user);
+      if (
+        user.roles.includes("ROLE_ANIMAL_CARE_ATTENDANT") === true
+      ) {
+        setShowAddAlertButton(true);
+      }
+    }
+  }, []);
 
   return (
     
@@ -47,7 +62,7 @@ export default function AlertsTable(props) {
         }))}
       <Box>
         <Box display="flex" justifyContent="flex-end">
-          <AddAlertButton animal = {props.animal}/>
+          {showAddAlertButton && (<AddAlertButton animal = {props.animal}/>)}
         </Box>
         <Paper sx={{ width: "100%", overflow: "hidden" }}>
           <TableContainer sx={{ maxHeight: 440 }}>
