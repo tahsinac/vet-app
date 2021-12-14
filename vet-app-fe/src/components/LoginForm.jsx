@@ -1,5 +1,6 @@
 import React, { useRef, useState } from "react";
 import LockIcon from "@mui/icons-material/Lock";
+
 import {
   Grid,
   Paper,
@@ -48,15 +49,14 @@ export default function LoginForm(props) {
         transform: "translate(-50%, -50%)",
       }}
     >
-      <Paper elevation={10} style={paperStyle}>
-        <Grid align="center">
-          <Avatar style={avatarStyle}>
-            <LockIcon />
-          </Avatar>
-          <Typography variant="h4" color="primary" sx={{ p: 3 }}>
-            Sign In
-          </Typography>
-        </Grid>
+      {/* <Paper elevation={10} style={paperStyle}> */}
+      <Grid align="center" sx={{ width: 300 }}>
+        <Avatar style={avatarStyle}>
+          <LockIcon />
+        </Avatar>
+        <Typography variant="h4" color="primary" sx={{ p: 3 }}>
+          Sign In
+        </Typography>
         <TextField
           sx={{ m: 1 }}
           label="Username"
@@ -88,7 +88,9 @@ export default function LoginForm(props) {
         <Typography>
           <Link href="#">Forgot password ?</Link>
         </Typography>
-      </Paper>
+      </Grid>
+
+      {/* </Paper> */}
     </div>
   );
 }
