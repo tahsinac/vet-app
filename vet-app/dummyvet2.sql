@@ -15,11 +15,25 @@ CREATE TABLE Users (
     primary key (id)
 );
 
+
+
 INSERT INTO Users (id, username, active, email, password, activationDate)
 VALUES
 (1, 'test-user', true, "test@test.test", "$2a$10$paOCw4c78f//fcwDYpyTTOOJ7.OoCTV1BI0iXmLuCCTCyfe6zqvL6", '2021-03-04'),
 (2, 'test-user2', true, "test2@test.test", "$2a$10$paOCw4c78f//fcwDYpyTTOOJ7.OoCTV1BI0iXmLuCCTCyfe6zqvL6", '2021-03-05'),
 (3, 'test-user3', true, "test3@test.test", "$2a$10$paOCw4c78f//fcwDYpyTTOOJ7.OoCTV1BI0iXmLuCCTCyfe6zqvL6", '2021-03-06');
+
+DROP TABLE IF EXISTS user_roles;
+CREATE TABLE user_roles (
+    user_id            integer,
+    role_id            integer
+    );
+
+INSERT INTO user_roles (user_id, role_id)
+VALUES
+(1, 2),
+(2, 5),
+(3, 5);
 
 DROP TABLE IF EXISTS Roles;
 CREATE TABLE Roles (
@@ -28,7 +42,6 @@ CREATE TABLE Roles (
     
     primary key(id)
 );
-
 
 INSERT INTO Roles (id, name)
 VALUES
