@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import { SERVER_URL } from "../constants.js";
-import { styled } from "@mui/material/styles";
-import SearchIcon from "@mui/icons-material/Search";
 
 export default function SearchBar() {
 
@@ -15,18 +13,23 @@ useEffect(() => {
       .then((data) => {
         // animals: responseData
         const animalData = data.map((a) => {
-          return [a.animalName];
+          return {
+            animalName: a.animalName,
+            animalId: a.animalId
+          };
         });
         setAnimals(animalData);
       })
       .catch((err) => console.error(err));
   }, []);
 
+
   return (
     <Autocomplete
       disablePortal
       id="disableClearable"
       options={animals}
+      getOptionLabel={(option) => option.animalName}
       sx={{ width: 300 }}
       forcePopupIcon={true}
       noOptionsText={'No animal found'}
