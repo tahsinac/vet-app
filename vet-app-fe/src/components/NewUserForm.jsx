@@ -17,14 +17,15 @@ import { Link } from "react-router-dom"; //added
 export default function NewUserForm(props) {
   const [values, setValues] = React.useState({
     username: "",
+    active: true,
     password: "",
     email: "",
     role: "",
     activationDate: "",
-    status: "",
   });
 
   const [dateValue, setDateValue] = useState(new Date());
+  const [active, setActive] = useState(true);
   const [role, setRole] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -50,6 +51,10 @@ export default function NewUserForm(props) {
     setRole(event.target.value);
   };
 
+  const handleActiveChange = (event) => {
+    setActive(event.target.value);
+  };
+
   const handleChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value });
     console.log(values);
@@ -58,7 +63,14 @@ export default function NewUserForm(props) {
   function newUserSubmit(event) {
     event.preventDefault();
 
-    props.onNewUserSubmit({ username, email, password, dateValue, role });
+    props.onNewUserSubmit({
+      username,
+      active,
+      email,
+      password,
+      dateValue,
+      role,
+    });
     // console.log(username, email, password, dateValue, type);
   }
 
@@ -94,6 +106,22 @@ export default function NewUserForm(props) {
                 label="Username"
                 placeholder="Enter username"
               />
+            </FormControl>
+
+            <FormControl fullWidth>
+              <InputLabel id="demo-simple-select-label">
+                Active Status
+              </InputLabel>
+              <Select
+                labelId="status-type-label"
+                id="status"
+                label="Status"
+                onChange={handleActiveChange}
+                placeholder="Select Status"
+              >
+                <MenuItem value={true}>Active</MenuItem>
+                <MenuItem value={false}>Inactive</MenuItem>
+              </Select>
             </FormControl>
 
             <FormControl sx={{ m: 1, width: "40ch" }} variant="outlined">
@@ -145,19 +173,6 @@ export default function NewUserForm(props) {
                 renderInput={(params) => <TextField {...params} />}
               />
             </LocalizationProvider>
-
-            {/* <FormControl sx={{ m: 1, width: "40ch" }} variant="outlined">
-              <InputLabel htmlFor="outlined-adornment-status">
-                Status
-              </InputLabel>
-              <OutlinedInput
-                id="outlined-adornment-status"
-                value={values.status}
-                onChange={handleChange("status")}
-                label="Status"
-                placeholder="Enter status"
-              />
-            </FormControl> */}
 
             <Button
               onClick={newUserSubmit}

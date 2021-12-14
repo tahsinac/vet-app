@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,6 +19,9 @@ public class UserController {
 
         @Autowired
         UserService userService;
+
+        @Autowired
+        PasswordEncoder encoder;
 
         @GetMapping("")
         @PreAuthorize("hasRole('ADMIN') or hasRole('TEACHING_TECHNICIAN')")
@@ -47,13 +51,22 @@ public class UserController {
             }
         }
 
-        @PutMapping("/{id}")
+        @PatchMapping("/{id}")
         @PreAuthorize("hasRole('ADMIN')")
         public ResponseEntity<?> updateUser(@RequestBody User user, @PathVariable Integer id){
             try{
                 User existingUser = userService.getUser(id);
-                user.setId(id);
-                userService.saveUser(user);
+
+                boolean status = user.isActive();
+                existingUser.setActive(status);
+                String updatedPassword;
+
+                if(user.getPassword() != null){
+                    updatedPassword = encoder.encode(user.getPassword());
+                    existingUser.setPassword(updatedPassword);
+                }
+//                user.setId(id);
+                userService.saveUser(existingUser);
                 return new ResponseEntity<>(HttpStatus.OK);
             }catch (NoSuchElementException e){
                 return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

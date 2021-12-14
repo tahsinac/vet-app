@@ -20,16 +20,17 @@ function App() {
   return (
     <div>
       <MenuBar />
-      <Route path="/login">
-        <Login />
-      </Route>
+
       <Switch>
         <main>
           <Route path="/" exact>
             <Redirect to="/login" />
           </Route>
+          <Route path="/login">
+            <Login />
+          </Route>
 
-          <ProtectedRoute path="/welcome" component={Welcome} />
+          <Route path="/welcome" component={Welcome} />
           {/* <Welcome />
           </ProtectedRoute> */}
           <ProtectedRoute path="/users" exact component={Users} />

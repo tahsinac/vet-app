@@ -7,10 +7,12 @@ export default function NewUser() {
 
   const addNewUserHandler = (signupData) => {
     console.log(signupData);
-    // console.log([].concat(signupData.role));
+    console.log([].concat(signupData.role));
+
     auth
       .signup(
         signupData.username,
+        signupData.active,
         signupData.email,
         signupData.password,
         signupData.activationDate,

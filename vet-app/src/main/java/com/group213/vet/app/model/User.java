@@ -33,6 +33,8 @@ public class User {
     @Size(max = 20)
     private String username;
 
+    private boolean active;
+
     @NotBlank
     @Size(max = 50)
     @Email
@@ -48,8 +50,9 @@ public class User {
 
 
 
-    public User(String username, String email, String password, String activationDate) {
+    public User(String username, boolean active, String email, String password, String activationDate) {
         this.username = username;
+        this.active=active;
         this.email = email;
         this.password = password;
         this.activationDate = activationDate;

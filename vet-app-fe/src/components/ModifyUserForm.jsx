@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import OutlinedInput from "@mui/material/OutlinedInput";
@@ -6,38 +6,66 @@ import Stack from "@mui/material/Stack";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import { Box, Button } from "@mui/material";
-import LocalizationProvider from "@mui/lab/LocalizationProvider";
-import DesktopDatePicker from "@mui/lab/DesktopDatePicker";
-import TextField from "@mui/material/TextField";
-import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
+import { Link } from "react-router-dom"; //added
+import { useLocation } from "react-router-dom";
+import axios from "axios";
+import { SERVER_URL } from "../constants.js";
+import { useHistory } from "react-router-dom";
+import authToken from "../authentication/DataService";
 
-export default function ModifyUserForm() {
-  const [values, setValues] = React.useState({
-    username: "",
-    email: "",
-    type: "",
-    activationDate: "",
-    status: "",
+export default function ModifyUserForm(props) {
+  const [values, setValues] = useState({
+    active: true,
+    password: null,
+    role: null,
   });
 
-  const [dateValue, setDateValue] = React.useState(new Date());
+  const history = useHistory();
+  const location = useLocation();
+  const data = location.state.data[0];
 
-  const [type, setType] = React.useState("");
+  const [active, setActive] = useState(true);
+  const [role, setRole] = useState("");
+  const [password, setPassword] = useState("");
 
-  const handleChangeDate = (dateValue) => {
-    setDateValue(dateValue);
+  const passwordInputChangeHandler = (e) => {
+    setPassword(e.target.value);
   };
 
-  const handleChange = (prop) => (event) => {
-    setValues({ ...values, [prop]: event.target.value });
-    console.log(values);
+  const handleRolesChange = (event) => {
+    setRole(event.target.value);
   };
 
-  const handleTypeChange = (event) => {
-    setType(event.target.value);
+  const handleActiveChange = (event) => {
+    setActive(event.target.value);
   };
+
+  const handleModifyUser = () => {
+    console.log(data);
+    axios
+      .patch(
+        `${SERVER_URL}users/${data.id}`,
+        {
+          username: data.username,
+          active: active,
+          email: data.email,
+          password: password,
+          role: [].concat(role),
+        },
+        {
+          headers: authToken(),
+        }
+      )
+      .then((response) => console.log(response))
+      .then(() => {
+        history.push("/users");
+        window.location.reload();
+      });
+  };
+
+  useEffect(() => {}, []);
 
   return (
     <Box sx={{ display: "flex", justifyContent: "center" }}>
@@ -55,11 +83,11 @@ export default function ModifyUserForm() {
           style={{ marginRight: "auto" }} //, border: "1px solid gray" }}
         >
           <Stack spacing={3}>
-            <Grid item>
-              <Typography variant="h3" color="primary">
-                Modify User
-              </Typography>
-            </Grid>
+            {/* <Grid item> */}
+            <Typography variant="h3" color="primary">
+              Modify User
+            </Typography>
+            {/* </Grid> */}
 
             <FormControl sx={{ m: 1, width: "40ch" }} variant="outlined">
               <InputLabel htmlFor="outlined-adornment-username">
@@ -67,28 +95,25 @@ export default function ModifyUserForm() {
               </InputLabel>
               <OutlinedInput
                 id="outlined-adornment-username"
-                value={values.username}
-                onChange={handleChange("username")}
                 label="Username"
                 placeholder="Enter username"
+                value={data.username}
               />
             </FormControl>
 
             <FormControl fullWidth>
-              <InputLabel id="demo-simple-select-label">Role Type</InputLabel>
+              <InputLabel id="demo-simple-select-label">
+                Active Status
+              </InputLabel>
               <Select
-                labelId="role-type-label"
-                id="role-type"
-                value={type}
-                label="Role Type"
-                onChange={handleTypeChange}
-                placeholder="Select Role"
+                labelId="status-type-label"
+                id="status"
+                label="Status"
+                onChange={handleActiveChange}
+                placeholder="Select Status"
               >
-                <MenuItem value={10}>Admin</MenuItem>
-                <MenuItem value={20}>Teaching Technician</MenuItem>
-                <MenuItem value={30}>Animal Care Attendant</MenuItem>
-                <MenuItem value={40}>Animal Care Technician</MenuItem>
-                <MenuItem value={50}>Student</MenuItem>
+                <MenuItem value={true}>Active</MenuItem>
+                <MenuItem value={false}>Inactive</MenuItem>
               </Select>
             </FormControl>
 
@@ -98,40 +123,57 @@ export default function ModifyUserForm() {
               </InputLabel>
               <OutlinedInput
                 id="outlined-adornment-email"
-                value={values.email}
-                onChange={handleChange("email")}
+                value={data.email}
                 label="Email Address"
                 placeholder="Enter email address"
               />
             </FormControl>
 
-            <LocalizationProvider dateAdapter={AdapterDateFns}>
-              <DesktopDatePicker
-                label="Activation Date"
-                inputFormat="MM/dd/yyyy"
-                value={dateValue}
-                onChange={handleChangeDate}
-                renderInput={(params) => <TextField {...params} />}
-              />
-            </LocalizationProvider>
-
             <FormControl sx={{ m: 1, width: "40ch" }} variant="outlined">
-              <InputLabel htmlFor="outlined-adornment-status">
-                Status
+              <InputLabel htmlFor="outlined-adornment-username">
+                Password
               </InputLabel>
               <OutlinedInput
-                id="outlined-adornment-status"
-                value={values.status}
-                onChange={handleChange("status")}
-                label="Status"
-                placeholder="Enter status"
+                id="outlined-adornment-username"
+                onChange={passwordInputChangeHandler}
+                label="Password"
+                placeholder="Enter password"
               />
             </FormControl>
 
-            <Button variant="contained" color="success" sx={{ m: 1 }}>
+            {/* <FormControl fullWidth>
+              <InputLabel id="demo-simple-select-label">Role Type</InputLabel>
+              <Select
+                labelId="role-type-label"
+                id="role-type"
+                label="Role Type"
+                onChange={handleRolesChange}
+                placeholder="Select Role"
+              >
+                <MenuItem value={"admin"}>Admin</MenuItem>
+                <MenuItem value={"tt"}>Teaching Technician</MenuItem>
+                <MenuItem value={"aca"}>Animal Care Attendant</MenuItem>
+                <MenuItem value={"aht"}>Animal Health Technician</MenuItem>
+                <MenuItem value={"student"}>Student</MenuItem>
+                <MenuItem value={"user"}>Blocked</MenuItem>
+              </Select>
+            </FormControl> */}
+
+            <Button
+              onClick={handleModifyUser}
+              variant="contained"
+              color="success"
+              sx={{ m: 1 }}
+            >
               Modify User
             </Button>
-            <Button variant="contained" color="error" sx={{ m: 1 }}>
+            <Button
+              component={Link}
+              to="/users"
+              variant="contained"
+              color="error"
+              sx={{ m: 1 }}
+            >
               Cancel
             </Button>
           </Stack>

@@ -43,7 +43,8 @@ export default function LoginForm(props) {
 
   function loginOnSubmit(event) {
     event.preventDefault();
-
+    console.log(username);
+    console.log(password);
     props.onLogin({ username, password });
     // console.log(username, password);
   }
@@ -62,58 +63,57 @@ export default function LoginForm(props) {
   // };
 
   return (
-    <Grid>
-      <div
-        style={{
-          position: "absolute",
-          left: "50%",
-          top: "50%",
-          transform: "translate(-50%, -50%)",
-        }}
-      >
-        <Paper elevation={10} style={paperStyle}>
-          <Grid align="center">
-            <Avatar style={avatarStyle}>
-              <LockIcon />
-            </Avatar>
-            <Typography variant="h4" color="primary" sx={{ p: 3 }}>
-              Sign In
-            </Typography>
-          </Grid>
-          <TextField
-            label="Username"
-            placeholder="Enter username"
-            fullWidth
-            required
-            onChange={usernameInputChangeHandler}
-          />
-          <TextField
-            label="Password"
-            placeholder="Enter password"
-            type="password"
-            fullWidth
-            required
-            onChange={passwordInputChangeHandler}
-          />
-          <FormControlLabel
-            control={<Checkbox name="checkedB" color="primary" />}
-            label="Remember me"
-          />
-          <Button
-            type="submit"
-            color="primary"
-            variant="contained"
-            style={btnstyle}
-            fullWidth
-            onClick={loginOnSubmit}
-          >
-            Sign in
-          </Button>
-          <Typography>
-            <Link href="#">Forgot password ?</Link>
+    <div
+      style={{
+        position: "absolute",
+        left: "50%",
+        top: "50%",
+        transform: "translate(-50%, -50%)",
+      }}
+    >
+      {/* <Grid> */}
+      <Paper elevation={10} style={paperStyle}>
+        <Grid align="center">
+          <Avatar style={avatarStyle}>
+            <LockIcon />
+          </Avatar>
+          <Typography variant="h4" color="primary" sx={{ p: 3 }}>
+            Sign In
           </Typography>
-        </Paper>
-      </div>
-    </Grid>
+        </Grid>
+        <TextField
+          sx={{ m: 1 }}
+          label="Username"
+          placeholder="Enter username"
+          fullWidth
+          required
+          onChange={usernameInputChangeHandler}
+        />
+        <TextField
+          sx={{ m: 1 }}
+          label="Password"
+          placeholder="Enter password"
+          type="password"
+          fullWidth
+          required
+          onChange={passwordInputChangeHandler}
+        />
+        <Button
+          sx={{ p: 1 }}
+          type="submit"
+          color="primary"
+          variant="contained"
+          style={btnstyle}
+          fullWidth
+          onClick={loginOnSubmit}
+        >
+          Sign in
+        </Button>
+        <Typography>
+          <Link href="#">Forgot password ?</Link>
+        </Typography>
+      </Paper>
+      {/* </Grid> */}
+    </div>
   );
 }

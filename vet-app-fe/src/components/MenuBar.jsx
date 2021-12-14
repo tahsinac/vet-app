@@ -13,12 +13,13 @@ import AccountCircle from "@mui/icons-material/AccountCircle";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import Paper from "@mui/material/Paper";
 import auth from "../authentication/AuthenticationService";
-import SearchBar from "./SearchBar";
 
 import { Link } from "react-router-dom"; //added
 import { NavLink } from "react-router-dom"; //added
 import classes from "./MainHeader.module.css"; //added
 import { useHistory } from "react-router-dom"; //added
+
+import SearchBar from "./SearchBar";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -44,9 +45,8 @@ const SearchIconWrapper = styled("div")(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  color: "secondary"
+  color: "secondary",
 }));
-
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
   color: "inherit",
   "& .MuiInputBase-input": {
@@ -209,7 +209,7 @@ export default function PrimarySearchAppBar() {
           aria-label="account of current user"
           aria-controls="primary-search-account-menu"
           aria-haspopup="true"
-          color="secondary"
+          color="inherit"
         >
           <AccountCircle />
         </IconButton>
@@ -226,11 +226,12 @@ export default function PrimarySearchAppBar() {
               <img height="67" width="225" src="./images/vetlogo.png" />
             </Paper>
           </NavLink>
+
           <Search>
             <SearchIconWrapper>
               <SearchIcon />
             </SearchIconWrapper>
-            <SearchBar/>
+            <SearchBar />
           </Search>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
