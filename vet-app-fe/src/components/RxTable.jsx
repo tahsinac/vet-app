@@ -9,6 +9,8 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import { Box } from "@mui/material";
 import AddRxButton from "./AddRxButton";
+import AddAlertButton from "./AddAlertButton";
+import auth from "../authentication/AuthenticationService";
 
 const columns = [
   { id: "theDate", label: "Date", minWidth: 100 },
@@ -35,7 +37,22 @@ function containsObject(obj, list) {
 
 export default function RxTable(props) {
 
+  const [currentUser, setCurrentUser] = useState(undefined);
+  const [displayRxButton, setDisplayRxButton] = useState(false);
   const [rows] = useState([]);
+
+
+  useEffect(() => {
+    const user = auth.getCurrentUser();
+    if (user) {
+      setCurrentUser(user);
+      if (
+        user.roles.includes("ROLE_ANIMAL_HEALTH_TECHNICIAN") === true
+      ) {
+        setDisplayRxButton(true);
+      }
+    }
+  }, []);
 
   return (
     <div>
@@ -49,7 +66,7 @@ export default function RxTable(props) {
 
       <Box>
         <Box display="flex" justifyContent="flex-end">
-          <AddRxButton animal = {props.animal} />
+          {displayRxButton && (<AddRxButton animal = {props.animal} />)}
         </Box>
         <Paper sx={{ width: "100%", overflow: "hidden" }}>
           <TableContainer sx={{ maxHeight: 440 }}>
