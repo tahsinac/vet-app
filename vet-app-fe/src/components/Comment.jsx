@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { SERVER_URL } from "../constants.js";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -9,8 +8,6 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import { Box } from "@mui/material";
 import NewCommentButton from "./NewCommentButton";
-import axios from "axios";
-import authToken from "../authentication/DataService";
 import auth from "../authentication/AuthenticationService";
 
 const columns = [
@@ -34,14 +31,12 @@ function containsObject(obj, list) {
   return false;
 }
 
-//var rows = [];
-
 export default function CommentsTable(props) {
 
  const [rows] = useState([]);
 
  const [currentUser, setCurrentUser] = useState(undefined);
-  const [showNewCommentButton, setshowNewCommentButton] = useState(false);
+ const [showNewCommentButton, setshowNewCommentButton] = useState(false);
 
   useEffect(() => {
     const user = auth.getCurrentUser();

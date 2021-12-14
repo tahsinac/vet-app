@@ -13,12 +13,9 @@ import AccountCircle from "@mui/icons-material/AccountCircle";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import Paper from "@mui/material/Paper";
 import auth from "../authentication/AuthenticationService";
-
-import { Link } from "react-router-dom"; //added
-import { NavLink } from "react-router-dom"; //added
-import classes from "./MainHeader.module.css"; //added
-import { useHistory } from "react-router-dom"; //added
-
+import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import classes from "./MainHeader.module.css";
 import SearchBar from "./SearchBar";
 
 const Search = styled("div")(({ theme }) => ({
@@ -63,7 +60,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 export default function PrimarySearchAppBar() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-
+  const [showSearchBar, setShowSearchBar] = useState(false);
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
@@ -106,6 +103,16 @@ export default function PrimarySearchAppBar() {
       if (user.roles.includes("") === false) {
         setShowLogout(true);
       }
+      if (
+        user.roles.includes("ROLE_ADMIN") === true ||
+        user.roles.includes("ROLE_ANIMAL_HEALTH_TECHNICIAN") === true ||
+        user.roles.includes("ROLE_TEACHING_TECHNICIAN") === true ||
+        user.roles.includes("ROLE_STUDENT") === true ||
+        user.roles.includes("ROLE_ANIMAL_CARE_ATTENDANT") === true
+      ) {
+        setShowSearchBar(true);
+      }
+      
     }
   }, []);
 
@@ -125,16 +132,6 @@ export default function PrimarySearchAppBar() {
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
-
-  // const { history } = useHistory();
-  // const logout = () => auth.logout;
-
-  // const handleLogout = () => {
-  //   logout();
-  //   window.addEventListener("popstate", () => {
-  //     history.go(1);
-  //   });
-  // };
 
   const menuId = "primary-search-account-menu";
 
@@ -227,12 +224,14 @@ export default function PrimarySearchAppBar() {
             </Paper>
           </NavLink>
 
-          <Search>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <SearchBar />
-          </Search>
+          {showSearchBar && (
+            <Search>
+              <SearchIconWrapper>
+                <SearchIcon />
+              </SearchIconWrapper>
+              <SearchBar />
+            </Search>
+          )}
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
             <IconButton

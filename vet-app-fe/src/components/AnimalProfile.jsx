@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Button, Stack } from "@mui/material";
+import { Box, Stack } from "@mui/material";
 import { SERVER_URL } from "../constants.js";
 import Typography from "@mui/material/Typography";
 import Avatar from "@mui/material/Avatar";
@@ -42,7 +42,6 @@ export default function AnimalProfile() {
 
     fetch(SERVER_URL + "animals/" + tempID)
       .then((response) => response.json())
-      // .then((tempData) => console.log(tempData))
       .then((data) => {
         hasPhoto(data)
           ? (imagePath = `${data.animalPhoto[0].theFile}`)

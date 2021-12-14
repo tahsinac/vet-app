@@ -24,7 +24,6 @@ export default function AnimalTab(props) {
             <Tab label="Images" value="1" />
             <Tab label="Comments" value="2" />
             <Tab label="Rx" value="3" />
-            {/* <Tab label="Diagnosis" value="4" /> */}
             <Tab label="Alerts" value="4" />
           </TabList>
         </Box>
