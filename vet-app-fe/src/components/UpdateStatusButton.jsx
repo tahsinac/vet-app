@@ -13,9 +13,10 @@ import { SERVER_URL } from "../constants.js";
 import authToken from "../authentication/DataService";
 
 export default function UploadImageButton(props) {
-
+  const animal = props.animal;
   const [open, setOpen] = useState(false);
   const [status, setStatus] = useState("");
+  const [theLocation, setTheLocation] = useState("");
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -30,26 +31,44 @@ export default function UploadImageButton(props) {
   }
 
   const handleLocationInput = (event) =>{
-    setStatus(event.target.value)
+    setTheLocation(event.target.value)
   }
 
   const handleOkay = (event) => {
-    // event.preventDefault();
-    // const user = JSON.parse(localStorage.getItem("user"));
-    // const newImage = {
-    //   userId: parseInt(user.id),
-    //   creationDate: date,
-    //   theFile: file,
-    //   animalId: parseInt(props.animal.animalId),
-    //   theType: type
-    // }
-    // axios.post(
-    //   `${SERVER_URL}animals/photos/`,
-    //   newImage,
-    //   {headers: authToken()}
-    // )
-    // .then(window.location.reload())
-    // setOpen(false);
+    if(animal && animal.animalStatus){
+        event.preventDefault();
+        const user = JSON.parse(localStorage.getItem("user"));
+        const newStatus = {
+          userId: parseInt(user.id),
+          location: theLocation,
+          theStatus: status
+        }
+        axios.patch(
+          `${SERVER_URL}animals/status/${animal.animalStatus.statusId}`,
+          newStatus,
+          {headers: authToken()}
+        )
+        .then(window.location.reload())
+        setOpen(false);
+    }else{
+        event.preventDefault();
+        const user = JSON.parse(localStorage.getItem("user"));
+        const newStatus = {
+          animalId: parseInt(props.animal.animalId),
+          userId: parseInt(user.id),
+          theDate: "",
+          location: theLocation,
+          theStatus: status
+        }
+        axios.post(
+          `${SERVER_URL}animals/status/`,
+          newStatus,
+          {headers: authToken()}
+        )
+        .then(window.location.reload())
+        setOpen(false);
+    }
+    
   };
 
   return (

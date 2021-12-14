@@ -40,16 +40,10 @@ export default function AnimalProfile() {
           imagePath
         );
         setAnimal(data);
-        // setStatus(data.animalStatus)
-        if (data.hasOwnProperty("animalStatus")){
-          setStatus(data.animalStatus)
-        }
-        
+        setStatus(data.animalStatus)
       })
       .catch((err) => console.error(err));
   }, []);
-
-  console.log(animal.animalStatus);
 
   return (
     <div>
@@ -90,7 +84,7 @@ export default function AnimalProfile() {
                 Location: N/A 
               </Typography>) :
               (<Typography variant="subtitle2" component="div">
-              {`Status: ${status.location}`} 
+              {`Location: ${status.location}`} 
             </Typography>)
             }
           </Stack>
