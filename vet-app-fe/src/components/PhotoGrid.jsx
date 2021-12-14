@@ -9,7 +9,7 @@ import auth from "../authentication/AuthenticationService";
 export default function PhotoGrid(props) {
 
   const [currentUser, setCurrentUser] = useState(undefined);
-  const [showUploadButton, setUploadButton] = useState(false);
+  const [showUploadButton, setShowUploadButton] = useState(false);
 
   useEffect(() => {
     const user = auth.getCurrentUser();
@@ -18,7 +18,7 @@ export default function PhotoGrid(props) {
       if (
         user.roles.includes("ROLE_ANIMAL_CARE_ATTENDANT") === true
       ) {
-        setUploadButton(true);
+        setShowUploadButton(true);
       }
     }
   }, []);
