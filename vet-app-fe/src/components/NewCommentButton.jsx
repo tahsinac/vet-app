@@ -53,9 +53,6 @@ export default function NewCommentButton(props) {
   };
 
 
-  // const handleAdd = (event) => {
-  //   inputComment = event.target.value
-  // };
 
   return (
     <div>

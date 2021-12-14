@@ -6,8 +6,9 @@ import Avatar from "@mui/material/Avatar";
 import Combined from "./Combined";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
+import RequestTreatmentButton from "./RequestTreatmentButton.jsx";
 
-export default function AnimalProfile() {
+export default function AnimalProfile(props) {
   const [animal, setAnimal] = useState([]);
   const location = useLocation();
 
@@ -82,9 +83,7 @@ export default function AnimalProfile() {
           <Button variant="contained" color="secondary" sx={{ m: 4 }}>
             Update Status
           </Button>
-          <Button variant="contained" color="secondary" sx={{ m: 4 }}>
-            Request Treatment
-          </Button>
+          <RequestTreatmentButton animal = {animal}/>
           <Button variant="contained" color="secondary" sx={{ m: 4 }}>
             Request For Instruction
           </Button>
