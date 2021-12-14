@@ -222,20 +222,15 @@ export default function PrimarySearchAppBar() {
       <AppBar position="static" color="transparent">
         <Toolbar>
           <NavLink to="/welcome" activeClassName={classes.active}>
-            <Paper variant="outlined">
-              <img height="67" width="230" src="./images/vetlogo.png" />
+            <Paper variant="contained">
+              <img height="67" width="225" src="./images/vetlogo.png" />
             </Paper>
           </NavLink>
-          {/* <SearchBar/> */}
           <Search>
             <SearchIconWrapper>
               <SearchIcon />
             </SearchIconWrapper>
             <SearchBar/>
-            {/* <StyledInputBase
-              placeholder="Search…"
-              inputProps={{ "aria-label": "search" }}
-            /> */}
           </Search>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
