@@ -19,18 +19,16 @@ const signin = (username, password) => {
       password,
     })
     .then((response) => {
+      console.log(response.data);
       if (response.data.accessToken) {
         localStorage.setItem("user", JSON.stringify(response.data));
         localStorage.setItem("isAuthenticated", "true");
       }
-      console.log(response.data);
       return response.data;
     });
 };
 
 const logout = () => {
-  //   localStorage.removeItem("user");
-  //   localStorage.removeItem("isAuthenticated");
   localStorage.clear();
   window.location.reload();
 };

@@ -19,6 +19,8 @@ public class UserDetailsImpl implements UserDetails {
 
     private String username;
 
+    private boolean active;
+
     private String email;
 
     @JsonIgnore
@@ -26,10 +28,11 @@ public class UserDetailsImpl implements UserDetails {
 
     private Collection<? extends GrantedAuthority> authorities;
 
-    public UserDetailsImpl(Integer id, String username, String email, String password,
+    public UserDetailsImpl(Integer id, String username, boolean active, String email, String password,
                            Collection<? extends GrantedAuthority> authorities) {
         this.id = id;
         this.username = username;
+        this.active = active;
         this.email = email;
         this.password = password;
         this.authorities = authorities;
@@ -43,6 +46,7 @@ public class UserDetailsImpl implements UserDetails {
         return new UserDetailsImpl(
                 user.getId(),
                 user.getUsername(),
+                user.isActive(),
                 user.getEmail(),
                 user.getPassword(),
                 authorities);
@@ -99,5 +103,13 @@ public class UserDetailsImpl implements UserDetails {
             return false;
         UserDetailsImpl user = (UserDetailsImpl) o;
         return Objects.equals(id, user.id);
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 }

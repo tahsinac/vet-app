@@ -25,11 +25,9 @@ export default function AnimalList() {
     await Axios.get(SERVER_URL + "animals/" + selectedAnimalId)
       .then((response) => {
         setselectedAnimal(response.data);
-        // console.log(selectedAnimal.requestedBy)
         selectedAnimal.requestedBy = "Teaching Technician";
         selectedAnimal.requestStatus = "New";
         selectedAnimal.approvalStatus = "Pending";
-        // console.log(selectedAnimal.requestedBy)
         const config = { headers: { "Content-Type": "application/json" } };
         Axios.put(
           SERVER_URL + "animals/" + selectedAnimalId,

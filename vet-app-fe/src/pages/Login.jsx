@@ -6,10 +6,16 @@ export default function Login() {
   const history = useHistory();
 
   const addLoginHandler = (loginData) => {
-    console.log(loginData);
+    // console.log(loginData);
+
     auth.signin(loginData.username, loginData.password).then(() => {
-      history.push("/welcome");
-      window.location.reload();
+      const isAuthenticated = localStorage.getItem("isAuthenticated");
+      if (isAuthenticated === "true") {
+        history.push("/welcome");
+        window.location.reload();
+      } else {
+        window.alert("Sorry you are not logged in or you are blocked!");
+      }
     });
   };
 

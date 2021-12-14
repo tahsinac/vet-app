@@ -18,8 +18,8 @@ import authToken from "../authentication/DataService";
 export default function ModifyUserForm(props) {
   const [values, setValues] = useState({
     active: true,
-    password: "",
-    role: "",
+    password: null,
+    role: null,
   });
 
   const history = useHistory();
@@ -43,9 +43,7 @@ export default function ModifyUserForm(props) {
   };
 
   const handleModifyUser = () => {
-    // console.log(active);
-    // console.log(password);
-    // console.log(role);
+    console.log(data);
     axios
       .patch(
         `${SERVER_URL}users/${data.id}`,
@@ -67,9 +65,7 @@ export default function ModifyUserForm(props) {
       });
   };
 
-  useEffect(() => {
-    // console.log(data);
-  }, []);
+  useEffect(() => {}, []);
 
   return (
     <Box sx={{ display: "flex", justifyContent: "center" }}>
@@ -145,7 +141,7 @@ export default function ModifyUserForm(props) {
               />
             </FormControl>
 
-            <FormControl fullWidth>
+            {/* <FormControl fullWidth>
               <InputLabel id="demo-simple-select-label">Role Type</InputLabel>
               <Select
                 labelId="role-type-label"
@@ -161,7 +157,7 @@ export default function ModifyUserForm(props) {
                 <MenuItem value={"student"}>Student</MenuItem>
                 <MenuItem value={"user"}>Blocked</MenuItem>
               </Select>
-            </FormControl>
+            </FormControl> */}
 
             <Button
               onClick={handleModifyUser}
