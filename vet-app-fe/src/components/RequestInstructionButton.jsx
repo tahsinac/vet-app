@@ -10,7 +10,7 @@ import { SERVER_URL } from "../constants.js";
 import authToken from "../authentication/DataService";
 import DialogContentText from "@mui/material/DialogContentText";
 
-export default function RequestTreatmentButton(props) {
+export default function RequestInstructionButton(props) {
   const [open, setOpen] = React.useState(false);
 
   const handleClose = () => {
@@ -34,7 +34,6 @@ export default function RequestTreatmentButton(props) {
        {headers: authToken()}
      )
      .then((response) => console.log(response))
-  //  setOpen(false);
     console.log(newRequest);
   };
 
@@ -46,7 +45,7 @@ export default function RequestTreatmentButton(props) {
         sx={{ m: 4 }}
         onClick={handleClickOpen, handleRequest}
       >
-        Request Treatment
+        Request Instruction
       </Button>
       <Dialog
         open={open}
@@ -54,10 +53,10 @@ export default function RequestTreatmentButton(props) {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">{"Treatment Request Submitted."}</DialogTitle>
+        <DialogTitle id="alert-dialog-title">{"Instruction Request Submitted."}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            Your treatment request has been received. Thank you.
+            Your instruction request has been received. Thank you.
           </DialogContentText>
         </DialogContent>
         <DialogActions>

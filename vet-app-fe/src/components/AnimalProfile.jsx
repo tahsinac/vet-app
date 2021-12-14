@@ -7,6 +7,7 @@ import Combined from "./Combined";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import RequestTreatmentButton from "./RequestTreatmentButton.jsx";
+import RequestInstructionButton from "./RequestInstructionButton.jsx";
 
 export default function AnimalProfile(props) {
   const [animal, setAnimal] = useState([]);
@@ -84,9 +85,7 @@ export default function AnimalProfile(props) {
             Update Status
           </Button>
           <RequestTreatmentButton animal = {animal}/>
-          <Button variant="contained" color="secondary" sx={{ m: 4 }}>
-            Request For Instruction
-          </Button>
+          <RequestInstructionButton animal = {animal}/>
         </Box>
       </Box>
       <Combined animal={animal} />
