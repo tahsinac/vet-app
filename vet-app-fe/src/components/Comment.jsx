@@ -11,6 +11,7 @@ import { Box } from "@mui/material";
 import NewCommentButton from "./NewCommentButton";
 import axios from "axios";
 import authToken from "../authentication/DataService";
+import auth from "../authentication/AuthenticationService";
 
 const columns = [
   { id: "username", label: "Author", minWidth: 100 },
@@ -39,6 +40,22 @@ export default function CommentsTable(props) {
 
  const [rows] = useState([]);
 
+ const [currentUser, setCurrentUser] = useState(undefined);
+  const [showNewCommentButton, setshowNewCommentButton] = useState(false);
+
+  useEffect(() => {
+    const user = auth.getCurrentUser();
+    if (user) {
+      setCurrentUser(user);
+      if (
+        user.roles.includes("ROLE_TEACHING_TECHNICIAN") === true || 
+        user.roles.includes("ROLE_STUDENT") === true
+      ) {
+        setshowNewCommentButton(true);
+      }
+    }
+  }, []);
+
   return (
     <div>
       {(props.animal.theComment || []).forEach((element) => {
@@ -50,7 +67,7 @@ export default function CommentsTable(props) {
 
       <Box>
         <Box display="flex" justifyContent="flex-end">
-          <NewCommentButton animal = {props.animal} />
+          {showNewCommentButton && (<NewCommentButton animal = {props.animal} />)}
         </Box>
         <Paper sx={{ width: "100%", overflow: "hidden" }}>
           <TableContainer sx={{ maxHeight: 440 }}>
