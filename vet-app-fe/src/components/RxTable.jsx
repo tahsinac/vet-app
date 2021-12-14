@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { SERVER_URL } from "../constants.js";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -9,7 +8,6 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import { Box } from "@mui/material";
 import AddRxButton from "./AddRxButton";
-import AddAlertButton from "./AddAlertButton";
 import auth from "../authentication/AuthenticationService";
 
 const columns = [

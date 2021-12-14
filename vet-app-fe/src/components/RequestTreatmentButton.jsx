@@ -4,7 +4,6 @@ import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
-
 import axios from "axios";
 import { SERVER_URL } from "../constants.js";
 import authToken from "../authentication/DataService";
@@ -34,7 +33,6 @@ export default function RequestTreatmentButton(props) {
        {headers: authToken()}
      )
      .then((response) => console.log(response))
-  //  setOpen(false);
     console.log(newRequest);
   };
 

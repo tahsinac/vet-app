@@ -17,7 +17,6 @@ export default function ProfileGrid() {
     fetch(SERVER_URL + "animals")
       .then((response) => response.json())
       .then((data) => {
-        // animals: responseData
         const animalData = data.map((a) => {
 
           let imagePath = "";
@@ -37,8 +36,6 @@ export default function ProfileGrid() {
       .catch((err) => console.error(err));
   }, []);
 
-
-  //
   const history = useHistory();
 
   const addViewProfileHandler = (profileID) => {

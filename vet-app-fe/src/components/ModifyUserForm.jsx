@@ -80,14 +80,12 @@ export default function ModifyUserForm(props) {
         <Grid
           sx={{ p: 4 }}
           item
-          style={{ marginRight: "auto" }} //, border: "1px solid gray" }}
+          style={{ marginRight: "auto" }}
         >
           <Stack spacing={3}>
-            {/* <Grid item> */}
             <Typography variant="h3" color="primary">
               Modify User
             </Typography>
-            {/* </Grid> */}
 
             <FormControl sx={{ m: 1, width: "40ch" }} variant="outlined">
               <InputLabel htmlFor="outlined-adornment-username">
@@ -140,24 +138,6 @@ export default function ModifyUserForm(props) {
                 placeholder="Enter password"
               />
             </FormControl>
-
-            {/* <FormControl fullWidth>
-              <InputLabel id="demo-simple-select-label">Role Type</InputLabel>
-              <Select
-                labelId="role-type-label"
-                id="role-type"
-                label="Role Type"
-                onChange={handleRolesChange}
-                placeholder="Select Role"
-              >
-                <MenuItem value={"admin"}>Admin</MenuItem>
-                <MenuItem value={"tt"}>Teaching Technician</MenuItem>
-                <MenuItem value={"aca"}>Animal Care Attendant</MenuItem>
-                <MenuItem value={"aht"}>Animal Health Technician</MenuItem>
-                <MenuItem value={"student"}>Student</MenuItem>
-                <MenuItem value={"user"}>Blocked</MenuItem>
-              </Select>
-            </FormControl> */}
 
             <Button
               onClick={handleModifyUser}

@@ -20,20 +20,12 @@ export default function NewUserForm(props) {
     sex: "",
   });
 
-  const [type, setType] = React.useState("");
-
   const [animalName, setAnimalName] = useState("");
   const [species, setSpecies] = useState("");
   const [weight, setWeight] = useState("");
   const [tattoo, setTattoo] = useState("");
   const [breed, setBreed] = useState("");
   const [sex, setSex] = useState("");
-
-
-  const handleChange = (prop) => (event) => {
-    setValues({ ...values, [prop]: event.target.value });
-    console.log(values);
-  };
 
   const handleAnimalNameInput = (event) => {
     setAnimalName(event.target.value);
@@ -62,7 +54,6 @@ export default function NewUserForm(props) {
     event.preventDefault();
 
     props.onNewAnimalSubmit({ species, weight, tattoo, breed, sex, animalName });
-    // console.log(username, email, password, dateValue, type);
   }
 
   return (
@@ -78,7 +69,7 @@ export default function NewUserForm(props) {
         <Grid
           sx={{ p: 4 }}
           item
-          style={{ marginRight: "auto" }} //, border: "1px solid gray" }}
+          style={{ marginRight: "auto" }}
         >
           <Stack spacing={3}>
             <Grid item>

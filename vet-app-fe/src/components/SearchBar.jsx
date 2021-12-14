@@ -6,7 +6,6 @@ import { useHistory } from "react-router-dom";
 
 export default function SearchBar() {
   const [animals, setAnimals] = useState([]);
-  const [selection, setSelection] = useState("");
   const history = useHistory();
 
   var animalsTest = animals;
@@ -15,7 +14,6 @@ export default function SearchBar() {
     fetch(SERVER_URL + "animals")
       .then((response) => response.json())
       .then((data) => {
-        // animals: responseData
         const animalData = data.map((a) => {
           return {
             animalName: a.animalName,
@@ -28,8 +26,7 @@ export default function SearchBar() {
   }, []);
 
   const handleSelection = (event, value) => {
-    // setSelection(event.target.value);
-    console.log(value);
+      console.log(value);
 
     if (value === null) {
       console.log(value);
@@ -48,8 +45,6 @@ export default function SearchBar() {
       sx={{ width: 300 }}
       forcePopupIcon={true}
       noOptionsText={"No animal found"}
-      // inputValue={""}
-      // onChange={(e, value) => console.log(e.target, value.animalId)}
       onChange={handleSelection}
       renderInput={(params) => (
         <TextField

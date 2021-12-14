@@ -5,11 +5,9 @@ import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
-import { useDateRangeValidation } from "@mui/lab/internal/pickers/hooks/useValidation";
 import axios from "axios";
 import { SERVER_URL } from "../constants.js";
 import authToken from "../authentication/DataService";
-
 
 export default function NewCommentButton(props) {
   const [open, setOpen] = React.useState(false);
@@ -22,7 +20,6 @@ export default function NewCommentButton(props) {
   const handleTheDescriptionInput = (event) => {
     setTheDescription(event.target.value);
   };
-
 
   const handleAdd = (event) => {
     event.preventDefault();
@@ -51,8 +48,6 @@ export default function NewCommentButton(props) {
   const handleClose = () => {
     setOpen(false);
   };
-
-
 
   return (
     <div>

@@ -26,7 +26,6 @@ const handleButtonClick = () =>{
   setId(props.id)
 }
 
-
   return (
     <Box sx={{ minWidth: 275 }}>
       <Card variant="outlined">
