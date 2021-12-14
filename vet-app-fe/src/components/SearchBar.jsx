@@ -3,6 +3,7 @@ import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 import { SERVER_URL } from "../constants.js";
 import { useHistory } from "react-router-dom";
+import authToken from "../authentication/DataService";
 
 export default function SearchBar() {
   const [animals, setAnimals] = useState([]);
@@ -11,7 +12,7 @@ export default function SearchBar() {
   var animalsTest = animals;
 
   useEffect(() => {
-    fetch(SERVER_URL + "animals")
+    fetch(SERVER_URL + "animals", {headers: authToken()})
       .then((response) => response.json())
       .then((data) => {
         const animalData = data.map((a) => {

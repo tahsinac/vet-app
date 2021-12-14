@@ -16,7 +16,6 @@ public class Role {
     private Integer id;
 
     @Enumerated(EnumType.STRING)
-//    @Enumerated()
     @Column(columnDefinition = "ENUM('ROLE_USER',\n" +
             "    'ROLE_ADMIN',\n" +
             "    'ROLE_TEACHING_TECHNICIAN',\n" +

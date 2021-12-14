@@ -22,15 +22,15 @@ public class AnimalPhotoController {
     AnimalPhotoService animalPhotoService;
 
     @GetMapping("")
-//    @PreAuthorize("hasRole('USER') or hasRole('TEACHING_TECHNICIAN') or hasRole('STUDENT')" +
-//            " or hasRole('ADMIN') or hasRole('ANIMAL_HEALTH_TECHNICIAN') or hasRole('ANIMAL_CARE_ATTENDANT')")
+    @PreAuthorize("hasRole('USER') or hasRole('TEACHING_TECHNICIAN') or hasRole('STUDENT')" +
+            " or hasRole('ADMIN') or hasRole('ANIMAL_HEALTH_TECHNICIAN') or hasRole('ANIMAL_CARE_ATTENDANT')")
     public List<AnimalPhoto> getAnimalPhoto(){
         return animalPhotoService.listAllAnimalPhoto();
     }
 
     @GetMapping("/{id}")
-//    @PreAuthorize("hasRole('USER') or hasRole('TEACHING_TECHNICIAN') or hasRole('STUDENT')" +
-//            " or hasRole('ADMIN') or hasRole('ANIMAL_HEALTH_TECHNICIAN') or hasRole('ANIMAL_CARE_ATTENDANT')")
+    @PreAuthorize("hasRole('USER') or hasRole('TEACHING_TECHNICIAN') or hasRole('STUDENT')" +
+            " or hasRole('ADMIN') or hasRole('ANIMAL_HEALTH_TECHNICIAN') or hasRole('ANIMAL_CARE_ATTENDANT')")
     public ResponseEntity<AnimalPhoto> getAnimalPhotoById(@PathVariable Integer id){
         try {
             AnimalPhoto animalPhoto = animalPhotoService.getAnimalPhoto(id);
@@ -41,7 +41,7 @@ public class AnimalPhotoController {
     }
 
     @PostMapping("")
-//    @PreAuthorize("hasRole('ANIMAL_CARE_ATTENDANT')")
+    @PreAuthorize("hasRole('ANIMAL_CARE_ATTENDANT')")
     public ResponseEntity<?> addAnimalPhoto(@RequestBody AnimalPhoto animalPhoto){
         try {
             animalPhotoService.saveAnimalPhoto(animalPhoto);
@@ -52,7 +52,7 @@ public class AnimalPhotoController {
     }
 
     @PutMapping("/{id}")
-//    @PreAuthorize("hasRole('ANIMAL_CARE_ATTENDANT')")
+    @PreAuthorize("hasRole('ANIMAL_CARE_ATTENDANT')")
     public ResponseEntity<?> updateAnimalPhoto(@RequestBody AnimalPhoto animalPhoto, @PathVariable Integer id){
         try{
             AnimalPhoto existingAnimalPhoto = animalPhotoService.getAnimalPhoto(id);
@@ -65,7 +65,7 @@ public class AnimalPhotoController {
     }
 
     @DeleteMapping("/{id}")
-//    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> removePhoto(@PathVariable Integer id){
         try{
             animalPhotoService.deleteAnimalPhoto(id);

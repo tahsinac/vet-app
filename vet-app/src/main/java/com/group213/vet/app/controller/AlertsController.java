@@ -22,13 +22,13 @@ public class AlertsController {
     AlertsService alertsService;
 
     @GetMapping("")
-//    @PreAuthorize("hasRole('ANIMAL_HEALTH_TECHNICIAN')")
+    @PreAuthorize("hasRole('ANIMAL_HEALTH_TECHNICIAN')")
     public List<Alerts> getAlerts(){
         return alertsService.listAllAlerts();
     }
 
     @GetMapping("/{alertId}")
-//    @PreAuthorize("hasRole('ANIMAL_HEALTH_TECHNICIAN')")
+    @PreAuthorize("hasRole('ANIMAL_HEALTH_TECHNICIAN')")
     public ResponseEntity<Alerts> getAlertsById(@PathVariable Integer alertId){
         try {
             Alerts alerts = alertsService.getAlertsById(alertId);
@@ -39,7 +39,7 @@ public class AlertsController {
     }
 
     @PutMapping("/{alertId}")
-//    @PreAuthorize("hasRole('ANIMAL_HEALTH_TECHNICIAN')")
+    @PreAuthorize("hasRole('ANIMAL_HEALTH_TECHNICIAN')")
     public ResponseEntity<?> updateAlert(@RequestBody Alerts alert, @PathVariable Integer alertId) {
         try {
             Alerts alerts = alertsService.getAlertsById(alertId);
@@ -52,7 +52,7 @@ public class AlertsController {
     }
 
     @PostMapping("")
-//    @PreAuthorize("hasRole('ANIMAL_HEALTH_TECHNICIAN')")
+    @PreAuthorize("hasRole('ANIMAL_HEALTH_TECHNICIAN')")
     public ResponseEntity<?> addAlert(@RequestBody Alerts alerts){
         try {
             alertsService.saveAlert(alerts);
@@ -63,7 +63,7 @@ public class AlertsController {
     }
 
     @DeleteMapping("/{alertId}")
-//    @PreAuthorize("hasRole('ANIMAL_HEALTH_TECHNICIAN')")
+    @PreAuthorize("hasRole('ANIMAL_HEALTH_TECHNICIAN')")
     public ResponseEntity<?> removeAlert(@PathVariable Integer alertId){
         try{
            alertsService.deleteAlert(alertId);

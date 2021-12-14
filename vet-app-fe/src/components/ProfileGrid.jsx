@@ -4,6 +4,8 @@ import ProfileCard from "./ProfileCard";
 import Grid from "@mui/material/Grid";
 import Container from "@mui/material/Container";
 import { useHistory } from "react-router-dom";
+import authToken from "../authentication/DataService";
+
 
 
 export default function ProfileGrid() {
@@ -14,7 +16,7 @@ export default function ProfileGrid() {
   }
 
   useEffect(() => {
-    fetch(SERVER_URL + "animals")
+    fetch(SERVER_URL + "animals", {headers: authToken()})
       .then((response) => response.json())
       .then((data) => {
         const animalData = data.map((a) => {

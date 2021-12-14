@@ -22,13 +22,13 @@ public class AnimalStatusController {
     AnimalStatusService animalStatusService;
 
     @GetMapping("")
-//    @PreAuthorize("hasRole('ADMIN') or hasRole('ANIMAL_HEALTH_TECHNICIAN') or hasRole('ANIMAL_CARE_ATTENDANT')")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('ANIMAL_HEALTH_TECHNICIAN') or hasRole('ANIMAL_CARE_ATTENDANT')")
     public List<AnimalStatus> getAnimalStatus(){
         return animalStatusService.listAllAnimalStatus();
     }
 
     @GetMapping("/{id}")
-//    @PreAuthorize("hasRole('ADMIN') or hasRole('ANIMAL_HEALTH_TECHNICIAN') or hasRole('ANIMAL_CARE_ATTENDANT')")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('ANIMAL_HEALTH_TECHNICIAN') or hasRole('ANIMAL_CARE_ATTENDANT')")
     public ResponseEntity<AnimalStatus> getAnimalStatusById(@PathVariable Integer id){
         try {
             AnimalStatus animalStatus = animalStatusService.getAnimalStatus(id);
@@ -39,7 +39,7 @@ public class AnimalStatusController {
     }
 
     @PostMapping("")
-//    @PreAuthorize("hasRole('ANIMAL_HEALTH_TECHNICIAN') or hasRole('ANIMAL_CARE_ATTENDANT')")
+    @PreAuthorize("hasRole('ANIMAL_HEALTH_TECHNICIAN') or hasRole('ANIMAL_CARE_ATTENDANT')")
     public ResponseEntity<?> addAnimalStatus(@RequestBody AnimalStatus animalStatus){
         try {
             animalStatusService.saveAnimalStatus(animalStatus);
@@ -50,7 +50,7 @@ public class AnimalStatusController {
     }
 
     @PatchMapping("/{id}")
-//    @PreAuthorize("hasRole('ANIMAL_HEALTH_TECHNICIAN') or hasRole('ANIMAL_CARE_ATTENDANT')")
+    @PreAuthorize("hasRole('ANIMAL_HEALTH_TECHNICIAN') or hasRole('ANIMAL_CARE_ATTENDANT')")
     public ResponseEntity<?> updateAnimalStatus(@RequestBody AnimalStatus animalStatus, @PathVariable Integer id){
         try{
             AnimalStatus existingAnimalStatus = animalStatusService.getAnimalStatus(id);
@@ -58,7 +58,6 @@ public class AnimalStatusController {
             existingAnimalStatus.setLocation(location);
             String theStatus = animalStatus.getTheStatus();
             existingAnimalStatus.setTheStatus(theStatus);
-//            animalStatus.setAnimalId(id);
             animalStatusService.saveAnimalStatus(existingAnimalStatus);
             return new ResponseEntity<>(HttpStatus.OK);
         }catch (NoSuchElementException e){

@@ -6,7 +6,6 @@ export default function Login() {
   const history = useHistory();
 
   const addLoginHandler = (loginData) => {
-    // console.log(loginData);
 
     auth.signin(loginData.username, loginData.password).then(() => {
       const isAuthenticated = localStorage.getItem("isAuthenticated");

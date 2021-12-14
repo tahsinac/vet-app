@@ -10,6 +10,8 @@ import UpdateStatusButton from "./UpdateStatusButton";
 import RequestTreatmentButton from "./RequestTreatmentButton.jsx";
 import RequestInstructionButton from "./RequestInstructionButton.jsx";
 import auth from "../authentication/AuthenticationService";
+import authToken from "../authentication/DataService";
+
 
 export default function AnimalProfile() {
   const [animal, setAnimal] = useState([]);
@@ -40,7 +42,7 @@ export default function AnimalProfile() {
       tempID = location.state.id;
     }
 
-    fetch(SERVER_URL + "animals/" + tempID)
+    fetch(SERVER_URL + "animals/" + tempID, {headers: authToken()})
       .then((response) => response.json())
       .then((data) => {
         hasPhoto(data)
