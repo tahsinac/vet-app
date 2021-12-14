@@ -6,41 +6,29 @@ import Avatar from "@mui/material/Avatar";
 import Combined from "./Combined";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
+import UpdateStatusButton from "./UpdateStatusButton"; 
 import RequestTreatmentButton from "./RequestTreatmentButton.jsx";
 import RequestInstructionButton from "./RequestInstructionButton.jsx";
 import auth from "../authentication/AuthenticationService";
 
-export default function AnimalProfile(props) {
+export default function AnimalProfile() {
   const [animal, setAnimal] = useState([]);
   const location = useLocation();
+  const [status, setStatus] = useState([]);
+
+  const [currentUser, setCurrentUser] = useState(undefined);
+  const [showStatus, setShowStatus] = useState(false);
+  const [showUpdateButton, setUpdateButton] = useState(false);
   const [displayInstructionButton, setDisplayInstructionButton] = useState(false);
   const [displayTreatmentButton, setDisplayTreatmentButton] = useState(false);
-  const [currentUser, setCurrentUser] = useState(undefined);
 
   function hasPhoto(data) {
     return data.animalPhoto.length === 0 ? false : true;
   }
 
-    useEffect(() => {
-        const user = auth.getCurrentUser();
-        let imagePath = "";
-        let tempID;
-    
-        if (user) {
-          setCurrentUser(user);
-          if (
-            user.roles.includes("ROLE_TEACHING_TECHNICIAN") === true
-          ) {
-            setDisplayInstructionButton(true);
-          }
-          if (
-            user.roles.includes("ROLE_ANIMAL_CARE_ATTENDANT") === true
-          ) {
-            setDisplayTreatmentButton(true);
-          }
-        }
-
-
+  useEffect(() => {
+    let imagePath = "";
+    let tempID;
 
     if (location.state.id === undefined) {
       tempID = location.state;
@@ -53,20 +41,47 @@ export default function AnimalProfile(props) {
       .then((response) => response.json())
       // .then((tempData) => console.log(tempData))
       .then((data) => {
-        console.log(data);
         hasPhoto(data)
           ? (imagePath = `${data.animalPhoto[0].theFile}`)
           : (imagePath = `animals.jpg`);
         localStorage.setItem(
           `animalPhoto`,
           imagePath
-          // `animalPhoto`,
-          // JSON.stringify(data.animalPhoto[0].theFile)
         );
         setAnimal(data);
-        console.log(data);
+        setStatus(data.animalStatus)
       })
       .catch((err) => console.error(err));
+  }, []);
+
+  useEffect(() => {
+    const user = auth.getCurrentUser();
+    if (user) {
+      setCurrentUser(user);
+      if (
+        user.roles.includes("ROLE_ADMIN") === true ||
+        user.roles.includes("ROLE_ANIMAL_HEALTH_TECHNICIAN") === true ||
+        user.roles.includes("ROLE_ANIMAL_CARE_ATTENDANT") === true
+      ) {
+        setShowStatus(true);
+      }
+      if (
+        user.roles.includes("ROLE_ANIMAL_HEALTH_TECHNICIAN") === true ||
+        user.roles.includes("ROLE_ANIMAL_CARE_ATTENDANT") ===true
+      ) {
+        setUpdateButton(true);
+      }
+      if (
+        user.roles.includes("ROLE_TEACHING_TECHNICIAN") === true
+      ) {
+        setDisplayInstructionButton(true);
+      }
+      if (
+        user.roles.includes("ROLE_ANIMAL_CARE_ATTENDANT") === true
+      ) {
+        setDisplayTreatmentButton(true);
+      }
+    }
   }, []);
 
   return (
@@ -92,19 +107,32 @@ export default function AnimalProfile(props) {
             sx={{ width: 90, height: 90 }}
           />
           <Stack spacing={0.1}>
-            <Typography variant="h5" component="div">
+            <Typography variant="h4" component="div">
               {animal.animalName}
             </Typography>
-            <Typography variant="subtitle2" component="div">
-              {`Status: ${animal.theStatus}`}
-            </Typography>
+            {(showStatus &&
+              <Stack spacing={0.05}>
+              {!status ? 
+                (<Typography variant="subtitle2" component="div">
+                  Status: N/A 
+                </Typography>) :
+                (<Typography variant="subtitle2" component="div">
+                {`Status: ${status.theStatus}`} 
+              </Typography>)
+              }
+              {!status ? 
+                (<Typography variant="subtitle2" component="div">
+                  Location: N/A 
+                </Typography>) :
+                (<Typography variant="subtitle2" component="div">
+                {`Location: ${status.location}`} 
+              </Typography>)
+              }
+            </Stack>)}
           </Stack>
         </Stack>
-
         <Box sx={{ display: "flex", justifyContent: "flex-end", p: 1, m: 1 }}>
-          <Button variant="contained" color="secondary" sx={{ m: 4 }}>
-            Update Status
-          </Button>
+          {showUpdateButton && (<UpdateStatusButton animal={animal}/>)}
           {displayTreatmentButton && (<RequestTreatmentButton animal = {animal}/>)}
           {displayInstructionButton && (<RequestInstructionButton animal = {animal}/>)}
         </Box>
