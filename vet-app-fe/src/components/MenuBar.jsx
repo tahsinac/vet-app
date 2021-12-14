@@ -13,6 +13,7 @@ import AccountCircle from "@mui/icons-material/AccountCircle";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import Paper from "@mui/material/Paper";
 import auth from "../authentication/AuthenticationService";
+import SearchBar from "./SearchBar";
 
 import { Link } from "react-router-dom"; //added
 import { NavLink } from "react-router-dom"; //added
@@ -36,13 +37,14 @@ const Search = styled("div")(({ theme }) => ({
 }));
 
 const SearchIconWrapper = styled("div")(({ theme }) => ({
-  padding: theme.spacing(0, 2),
+  padding: theme.spacing(0, 41),
   height: "100%",
   position: "absolute",
   pointerEvents: "none",
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
+  color: "secondary"
 }));
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
@@ -207,7 +209,7 @@ export default function PrimarySearchAppBar() {
           aria-label="account of current user"
           aria-controls="primary-search-account-menu"
           aria-haspopup="true"
-          color="inherit"
+          color="secondary"
         >
           <AccountCircle />
         </IconButton>
@@ -217,22 +219,23 @@ export default function PrimarySearchAppBar() {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
+      <AppBar position="static" color="transparent">
         <Toolbar>
           <NavLink to="/welcome" activeClassName={classes.active}>
             <Paper variant="outlined">
               <img height="67" width="230" src="./images/vetlogo.png" />
             </Paper>
           </NavLink>
-
+          {/* <SearchBar/> */}
           <Search>
             <SearchIconWrapper>
               <SearchIcon />
             </SearchIconWrapper>
-            <StyledInputBase
+            <SearchBar/>
+            {/* <StyledInputBase
               placeholder="Search…"
               inputProps={{ "aria-label": "search" }}
-            />
+            /> */}
           </Search>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
