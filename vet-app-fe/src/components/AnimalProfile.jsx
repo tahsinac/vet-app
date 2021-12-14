@@ -8,18 +8,39 @@ import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import RequestTreatmentButton from "./RequestTreatmentButton.jsx";
 import RequestInstructionButton from "./RequestInstructionButton.jsx";
+import auth from "../authentication/AuthenticationService";
 
 export default function AnimalProfile(props) {
   const [animal, setAnimal] = useState([]);
   const location = useLocation();
+  const [displayInstructionButton, setDisplayInstructionButton] = useState(false);
+  const [displayTreatmentButton, setDisplayTreatmentButton] = useState(false);
+  const [currentUser, setCurrentUser] = useState(undefined);
 
   function hasPhoto(data) {
     return data.animalPhoto.length === 0 ? false : true;
   }
 
-  useEffect(() => {
-    let imagePath = "";
-    let tempID;
+    useEffect(() => {
+        const user = auth.getCurrentUser();
+        let imagePath = "";
+        let tempID;
+    
+        if (user) {
+          setCurrentUser(user);
+          if (
+            user.roles.includes("ROLE_TEACHING_TECHNICIAN") === true
+          ) {
+            setDisplayInstructionButton(true);
+          }
+          if (
+            user.roles.includes("ROLE_ANIMAL_CARE_ATTENDANT") === true
+          ) {
+            setDisplayTreatmentButton(true);
+          }
+        }
+
+
 
     if (location.state.id === undefined) {
       tempID = location.state;
@@ -84,8 +105,8 @@ export default function AnimalProfile(props) {
           <Button variant="contained" color="secondary" sx={{ m: 4 }}>
             Update Status
           </Button>
-          <RequestTreatmentButton animal = {animal}/>
-          <RequestInstructionButton animal = {animal}/>
+          {displayTreatmentButton && (<RequestTreatmentButton animal = {animal}/>)}
+          {displayInstructionButton && (<RequestInstructionButton animal = {animal}/>)}
         </Box>
       </Box>
       <Combined animal={animal} />

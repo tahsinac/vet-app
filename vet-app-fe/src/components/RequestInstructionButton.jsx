@@ -1,16 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
-
 import axios from "axios";
 import { SERVER_URL } from "../constants.js";
 import authToken from "../authentication/DataService";
 import DialogContentText from "@mui/material/DialogContentText";
 
 export default function RequestInstructionButton(props) {
+
   const [open, setOpen] = React.useState(false);
 
   const handleClose = () => {
