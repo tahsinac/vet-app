@@ -6,7 +6,7 @@ DROP TABLE IF EXISTS Users;
 CREATE TABLE Users (
     id                  integer AUTO_INCREMENT not null,
     username            VARCHAR(30),
-    active        		boolean,
+    active                boolean,
     email               VARCHAR(30),
     activationDate      VARCHAR(30),
     password            VARCHAR(200) not null,
