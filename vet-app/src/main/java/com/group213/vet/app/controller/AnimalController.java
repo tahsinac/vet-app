@@ -63,22 +63,6 @@ public class AnimalController {
         }
     }
 
-        @PatchMapping("/{id}")
-//    @PreAuthorize("hasRole('ADMIN') or hasRole('ANIMAL_CARE_ATTENDANT') or hasRole('TEACHING_TECHNICIAN')")
-    public ResponseEntity<?> updateAnimal(@RequestBody Animal animal, @PathVariable Integer id){
-        try{
-            Animal existingAnimal = animalService.getAnimal(id);
-            String requestedBy = animal.getRequestedBy();
-//            animal.setAnimalId(id);
-            existingAnimal.setRequestedBy(requestedBy);
-            //existingAnimal.setRequestedBy("test-request");
-            animalService.saveAnimal(existingAnimal);
-            return new ResponseEntity<>(HttpStatus.OK);
-        }catch (NoSuchElementException e){
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
-    }
-
     @DeleteMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     public void deleteAnimal(@PathVariable Integer id){
