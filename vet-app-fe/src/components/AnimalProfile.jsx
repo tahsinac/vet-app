@@ -6,10 +6,12 @@ import Avatar from "@mui/material/Avatar";
 import Combined from "./Combined";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
+import UpdateStatusButton from "./UpdateStatusButton"; 
 
 export default function AnimalProfile() {
   const [animal, setAnimal] = useState([]);
   const location = useLocation();
+  const [status, setStatus] = useState([]);
 
   function hasPhoto(data) {
     return data.animalPhoto.length === 0 ? false : true;
@@ -30,21 +32,24 @@ export default function AnimalProfile() {
       .then((response) => response.json())
       // .then((tempData) => console.log(tempData))
       .then((data) => {
-        console.log(data);
         hasPhoto(data)
           ? (imagePath = `${data.animalPhoto[0].theFile}`)
           : (imagePath = `animals.jpg`);
         localStorage.setItem(
           `animalPhoto`,
           imagePath
-          // `animalPhoto`,
-          // JSON.stringify(data.animalPhoto[0].theFile)
         );
         setAnimal(data);
-        console.log(data);
+        // setStatus(data.animalStatus)
+        if (data.hasOwnProperty("animalStatus")){
+          setStatus(data.animalStatus)
+        }
+        
       })
       .catch((err) => console.error(err));
   }, []);
+
+  console.log(animal.animalStatus);
 
   return (
     <div>
@@ -69,19 +74,29 @@ export default function AnimalProfile() {
             sx={{ width: 90, height: 90 }}
           />
           <Stack spacing={0.1}>
-            <Typography variant="h5" component="div">
+            <Typography variant="h4" component="div">
               {animal.animalName}
             </Typography>
-            <Typography variant="subtitle2" component="div">
-              {`Status: ${animal.theStatus}`}
-            </Typography>
+            {!status ? 
+              (<Typography variant="subtitle2" component="div">
+                Status: N/A 
+              </Typography>) :
+              (<Typography variant="subtitle2" component="div">
+              {`Status: ${status.theStatus}`} 
+            </Typography>)
+            }
+            {!status ? 
+              (<Typography variant="subtitle2" component="div">
+                Location: N/A 
+              </Typography>) :
+              (<Typography variant="subtitle2" component="div">
+              {`Status: ${status.location}`} 
+            </Typography>)
+            }
           </Stack>
         </Stack>
-
         <Box sx={{ display: "flex", justifyContent: "flex-end", p: 1, m: 1 }}>
-          <Button variant="contained" color="secondary" sx={{ m: 4 }}>
-            Update Status
-          </Button>
+          <UpdateStatusButton animal={animal}/>
           <Button variant="contained" color="secondary" sx={{ m: 4 }}>
             Request Treatment
           </Button>
