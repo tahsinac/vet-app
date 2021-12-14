@@ -74,6 +74,7 @@ export default function PrimarySearchAppBar() {
   const [showRequests, setShowRequests] = useState(false);
   const [showLogin, setShowLogin] = useState(true);
   const [showLogout, setShowLogout] = useState(false);
+  const [showSearchBar, setShowSearchBar] = useState(false);
 
   useEffect(() => {
     const user = auth.getCurrentUser();
@@ -105,6 +106,16 @@ export default function PrimarySearchAppBar() {
 
       if (user.roles.includes("") === false) {
         setShowLogout(true);
+      }
+
+      if (
+        user.roles.includes("ROLE_ADMIN") === true ||
+        user.roles.includes("ROLE_ANIMAL_HEALTH_TECHNICIAN") === true ||
+        user.roles.includes("ROLE_TEACHING_TECHNICIAN") === true ||
+        user.roles.includes("ROLE_STUDENT") === true ||
+        user.roles.includes("ROLE_ANIMAL_CARE_ATTENDANT") === true
+      ) {
+        setShowSearchBar(true);
       }
     }
   }, []);
@@ -226,13 +237,14 @@ export default function PrimarySearchAppBar() {
               <img height="67" width="225" src="./images/vetlogo.png" />
             </Paper>
           </NavLink>
-
-          <Search>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <SearchBar />
-          </Search>
+          {showSearchBar && (
+            <Search>
+              <SearchIconWrapper>
+                <SearchIcon />
+              </SearchIconWrapper>
+              <SearchBar />
+            </Search>
+          )}
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
             <IconButton

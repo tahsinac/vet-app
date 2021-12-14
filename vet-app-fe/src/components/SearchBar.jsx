@@ -28,7 +28,6 @@ export default function SearchBar() {
   }, []);
 
   const handleSelection = (event, value) => {
-    // setSelection(event.target.value);
     console.log(value);
 
     if (value === null) {

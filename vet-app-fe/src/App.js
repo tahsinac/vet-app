@@ -20,7 +20,6 @@ function App() {
   return (
     <div>
       <MenuBar />
-
       <Switch>
         <main>
           <Route path="/" exact>
