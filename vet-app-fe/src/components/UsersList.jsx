@@ -5,6 +5,7 @@ import { DataGrid } from "@mui/x-data-grid";
 import { Link } from "react-router-dom"; //added
 import authToken from "../authentication/DataService";
 import AlertDialog from "./UserDeleteDialog";
+import auth from "../authentication/AuthenticationService";
 
 export default function UsersList() {
   const [colDefs] = useState([
@@ -19,29 +20,110 @@ export default function UsersList() {
   const [rowData, setRowData] = useState([]);
   const [data, setData] = useState("");
   const [selectedUser, setSelectedUser] = useState([]);
+  const [filteredData, setFilteredData] = useState([null]);
 
   var selectedRowData = 0;
 
   useEffect(() => {
+    const user = auth.getCurrentUser();
+
     (async () => {
       fetch(SERVER_URL + "users/", { headers: authToken() })
         .then((response) => response.json())
         .then((rowData) => {
-          const userData = rowData.map((u) => {
-            return {
-              id: u.id,
-              username: u.username,
-              // theType: u.theType,
-              email: u.email,
-              activationDate: u.activationDate,
-              active: u.active,
-            };
-          });
+          let userData;
+          if (user.roles.includes("ROLE_TEACHING_TECHNICIAN")) {
+            const test = rowData.filter(
+              (u) => u.roles[0].name === "ROLE_STUDENT"
+            );
+
+            console.log(test);
+            userData = test.map((u) => {
+              // setFilteredData(u.roles[0]);
+              // setFilteredData((state) => {
+              //   return state;
+              // });
+              console.log(u.roles[0].name);
+              // console.log(JSON.stringify(u.roles[0]["name"]));
+              // console.log(u);
+              return {
+                id: u.id,
+                username: u.username,
+                // theType: u.theType,
+                email: u.email,
+                activationDate: u.activationDate,
+                active: u.active,
+              };
+            });
+          } else {
+            userData = rowData.map((u) => {
+              return {
+                id: u.id,
+                username: u.username,
+                email: u.email,
+                activationDate: u.activationDate,
+                active: u.active,
+              };
+            });
+          }
           setRowData(userData);
         })
         .catch((err) => console.error(err));
     })();
   }, [selectedUser]);
+
+  // if (user.roles.includes("ROLE_TEACHING_TECHNICIAN")) {
+  //   console.log(u.roles[0]);
+  //   if (u.roles[0] === "ROLE_STUDENT") {
+
+  // useEffect(() => {
+  //   const user = auth.getCurrentUser();
+
+  //   (async () => {
+  //     fetch(SERVER_URL + "users/", { headers: authToken() })
+  //       .then((response) => response.json())
+  //       .then((rowData) => {
+  //         const userData = rowData.map((u) => {
+  //           if (user.roles.includes("ROLE_TEACHING_TECHNICIAN")) {
+  //             console.log(u.roles[0]);
+  //             if (u.roles[0] === "ROLE_STUDENT") {
+  //               return {
+  //                 id: u.id,
+  //                 username: u.username,
+  //                 // theType: u.theType,
+  //                 email: u.email,
+  //                 activationDate: u.activationDate,
+
+  //                 active: u.active ? "Active" : "Blocked",
+  //               };
+  //             } else {
+  //               return {
+  //                 id: u.id,
+  //                 username: "Access Denied",
+  //                 // theType: u.theType,
+  //                 email: "Access Denied",
+  //                 activationDate: "Access Denied",
+
+  //                 active: "Access Denied",
+  //               };
+  //             }
+  //           } else {
+  //             return {
+  //               id: u.id,
+  //               username: u.username,
+  //               // theType: u.theType,
+  //               email: u.email,
+  //               activationDate: u.activationDate,
+
+  //               active: u.active ? "Active" : "Blocked",
+  //             };
+  //           }
+  //         });
+  //         setRowData(userData);
+  //       })
+  //       .catch((err) => console.error(err));
+  //   })();
+  // }, [selectedUser]);
 
   return (
     <div style={{ height: 700, width: "100%" }}>

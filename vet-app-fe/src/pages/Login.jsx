@@ -14,7 +14,7 @@ export default function Login() {
         history.push("/welcome");
         window.location.reload();
       } else {
-        window.alert("Sorry you are not logged in or you are blocked!");
+        window.alert("Sorry incorrect log in credentials or you are blocked!");
       }
     });
   };

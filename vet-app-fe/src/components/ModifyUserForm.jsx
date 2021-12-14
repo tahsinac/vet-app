@@ -83,11 +83,11 @@ export default function ModifyUserForm(props) {
           style={{ marginRight: "auto" }} //, border: "1px solid gray" }}
         >
           <Stack spacing={3}>
-            <Grid item>
-              <Typography variant="h3" color="primary">
-                Modify User
-              </Typography>
-            </Grid>
+            {/* <Grid item> */}
+            <Typography variant="h3" color="primary">
+              Modify User
+            </Typography>
+            {/* </Grid> */}
 
             <FormControl sx={{ m: 1, width: "40ch" }} variant="outlined">
               <InputLabel htmlFor="outlined-adornment-username">
