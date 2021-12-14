@@ -63,15 +63,15 @@ export default function LoginForm(props) {
   // };
 
   return (
-    <Grid>
-      <div
-        style={{
-          position: "absolute",
-          left: "50%",
-          top: "50%",
-          transform: "translate(-50%, -50%)",
-        }}
-      >
+    <div
+      style={{
+        position: "absolute",
+        left: "50%",
+        top: "50%",
+        transform: "translate(-50%, -50%)",
+      }}
+    >
+      <Grid>
         <Paper elevation={10} style={paperStyle}>
           <Grid align="center">
             <Avatar style={avatarStyle}>
@@ -114,7 +114,7 @@ export default function LoginForm(props) {
             <Link href="#">Forgot password ?</Link>
           </Typography>
         </Paper>
-      </div>
-    </Grid>
+      </Grid>
+    </div>
   );
 }

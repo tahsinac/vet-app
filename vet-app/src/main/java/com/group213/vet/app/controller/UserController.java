@@ -56,7 +56,7 @@ public class UserController {
         public ResponseEntity<?> updateUser(@RequestBody User user, @PathVariable Integer id){
             try{
                 User existingUser = userService.getUser(id);
-                
+
                 boolean status = user.isActive();
                 existingUser.setActive(status);
                 String updatedPassword;

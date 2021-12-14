@@ -20,12 +20,15 @@ export default function AnimalProfile() {
     let tempID;
 
     if (location.state.id === undefined) {
-      tempID = location.state;
+      if (location.state.id === undefined) {
+        tempID = location.state.animalId;
+      } else {
+        tempID = location.state;
+      }
     } else {
       tempID = location.state.id;
     }
 
-    console.log(location.state);
     fetch(SERVER_URL + "animals/" + tempID)
       .then((response) => response.json())
       // .then((tempData) => console.log(tempData))

@@ -25,11 +25,10 @@ export default function AnimalList() {
     await Axios.get(SERVER_URL + "animals/" + selectedAnimalId)
       .then((response) => {
         setselectedAnimal(response.data);
-        selectedAnimal.requestedBy = "Teaching Technician";
         selectedAnimal.requestStatus = "New";
         selectedAnimal.approvalStatus = "Pending";
         const config = { headers: { "Content-Type": "application/json" } };
-        Axios.put(
+        Axios.patch(
           SERVER_URL + "animals/" + selectedAnimalId,
           selectedAnimal,
           config
@@ -51,7 +50,7 @@ export default function AnimalList() {
           selectedAnimal.requestStatus = "Accepted by Admin";
           selectedAnimal.approvalStatus = "Pending Final Approval";
           const config = { headers: { "Content-Type": "application/json" } };
-          Axios.put(
+          Axios.patch(
             SERVER_URL + "animals/" + selectedAnimalId,
             selectedAnimal,
             config
@@ -78,7 +77,7 @@ export default function AnimalList() {
           selectedAnimal.requestStatus = "Approved";
           selectedAnimal.approvalStatus = "Approved";
           const config = { headers: { "Content-Type": "application/json" } };
-          Axios.put(
+          Axios.patch(
             SERVER_URL + "animals/" + selectedAnimalId,
             selectedAnimal,
             config
@@ -105,7 +104,7 @@ export default function AnimalList() {
           selectedAnimal.requestStatus = "None";
           selectedAnimal.approvalStatus = "None";
           const config = { headers: { "Content-Type": "application/json" } };
-          Axios.put(
+          Axios.patch(
             SERVER_URL + "animals/" + selectedAnimalId,
             selectedAnimal,
             config
@@ -132,7 +131,7 @@ export default function AnimalList() {
           selectedAnimal.requestStatus = "None";
           selectedAnimal.approvalStatus = "None";
           const config = { headers: { "Content-Type": "application/json" } };
-          Axios.put(
+          Axios.patch(
             SERVER_URL + "animals/" + selectedAnimalId,
             selectedAnimal,
             config

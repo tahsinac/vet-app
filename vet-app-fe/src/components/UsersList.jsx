@@ -10,17 +10,18 @@ import auth from "../authentication/AuthenticationService";
 export default function UsersList() {
   const [colDefs] = useState([
     { field: "id", headerName: "User ID", width: 200 },
-    { field: "username", headerName: "Username", width: 350 },
+    { field: "username", headerName: "Username", width: 300 },
     // { field: "theType", headerName: "Type", width: 350 },
-    { field: "email", headerName: "Email", width: 350 },
-    { field: "activationDate", headerName: "Activation Date", width: 350 },
-    { field: "active", headerName: "Status", width: 350 },
+    { field: "email", headerName: "Email", width: 300 },
+    // { field: "activationDate", headerName: "Activation Date", width: 275 },
+    { field: "active", headerName: "Status", width: 300 },
+    { field: "role", headerName: "Role", width: 300 },
   ]);
 
   const [rowData, setRowData] = useState([]);
   const [data, setData] = useState("");
   const [selectedUser, setSelectedUser] = useState([]);
-  const [filteredData, setFilteredData] = useState([null]);
+  // const [filteredData, setFilteredData] = useState([null]);
 
   var selectedRowData = 0;
 
@@ -33,26 +34,18 @@ export default function UsersList() {
         .then((rowData) => {
           let userData;
           if (user.roles.includes("ROLE_TEACHING_TECHNICIAN")) {
-            const test = rowData.filter(
+            const filteredData = rowData.filter(
               (u) => u.roles[0].name === "ROLE_STUDENT"
             );
-
-            console.log(test);
-            userData = test.map((u) => {
-              // setFilteredData(u.roles[0]);
-              // setFilteredData((state) => {
-              //   return state;
-              // });
+            userData = filteredData.map((u) => {
               console.log(u.roles[0].name);
-              // console.log(JSON.stringify(u.roles[0]["name"]));
-              // console.log(u);
               return {
                 id: u.id,
                 username: u.username,
                 // theType: u.theType,
                 email: u.email,
-                activationDate: u.activationDate,
-                active: u.active,
+                active: u.active ? "Active" : "Blocked",
+                role: u.roles[0].name,
               };
             });
           } else {
@@ -61,8 +54,8 @@ export default function UsersList() {
                 id: u.id,
                 username: u.username,
                 email: u.email,
-                activationDate: u.activationDate,
-                active: u.active,
+                active: u.active ? "Active" : "Blocked",
+                role: u.roles[0].name,
               };
             });
           }
@@ -71,59 +64,6 @@ export default function UsersList() {
         .catch((err) => console.error(err));
     })();
   }, [selectedUser]);
-
-  // if (user.roles.includes("ROLE_TEACHING_TECHNICIAN")) {
-  //   console.log(u.roles[0]);
-  //   if (u.roles[0] === "ROLE_STUDENT") {
-
-  // useEffect(() => {
-  //   const user = auth.getCurrentUser();
-
-  //   (async () => {
-  //     fetch(SERVER_URL + "users/", { headers: authToken() })
-  //       .then((response) => response.json())
-  //       .then((rowData) => {
-  //         const userData = rowData.map((u) => {
-  //           if (user.roles.includes("ROLE_TEACHING_TECHNICIAN")) {
-  //             console.log(u.roles[0]);
-  //             if (u.roles[0] === "ROLE_STUDENT") {
-  //               return {
-  //                 id: u.id,
-  //                 username: u.username,
-  //                 // theType: u.theType,
-  //                 email: u.email,
-  //                 activationDate: u.activationDate,
-
-  //                 active: u.active ? "Active" : "Blocked",
-  //               };
-  //             } else {
-  //               return {
-  //                 id: u.id,
-  //                 username: "Access Denied",
-  //                 // theType: u.theType,
-  //                 email: "Access Denied",
-  //                 activationDate: "Access Denied",
-
-  //                 active: "Access Denied",
-  //               };
-  //             }
-  //           } else {
-  //             return {
-  //               id: u.id,
-  //               username: u.username,
-  //               // theType: u.theType,
-  //               email: u.email,
-  //               activationDate: u.activationDate,
-
-  //               active: u.active ? "Active" : "Blocked",
-  //             };
-  //           }
-  //         });
-  //         setRowData(userData);
-  //       })
-  //       .catch((err) => console.error(err));
-  //   })();
-  // }, [selectedUser]);
 
   return (
     <div style={{ height: 700, width: "100%" }}>
@@ -146,9 +86,6 @@ export default function UsersList() {
         >
           Modify User
         </Button>
-        {/* <Button variant="contained" color="error" sx={{ m: 1 }}>
-          Remove User
-        </Button> */}
         <AlertDialog data={data} />
       </Box>
       <DataGrid
