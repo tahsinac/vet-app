@@ -80,7 +80,7 @@ export default function ModifyUserForm(props) {
         <Grid
           sx={{ p: 4 }}
           item
-          style={{ marginRight: "auto" }} //, border: "1px solid gray" }}
+          style={{ marginRight: "auto" }}
         >
           <Stack spacing={3}>
             <Typography variant="h3" color="primary">
@@ -138,6 +138,7 @@ export default function ModifyUserForm(props) {
                 placeholder="Enter password"
               />
             </FormControl>
+
             <Button
               onClick={handleModifyUser}
               variant="contained"

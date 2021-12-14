@@ -1,9 +1,5 @@
 import React, { useRef, useState } from "react";
-import axios from "axios";
-import { SERVER_URL } from "../constants.js";
-import { Route, Switch, Redirect } from "react-router-dom";
-import { useHistory } from "react-router-dom";
-
+import LockIcon from "@mui/icons-material/Lock";
 import {
   Grid,
   Paper,
@@ -13,11 +9,6 @@ import {
   Typography,
   Link,
 } from "@mui/material";
-import auth from "../authentication/AuthenticationService";
-
-import LockIcon from "@mui/icons-material/Lock";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
 
 export default function LoginForm(props) {
   const paperStyle = {
@@ -46,21 +37,7 @@ export default function LoginForm(props) {
     console.log(username);
     console.log(password);
     props.onLogin({ username, password });
-    // console.log(username, password);
   }
-
-  // const loginOnSubmit = (event) => {
-  //   event.preventDefault(); //To prevent losing state
-
-  //   props.onLogin({ username: username, password: password });
-  //   console.log(username, password);
-
-  //   auth.signin(username, password).then(() => {
-  //     // const { history } = this.props;
-  //     // props.history.push("/welcome");
-  //     // window.location.reload();
-  //   // });
-  // };
 
   return (
     <div
@@ -71,7 +48,6 @@ export default function LoginForm(props) {
         transform: "translate(-50%, -50%)",
       }}
     >
-      {/* <Grid> */}
       <Paper elevation={10} style={paperStyle}>
         <Grid align="center">
           <Avatar style={avatarStyle}>
@@ -113,7 +89,6 @@ export default function LoginForm(props) {
           <Link href="#">Forgot password ?</Link>
         </Typography>
       </Paper>
-      {/* </Grid> */}
     </div>
   );
 }

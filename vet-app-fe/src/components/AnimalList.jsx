@@ -3,6 +3,7 @@ import { SERVER_URL } from "../constants.js";
 import { Box, Button } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import Axios from "axios";
+import authToken from "../authentication/DataService";
 
 //Reqests management from hackathon
 export default function AnimalList() {
@@ -27,11 +28,10 @@ export default function AnimalList() {
         setselectedAnimal(response.data);
         selectedAnimal.requestStatus = "New";
         selectedAnimal.approvalStatus = "Pending";
-        const config = { headers: { "Content-Type": "application/json" } };
         Axios.patch(
           SERVER_URL + "animals/" + selectedAnimalId,
           selectedAnimal,
-          config
+          {headers: authToken()}
         );
         setselectedAnimal(response.data);
       })
@@ -159,8 +159,6 @@ export default function AnimalList() {
               requestStatus: a.requestStatus,
             };
           });
-
-          //console.log(animalData);
           setRowData(animalData);
         })
         .catch((err) => console.error(err));
@@ -223,7 +221,6 @@ export default function AnimalList() {
             selectedIDs.has(row.id)
           );
           setData(selectedRowData);
-          //window.location.reload(false);
         }}
       />
     </div>

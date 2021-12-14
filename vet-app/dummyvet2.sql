@@ -21,7 +21,9 @@ INSERT INTO Users (id, username, active, email, password, activationDate)
 VALUES
 (1, 'admin', true, "test@test.test", "$2a$10$paOCw4c78f//fcwDYpyTTOOJ7.OoCTV1BI0iXmLuCCTCyfe6zqvL6", '2021-03-04'),
 (2, 'aca', true, "test2@test.test", "$2a$10$paOCw4c78f//fcwDYpyTTOOJ7.OoCTV1BI0iXmLuCCTCyfe6zqvL6", '2021-03-05'),
-(3, 'test-user3', true, "test3@test.test", "$2a$10$paOCw4c78f//fcwDYpyTTOOJ7.OoCTV1BI0iXmLuCCTCyfe6zqvL6", '2021-03-06');
+(3, 'aht', true, "test3@test.test", "$2a$10$paOCw4c78f//fcwDYpyTTOOJ7.OoCTV1BI0iXmLuCCTCyfe6zqvL6", '2021-03-06'),
+(4, 'student', true, "test3@test.test", "$2a$10$paOCw4c78f//fcwDYpyTTOOJ7.OoCTV1BI0iXmLuCCTCyfe6zqvL6", '2021-03-06'),
+(5, 'tt', true, "test3@test.test", "$2a$10$paOCw4c78f//fcwDYpyTTOOJ7.OoCTV1BI0iXmLuCCTCyfe6zqvL6", '2021-03-06');
 
 DROP TABLE IF EXISTS user_roles;
 CREATE TABLE user_roles (
@@ -33,7 +35,9 @@ INSERT INTO user_roles (user_id, role_id)
 VALUES
 (1, 2),
 (2, 6),
-(3, 5);
+(3, 4),
+(4, 5),
+(5, 3);
 
 DROP TABLE IF EXISTS Roles;
 CREATE TABLE Roles (
@@ -108,8 +112,18 @@ CREATE TABLE AnimalStatus (
 
 INSERT INTO AnimalStatus (statusId, animalId, theDate, theDescription, location, theStatus)
 VALUES
-('1', '1','2021-12-12', null, 'In Campus', 'Available'),
-('2', '2','2021-11-01', 'Her foot is injured', 'Hospital', 'Injured');
+('1', '1','2021-12-12', null, 'Campus', 'Available'),
+('2', '2','2021-11-01', 'Her foot is injured', 'Clinic', 'Injured'),
+('3', '3','2021-11-01', 'Her foot is injured', 'Available', 'Barn'),
+('4', '4','2021-11-01', 'Her foot is injured', 'Campus', 'Available'),
+('5', '5','2021-11-01', 'Her foot is injured', 'Sick', 'Clinic'),
+('6', '6','2021-11-01', 'Her foot is injured', 'Campus', 'Available'),
+('7', '7','2021-11-01', 'Her foot is injured', 'Farm', 'Unavailable'),
+('8', '8','2021-11-01', 'Her foot is injured', 'Barn', 'Available'),
+('9', '9','2021-11-01', 'Her foot is injured', 'Barn', 'Sick'),
+('10', '10','2021-11-01', 'Her foot is injured', 'Farm', 'Available'),
+('11', '11','2021-11-01', 'Her foot is injured', 'Farm', 'Available'),
+('12', '12','2021-11-01', 'Her foot is injured', 'Barn', 'Unavailable');
 
 DROP TABLE IF EXISTS AnimalStatusImages;
 CREATE TABLE AnimalStatusImages (

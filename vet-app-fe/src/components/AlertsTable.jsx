@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { SERVER_URL } from "../constants.js";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -31,7 +30,6 @@ function containsObject(obj, list) {
 
   return false;
 }
-
 
 export default function AlertsTable(props) {
 

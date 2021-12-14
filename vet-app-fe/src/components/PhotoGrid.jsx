@@ -46,10 +46,6 @@ export default function PhotoGrid(props) {
     </Container>
   );
 }
-
-
-{/* <Grid item xs={12} sm={6} md={4}>
-          <PhotoCard />
-        </Grid> */}<Grid Grid item xs={12} sm={6} md={4}>
-            <PhotoCard />
-            </Grid>
+<Grid Grid item xs={12} sm={6} md={4}>
+  <PhotoCard />
+</Grid>

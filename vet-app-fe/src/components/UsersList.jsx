@@ -11,9 +11,7 @@ export default function UsersList() {
   const [colDefs] = useState([
     { field: "id", headerName: "User ID", width: 200 },
     { field: "username", headerName: "Username", width: 300 },
-    // { field: "theType", headerName: "Type", width: 350 },
     { field: "email", headerName: "Email", width: 300 },
-    // { field: "activationDate", headerName: "Activation Date", width: 275 },
     { field: "active", headerName: "Status", width: 300 },
     { field: "role", headerName: "Role", width: 300 },
   ]);
@@ -21,7 +19,6 @@ export default function UsersList() {
   const [rowData, setRowData] = useState([]);
   const [data, setData] = useState("");
   const [selectedUser, setSelectedUser] = useState([]);
-  // const [filteredData, setFilteredData] = useState([null]);
 
   var selectedRowData = 0;
 
@@ -42,7 +39,6 @@ export default function UsersList() {
               return {
                 id: u.id,
                 username: u.username,
-                // theType: u.theType,
                 email: u.email,
                 active: u.active ? "Active" : "Blocked",
                 role: u.roles[0].name,

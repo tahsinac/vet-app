@@ -65,7 +65,6 @@ public class UserController {
                     updatedPassword = encoder.encode(user.getPassword());
                     existingUser.setPassword(updatedPassword);
                 }
-//                user.setId(id);
                 userService.saveUser(existingUser);
                 return new ResponseEntity<>(HttpStatus.OK);
             }catch (NoSuchElementException e){

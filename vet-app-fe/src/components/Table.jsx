@@ -7,7 +7,7 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import { SettingsSystemDaydreamTwoTone } from "@mui/icons-material";
+import authToken from "../authentication/DataService";
 
 const columns = [
   { id: "attribute", label: "Attribute", minWidth: 170 },
@@ -25,10 +25,9 @@ export default function StickyHeadTable(props) {
   const id = props.id
 
   useEffect(() => {
-    fetch(SERVER_URL + "animals/" + props.id)
+    fetch(SERVER_URL + "animals/" + props.id, {headers: authToken()},)
       .then((response) => response.json())
       .then((data) => {
-        // animals: responseData
         const animalData = [data].map((a) => {
           return {
             animalName: a.animalName,
@@ -45,15 +44,10 @@ export default function StickyHeadTable(props) {
             color: a.color,
             weight: a.weight,
             diet: a.diet,
-            region: a.region,
-            
-            
+            region: a.region,          
           };
         });
-        console.log(animalData)
-       setAnimals(animalData);
-
-        
+       setAnimals(animalData);   
       })
       .catch((err) => console.error(err));
 }, [id]);

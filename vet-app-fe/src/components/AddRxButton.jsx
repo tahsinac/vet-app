@@ -20,7 +20,6 @@ export default function AddRxButton(props) {
     theDrugName: "",
     theTreatmentMethodId: "",
   });
-
   
   const [date, setDate] = useState("");
   const [theInstructions, setInstructions] = useState("");
@@ -82,7 +81,6 @@ export default function AddRxButton(props) {
     console.log(`${SERVER_URL}animals/prescriptions/`);
     setOpen(false);
   };
-
 
   const handleClickOpen = () => {
     setOpen(true);

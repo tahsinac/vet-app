@@ -3,19 +3,18 @@ import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 import { SERVER_URL } from "../constants.js";
 import { useHistory } from "react-router-dom";
+import authToken from "../authentication/DataService";
 
 export default function SearchBar() {
   const [animals, setAnimals] = useState([]);
-  const [selection, setSelection] = useState("");
   const history = useHistory();
 
   var animalsTest = animals;
 
   useEffect(() => {
-    fetch(SERVER_URL + "animals")
+    fetch(SERVER_URL + "animals", {headers: authToken()})
       .then((response) => response.json())
       .then((data) => {
-        // animals: responseData
         const animalData = data.map((a) => {
           return {
             animalName: a.animalName,
@@ -28,7 +27,7 @@ export default function SearchBar() {
   }, []);
 
   const handleSelection = (event, value) => {
-    console.log(value);
+      console.log(value);
 
     if (value === null) {
       console.log(value);
@@ -47,8 +46,6 @@ export default function SearchBar() {
       sx={{ width: 300 }}
       forcePopupIcon={true}
       noOptionsText={"No animal found"}
-      // inputValue={""}
-      // onChange={(e, value) => console.log(e.target, value.animalId)}
       onChange={handleSelection}
       renderInput={(params) => (
         <TextField
