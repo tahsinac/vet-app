@@ -7,6 +7,8 @@ import Combined from "./Combined";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import UpdateStatusButton from "./UpdateStatusButton"; 
+import RequestTreatmentButton from "./RequestTreatmentButton.jsx";
+import RequestInstructionButton from "./RequestInstructionButton.jsx";
 import auth from "../authentication/AuthenticationService";
 
 export default function AnimalProfile() {
@@ -17,6 +19,8 @@ export default function AnimalProfile() {
   const [currentUser, setCurrentUser] = useState(undefined);
   const [showStatus, setShowStatus] = useState(false);
   const [showUpdateButton, setUpdateButton] = useState(false);
+  const [displayInstructionButton, setDisplayInstructionButton] = useState(false);
+  const [displayTreatmentButton, setDisplayTreatmentButton] = useState(false);
 
   function hasPhoto(data) {
     return data.animalPhoto.length === 0 ? false : true;
@@ -66,6 +70,16 @@ export default function AnimalProfile() {
         user.roles.includes("ROLE_ANIMAL_CARE_ATTENDANT") ===true
       ) {
         setUpdateButton(true);
+      }
+      if (
+        user.roles.includes("ROLE_TEACHING_TECHNICIAN") === true
+      ) {
+        setDisplayInstructionButton(true);
+      }
+      if (
+        user.roles.includes("ROLE_ANIMAL_CARE_ATTENDANT") === true
+      ) {
+        setDisplayTreatmentButton(true);
       }
     }
   }, []);
@@ -119,12 +133,8 @@ export default function AnimalProfile() {
         </Stack>
         <Box sx={{ display: "flex", justifyContent: "flex-end", p: 1, m: 1 }}>
           {showUpdateButton && (<UpdateStatusButton animal={animal}/>)}
-          <Button variant="contained" color="secondary" sx={{ m: 4 }}>
-            Request Treatment
-          </Button>
-          <Button variant="contained" color="secondary" sx={{ m: 4 }}>
-            Request For Instruction
-          </Button>
+          {displayTreatmentButton && (<RequestTreatmentButton animal = {animal}/>)}
+          {displayInstructionButton && (<RequestInstructionButton animal = {animal}/>)}
         </Box>
       </Box>
       <Combined animal={animal} />
