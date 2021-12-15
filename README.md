@@ -1,22 +1,31 @@
 # Final-Project 607 Final Project
 ## Group 213
-* Brandon Attai (UCID:)
+* Brandon Attai (UCID: 30146080)
 * Kelten Falez (UCID: 30145189)
 * Tahsin Chowdhury (UCID: 30141930)
+
 ### Jira Board
 Link to Jira Board [here](https://uofeng607-213.atlassian.net/jira/software/projects/VETAPP/boards/1/backlog).
 
+---
+
+## Demo Video
+![Front End Demo](demo1.gif)
+
+### Back
+
 ## Database Instructions
-1. Ensure that `dummyvet.sql` has been loaded and executed in MySQL workbench.
+1. Ensure that `dummyvet2.sql` has been loaded and executed in MySQL workbench.
 2. In the Java IDE,  `navigate to > src > main > resources` and open `application.properties`.
 3. In application.properties, change the following lines:
-    ```spring.datasource.url=jdbc:mysql://localhost:3306/DUMMYVET
+    ```spring.datasource.url=jdbc:mysql://localhost:3306/DUMMYVET2
     spring.datasource.username=root
     spring.datasource.password=password
     spring.jpa.hibernate.naming.implicit-strategy=org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
     spring.jpa.hibernate.naming.physical-strategy=org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
 4. Navigate to `> src > main > java` and run  `Application.java`
 
+---
 
 ## API endpoints
 1. User story: VETAPP-11 Add Users
@@ -53,7 +62,7 @@ Link to Jira Board [here](https://uofeng607-213.atlassian.net/jira/software/proj
     * API endpoint(POST): http://localhost:8080/animals/prescriptions 
       (Note: When the user enters null values on a new prescriptions, it will be checked as a request for treatment) 
 
-
+---
 ## Frontend 
 Please ensure you have the following installed:
 
@@ -67,6 +76,7 @@ Please ensure you have the following installed:
 `npm i date-fns`<br>
 `npm i @mui/lab`<br>
 `npm install react-router-dom@5`<br>
+`npm install react-router-dom@5`
 
 
 Once all the dependencies have install, start the react application:
@@ -82,25 +92,29 @@ Implemented Features on the Front End
 - Animal Profile Details Page
 - Animal Images
 - Animal Comments
-- Animal RX
-- Animal Diagnosis
+- Animal Rx
 - Animal Alerts
 - Not Found Page
 ---
 
+
 ## Backend 
-Back end is built using Spring Boot, for sprint 4, the following were implemented, Database connectivity and Spring Security on the API end points.
+Back end is built using Spring Boot for database connectivity and Spring Security on the API end points.
 
 ### Instructions
-- http://localhost:8080/ directs to backend home paeg
+- http://localhost:8080/ directs to backend home page
 - http://localhost:8080/animals directs to login page
 
-Example login credentials:
-* username: Admin_1 , password: pa
+### Example login credentials:
+* **Admin Role**:<br>
+    username: `admin` , password: `password`
+* **Animal Care Attendent Role**:<br>
+    username: `aca` , password: `password`
+* **Animal Health Technician Role**:<br>
+    username: `aht` , password: password
+* **Student Role**:<br>
+    username: `student` , password: `password`
+* **Teaching Technician Role**:<br>
+    username: `tt` , password: `password`
 
-## Demo
-### Front End Demo
-![Front End Demo](demo1.gif)
-
-### Back
 
