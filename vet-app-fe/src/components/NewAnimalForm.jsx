@@ -73,7 +73,7 @@ export default function NewUserForm(props) {
         >
           <Stack spacing={3}>
             <Grid item>
-              <Typography variant="h3" color="primary">
+              <Typography variant="h4" color="primary">
                 Create New Animal
               </Typography>
             </Grid>
@@ -157,11 +157,11 @@ export default function NewUserForm(props) {
             </FormControl>
 
             <Button onClick = {newAnimalSubmit}
-            variant="contained" color="success" sx={{ m: 1 }}>
+            variant="contained" color="success" sx={{ m: 1,width: "41ch" }}>
               Add New Animal
             </Button>
             <Button component = {Link} to = "/welcome"
-            variant="contained" color="error" sx={{ m: 1 }}>
+            variant="contained" color="error" sx={{ m: 1, width: "41ch"}}>
               Cancel
             </Button>
           </Stack>

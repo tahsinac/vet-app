@@ -216,7 +216,7 @@ export default function PrimarySearchAppBar() {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" color="transparent">
+      <AppBar position="static" style={{ background: '#ffffff' }}>
         <Toolbar>
           <NavLink to="/welcome" activeClassName={classes.active}>
             <Paper variant="contained">
@@ -241,7 +241,7 @@ export default function PrimarySearchAppBar() {
               aria-controls={menuId}
               aria-haspopup="true"
               onClick={handleProfileMenuOpen}
-              color="inherit"
+              color="secondary"
             >
               <AccountCircle />
             </IconButton>
@@ -253,7 +253,7 @@ export default function PrimarySearchAppBar() {
               aria-controls={mobileMenuId}
               aria-haspopup="true"
               onClick={handleMobileMenuOpen}
-              color="inherit"
+              color="primary"
             >
               <MoreIcon />
             </IconButton>

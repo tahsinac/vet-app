@@ -1,9 +1,9 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import LockIcon from "@mui/icons-material/Lock";
+import Stack from '@mui/material/Stack';
 
 import {
   Grid,
-  Paper,
   Avatar,
   TextField,
   Button,
@@ -12,12 +12,6 @@ import {
 } from "@mui/material";
 
 export default function LoginForm(props) {
-  const paperStyle = {
-    padding: 20,
-    height: "40vh",
-    width: 280,
-    margin: "20px auto",
-  };
 
   const avatarStyle = { backgroundColor: "#9c27b0" };
   const btnstyle = { margin: "8px 0" };
@@ -51,43 +45,45 @@ export default function LoginForm(props) {
     >
       {/* <Paper elevation={10} style={paperStyle}> */}
       <Grid align="center" sx={{ width: 300 }}>
-        <Avatar style={avatarStyle}>
-          <LockIcon />
-        </Avatar>
-        <Typography variant="h4" color="primary" sx={{ p: 3 }}>
-          Sign In
-        </Typography>
-        <TextField
-          sx={{ m: 1 }}
-          label="Username"
-          placeholder="Enter username"
-          fullWidth
-          required
-          onChange={usernameInputChangeHandler}
-        />
-        <TextField
-          sx={{ m: 1 }}
-          label="Password"
-          placeholder="Enter password"
-          type="password"
-          fullWidth
-          required
-          onChange={passwordInputChangeHandler}
-        />
-        <Button
-          sx={{ p: 1 }}
-          type="submit"
-          color="primary"
-          variant="contained"
-          style={btnstyle}
-          fullWidth
-          onClick={loginOnSubmit}
-        >
-          Sign in
-        </Button>
-        <Typography>
-          <Link href="#">Forgot password ?</Link>
-        </Typography>
+        <Stack spacing={1} alignItems="center">
+          <Avatar style={avatarStyle}>
+            <LockIcon />
+          </Avatar>
+          <Typography variant="h4" color="primary" sx={{ p: 3 }}>
+            Sign In
+          </Typography>
+          <TextField
+            sx={{ m: 1 }}
+            label="Username"
+            placeholder="Enter username"
+            fullWidth
+            required
+            onChange={usernameInputChangeHandler}
+          />
+          <TextField
+            sx={{ m: 1 }}
+            label="Password"
+            placeholder="Enter password"
+            type="password"
+            fullWidth
+            required
+            onChange={passwordInputChangeHandler}
+          />
+          <Button
+            sx={{ p: 1 }}
+            type="submit"
+            color="primary"
+            variant="contained"
+            style={btnstyle}
+            fullWidth
+            onClick={loginOnSubmit}
+          >
+            Sign in
+          </Button>
+          <Typography>
+            <Link href="#">Forgot password ?</Link>
+          </Typography>
+        </Stack>
       </Grid>
 
       {/* </Paper> */}
