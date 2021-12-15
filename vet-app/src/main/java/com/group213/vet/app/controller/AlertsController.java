@@ -52,7 +52,7 @@ public class AlertsController {
     }
 
     @PostMapping("")
-    @PreAuthorize("hasRole('ANIMAL_HEALTH_TECHNICIAN')")
+    @PreAuthorize("hasRole('ANIMAL_HEALTH_TECHNICIAN') or hasRole('ANIMAL_CARE_ATTENDANT')")
     public ResponseEntity<?> addAlert(@RequestBody Alerts alerts){
         try {
             alertsService.saveAlert(alerts);
