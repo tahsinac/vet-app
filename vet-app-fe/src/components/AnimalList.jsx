@@ -12,17 +12,16 @@ export default function AnimalList() {
     { field: "name", headerName: "Name", width: 350 },
     { field: "tattooNum", headerName: "Tatoo Number", width: 350 },
     { field: "species", headerName: "Species", width: 350 },
-    { field: "requestedBy", headerName: "Requested By", width: 350 }
+    { field: "requestedBy", headerName: "Requested By", width: 350 },
   ]);
 
   const [rowData, setRowData] = useState([]);
   const [data, setData] = useState("");
   const [selectedAnimal, setselectedAnimal] = useState([]);
 
-
   useEffect(() => {
     (async () => {
-      fetch(SERVER_URL + "animals/", {headers: authToken()})
+      fetch(SERVER_URL + "animals/", { headers: authToken() })
         .then((response) => response.json())
         .then((rowData) => {
           // animals: responseData

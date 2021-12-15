@@ -77,11 +77,7 @@ export default function ModifyUserForm(props) {
           transform: "translate(-50%, -50%)",
         }}
       >
-        <Grid
-          sx={{ p: 4 }}
-          item
-          style={{ marginRight: "auto" }}
-        >
+        <Grid sx={{ p: 4 }} item style={{ marginRight: "auto" }}>
           <Stack spacing={3}>
             <Typography variant="h3" color="primary">
               Modify User

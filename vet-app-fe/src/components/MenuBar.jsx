@@ -17,6 +17,7 @@ import { Link } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import classes from "./MainHeader.module.css";
 import SearchBar from "./SearchBar";
+import Typography from "@mui/material/Typography";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -71,6 +72,8 @@ export default function PrimarySearchAppBar() {
   const [showRequests, setShowRequests] = useState(false);
   const [showLogin, setShowLogin] = useState(true);
   const [showLogout, setShowLogout] = useState(false);
+  const [showUserProfileName, setShowUserProfileName] = useState(false);
+  const [userName, setUserName] = useState("");
 
   useEffect(() => {
     const user = auth.getCurrentUser();
@@ -112,7 +115,22 @@ export default function PrimarySearchAppBar() {
       ) {
         setShowSearchBar(true);
       }
-      
+
+      if (
+        user.roles.includes("ROLE_ADMIN") === true ||
+        user.roles.includes("ROLE_ANIMAL_HEALTH_TECHNICIAN") === true ||
+        user.roles.includes("ROLE_TEACHING_TECHNICIAN") === true ||
+        user.roles.includes("ROLE_STUDENT") === true ||
+        user.roles.includes("ROLE_ANIMAL_CARE_ATTENDANT") === true
+      ) {
+        setShowUserProfileName(true);
+      }
+
+      if (user.roles.includes("")) {
+        setUserName("");
+      } else {
+        setUserName(user.roles[0].slice(5));
+      }
     }
   }, []);
 
@@ -233,6 +251,13 @@ export default function PrimarySearchAppBar() {
             </Search>
           )}
           <Box sx={{ flexGrow: 1 }} />
+          {showSearchBar && (
+            <Box>
+              <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                {userName}
+              </Typography>
+            </Box>
+          )}
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
             <IconButton
               size="large"
