@@ -38,7 +38,7 @@ public class TheCommentController {
     }
 
     @PostMapping("")
-    @PreAuthorize("hasRole('STUDENT') or hasRole('ANIMAL_HEALTH_TECHNICIAN') or hasRole('ANIMAL_CARE_ATTENDANT')")
+    @PreAuthorize("hasRole('STUDENT') or hasRole('ANIMAL_HEALTH_TECHNICIAN') or hasRole('ANIMAL_CARE_ATTENDANT') or hasRole('TEACHING_TECHNICIAN')")
     public ResponseEntity<?> addTheComment(@RequestBody TheComment theComment){
         try {
             theCommentService.saveTheComment(theComment);
