@@ -1,5 +1,6 @@
 import axios from "axios";
 import { SERVER_URL } from "../constants.js";
+import { useHistory } from "react-router-dom";
 
 const signup = (username, active, email, password, activationDate, role) => {
   return axios.post(`${SERVER_URL}auth/signup`, {
