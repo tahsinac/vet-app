@@ -52,7 +52,7 @@ public class UserController {
         }
 
         @PatchMapping("/{id}")
-        @PreAuthorize("hasRole('ADMIN')")
+        @PreAuthorize("hasRole('ADMIN') or hasRole('TEACHING_TECHNICIAN')")
         public ResponseEntity<?> updateUser(@RequestBody User user, @PathVariable Integer id){
             try{
                 User existingUser = userService.getUser(id);
