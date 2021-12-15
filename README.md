@@ -100,8 +100,8 @@ Implemented Features on the Front End
 Back end is built using Spring Boot for database connectivity and Spring Security on the API end points.
 
 ### Instructions
-- http://localhost:8080/ directs to backend home page
-- http://localhost:8080/animals directs to login page
+- http://localhost:8080/ directs to backend home page - Spring Boot
+- http://localhost:3000/ directs to login page - React App
 
 ### Example login credentials:
 * **Admin Role**:<br>
