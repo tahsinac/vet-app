@@ -10,9 +10,7 @@ Link to Jira Board [here](https://uofeng607-213.atlassian.net/jira/software/proj
 ---
 
 ## Demo Video
-![Front End Demo](demo1.gif)
-
-### Back
+[![Demo video](thumbnail.png)](https://drive.google.com/file/d/10cGJ0PMyuE2LkDLikTEcwSY4hHY9A6Ce/view?usp=sharing)
 
 ## Database Instructions
 1. Ensure that `dummyvet2.sql` has been loaded and executed in MySQL workbench.
