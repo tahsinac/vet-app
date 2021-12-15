@@ -234,7 +234,7 @@ export default function PrimarySearchAppBar() {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" style={{ background: '#ffffff' }}>
+      <AppBar position="static" color = "transparent">
         <Toolbar>
           <NavLink to="/welcome" activeClassName={classes.active}>
             <Paper variant="contained">
@@ -253,7 +253,7 @@ export default function PrimarySearchAppBar() {
           <Box sx={{ flexGrow: 1 }} />
           {showSearchBar && (
             <Box>
-              <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+              <Typography variant="subtitle2" component="div" sx={{ flexGrow: 1 }}>
                 {userName}
               </Typography>
             </Box>
