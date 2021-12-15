@@ -21,6 +21,13 @@ Link to Jira Board [here](https://uofeng607-213.atlassian.net/jira/software/proj
     spring.datasource.password=password
     spring.jpa.hibernate.naming.implicit-strategy=org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
     spring.jpa.hibernate.naming.physical-strategy=org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+
+    spring.jpa.properties.hibernate.dialect= org.hibernate.dialect.MySQL5InnoDBDialect
+    spring.jpa.hibernate.ddl-auto= update
+
+    vet-app.app.jwtSecret= mySecretKey
+    vet-app.app.jwtExpirationMs= 86400000
+    
 4. Navigate to `> src > main > java` and run  `Application.java`
 
 ---
