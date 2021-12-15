@@ -114,7 +114,7 @@ INSERT INTO AnimalStatus (statusId, animalId, theDate, theDescription, location,
 VALUES
 ('1', '1','2021-12-12', null, 'Campus', 'Available'),
 ('2', '2','2021-11-01', 'Her foot is injured', 'Clinic', 'Injured'),
-('3', '3','2021-11-01', 'Her foot is injured', 'Available', 'Barn'),
+('3', '3','2021-11-01', 'Her foot is injured', 'Barn', 'Available'),
 ('4', '4','2021-11-01', 'Her foot is injured', 'Campus', 'Available'),
 ('5', '5','2021-11-01', 'Her foot is injured', 'Sick', 'Clinic'),
 ('6', '6','2021-11-01', 'Her foot is injured', 'Campus', 'Available'),
