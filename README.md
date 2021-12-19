@@ -1,13 +1,3 @@
-# Final-Project 607 Final Project
-## Group 213
-* Brandon Attai (UCID: 30146080)
-* Kelten Falez (UCID: 30145189)
-* Tahsin Chowdhury (UCID: 30141930)
-
-### Jira Board
-Link to Jira Board [here](https://uofeng607-213.atlassian.net/jira/software/projects/VETAPP/boards/1/backlog).
-
----
 
 ## Demo Video
 [![Demo video](thumbnail.png)](https://drive.google.com/file/d/10cGJ0PMyuE2LkDLikTEcwSY4hHY9A6Ce/view?usp=sharing)
