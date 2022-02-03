@@ -1,3 +1,16 @@
+A web application for the school of Veterinary Medicine at the University of Calgary to help manage animals profiles, treatment & prescriptions, animal status availability for instruction purposes and process requests for treatment and instructions.
+Functionality:
+
+* Manage animals <br>
+    a. Create animal profile (includes profilee photo, RFID number, name, sex, breed, age etc.)<br>
+    b. Search animals<br>
+    c. Ongoing care process (prescriptions, medications, treatment)<br>
+    d. Leave comments and alerts on the animal profiles.
+
+* User Management<br>
+    a. Add users<br>
+    b. Access control<br>
+    c. Manage users (block, suspend, etc)<br>
 
 ## Demo Video
 [![Demo video](thumbnail.png)](https://drive.google.com/file/d/10cGJ0PMyuE2LkDLikTEcwSY4hHY9A6Ce/view?usp=sharing)
